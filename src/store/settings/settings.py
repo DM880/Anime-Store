@@ -44,7 +44,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # Data
     'store.data',
-    'store.data.category',
     'store.data.item',
     'store.data.user.apps.CustomUserConfig',
     # Domain
