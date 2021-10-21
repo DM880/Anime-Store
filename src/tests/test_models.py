@@ -1,7 +1,6 @@
 from django.test import TestCase
 
-from store.data.category.models import CategoryItem as Category
-from store.data.item.models import Item
+from store.data.item.models import Item , ItemReview
 from store.data.user.models import CustomUser as User
 
 
@@ -13,7 +12,7 @@ class ItemTest(TestCase):
             'item_name': "Test Item",
             'item_description': "This is a test description",
             'price': 20.20,
-            'reviews': "This a Test review",
+            'category': "ANIME",
         }
 
         return Item.objects.create(**item_data)
