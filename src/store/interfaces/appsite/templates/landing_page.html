@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Store Name</title>
+  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css'>
+<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/css/bootstrap.min.css'><link rel="stylesheet" href="{% static 'css/landing_page.css' %}">
+</head>
+<body>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rock+Salt&display=swap" rel="stylesheet">
+
+<div class="nav">
+    <a href=""><img class="logo" src="{% static 'img/landing_page/logo.png' %}"></a>
+    <a href="" method="GET"><i class="fas fa-shopping-cart"></i></a>
+    <a href="" method="POST"><i class="fas fa-search"></i></a>
+    <a href="" method="POST"><i class="fas fa-user"></i></a>
+</div>
+
+<div class="wrapper">
+  <div class="main-page">
+    <div class="store-name">
+    <h1 class="name">STORE NAME</h1>
+<!--       <button class="btn btn-danger btn-enter">Enter</button> -->
+    </div>
+   <div class="image-container"></div>
+  </div>
+</div>
+
+</body>
+</html>

@@ -1,6 +1,6 @@
 from django.test import TestCase
 
-from store.data.item.models import Item , ItemReview
+from store.data.item.models import Item, ItemReview
 from store.data.user.models import CustomUser as User
 
 

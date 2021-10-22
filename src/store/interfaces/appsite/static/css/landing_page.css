@@ -1,0 +1,116 @@
+body, html{
+  margin: 0;
+  overflow: hidden;
+}
+
+/*Nav*/
+
+.nav{
+  background-color: #262626;
+  height: 10vh;
+  width: 100%;
+}
+
+.logo{
+  margin-top: -40px;
+  margin-left: -40px;
+  height: 200px;
+  width: 200px;
+}
+
+/*Icons Nav*/
+
+.fa-shopping-cart{
+  position: absolute;
+  right: 0;
+  font-size: 30px;
+  padding: 20px;
+  color: white;
+  transition: color 0.5s ease-in;
+}
+
+.fa-search{
+  position: absolute;
+  right: 50px;
+  font-size: 30px;
+  padding: 20px;
+  color: white;
+  transition: color 0.3s ease-in;
+}
+
+.fa-user{
+  position: absolute;
+  right: 100px;
+  font-size: 30px;
+  padding: 20px;
+  color: white;
+  transition: color 0.3s ease-in;
+}
+
+.fas:hover{
+  color: #F21D2E;
+}
+
+/*////////////////*/
+
+/*Main page*/
+
+.main-page{
+  background-color: #262626;
+  height: 90vh;
+  width: 100%;
+  overflow: hidden;
+}
+
+/*Name div*/
+
+.store-name{
+  position: absolute;
+  margin-top: 150px;
+  margin-left: 15%;
+  text-align: center;
+  width: 200px;
+}
+
+.name{
+  font-size: 100px;
+  color: #D92332;
+  font-family: 'Rock Salt', cursive;
+}
+
+
+/*.btn-enter{*/
+/*  font-size: 20px;*/
+/*  font-family: 'Rock Salt', cursive;*/
+/*  margin-top: 50px;*/
+/*  margin-left: 120px;*/
+/*  background-color: #D92332;*/
+/*}*/
+
+/*.btn-enter:hover{*/
+/*  background-color: #F21D2E;*/
+/*}*/
+
+
+/*////////////////*/
+
+/*Itachi*/
+
+.image-container {
+  margin-right: 50px;
+  float: right;
+  height: 800px;
+  width: 500px;
+  background: url('../img/landing_page/itachi_before.png') center center no-repeat;
+  background-size: contain;
+  -webkit-transition: all 1s ease-in-out;
+  -moz-transition: all 1s ease-in-out;
+  transition: all 1s ease-in-out;
+}
+
+.image-container:hover {
+  background-image: url('../img/landing_page/itachi_hover.png');
+  width: 450px;
+}
+
+/*////////////////*/
