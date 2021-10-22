@@ -1,6 +1,7 @@
 body, html{
   margin: 0;
   overflow: hidden;
+  border: solid #D92332 4px;
 }
 
 /*Nav*/
@@ -48,7 +49,7 @@ body, html{
 }
 
 .fas:hover{
-  color: #F21D2E;
+  color: #D92332;
 }
 
 /*////////////////*/
@@ -57,7 +58,7 @@ body, html{
 
 .main-page{
   background-color: #262626;
-  height: 90vh;
+  height: 88.5vh;
   width: 100%;
   overflow: hidden;
 }
@@ -78,6 +79,25 @@ body, html{
   font-family: 'Rock Salt', cursive;
 }
 
+.a-explore{
+  text-decoration: none;
+}
+
+.explore{
+  color: white;
+  font-size: 30px;
+  margin-top: 50px;
+  margin-left: 115px;
+  font-family: 'Permanent Marker', cursive;
+  transition: all 0.5s ease-in-out;
+}
+
+.explore:hover{
+  margin-left: 80px;
+  font-size: 50px;
+  color: #D9A91A;
+  /*text-decoration: underline;*/
+}
 
 /*.btn-enter{*/
 /*  font-size: 20px;*/
@@ -99,8 +119,9 @@ body, html{
 .image-container {
   margin-right: 50px;
   float: right;
-  height: 800px;
-  width: 500px;
+  margin-top: 100px;
+  height: 900px;
+  width: 600px;
   background: url('../img/landing_page/itachi_before.png') center center no-repeat;
   background-size: contain;
   -webkit-transition: all 1s ease-in-out;
@@ -110,7 +131,7 @@ body, html{
 
 .image-container:hover {
   background-image: url('../img/landing_page/itachi_hover.png');
-  width: 450px;
+  width: 550px;
 }
 
 /*////////////////*/
