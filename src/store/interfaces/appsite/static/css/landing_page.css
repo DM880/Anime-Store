@@ -1,15 +1,27 @@
 body, html{
   margin: 0;
-  overflow: hidden;
-  border: solid #D92332 4px;
+}
+
+body{
+  width: 100%;
+  height: 100%;
+  background-color: #262626;
 }
 
 /*Nav*/
 
 .nav{
+  z-index: 3;
+  top:0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  position: absolute;
   background-color: #262626;
-  height: 10vh;
+  height: 10%;
   width: 100%;
+  border: solid #D92332 4px;
+  border-bottom: none;
 }
 
 .logo{
@@ -57,17 +69,25 @@ body, html{
 /*Main page*/
 
 .main-page{
+  margin-top: 10vh;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
   background-color: #262626;
-  height: 88.5vh;
+  height: 100%;
   width: 100%;
   overflow: hidden;
+  border: solid #D92332 4px;
+  border-top: none;
 }
 
 /*Name div*/
 
 .store-name{
   position: absolute;
-  margin-top: 150px;
+  margin-top: 25vh;
   margin-left: 15%;
   text-align: center;
   width: 200px;
@@ -119,7 +139,6 @@ body, html{
 .image-container {
   margin-right: 50px;
   float: right;
-  margin-top: 100px;
   height: 900px;
   width: 600px;
   background: url('../img/landing_page/itachi_before.png') center center no-repeat;
