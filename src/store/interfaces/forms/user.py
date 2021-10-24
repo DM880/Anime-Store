@@ -6,6 +6,7 @@ from store.data.user.models import CustomUser
 
 class UserCreationForm(forms.ModelForm):
     username = forms.CharField(label="Username", max_length=20)
+    email = forms.EmailField(label="Email", max_length=200)
     password1 = forms.CharField(label='Password', widget=forms.PasswordInput)
     password2 = forms.CharField(label='Password confirmation', widget=forms.PasswordInput)
 
@@ -26,3 +27,11 @@ class UserCreationForm(forms.ModelForm):
         if commit:
             user.save()
         return user
+
+
+class UserCreate(forms.ModelForm):
+
+    class Meta:
+
+        model = CustomUser
+        fields = "__all__"
