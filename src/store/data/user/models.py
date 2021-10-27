@@ -13,6 +13,7 @@ class CustomUser(AbstractUser):
     time_created = models.DateTimeField(default=timezone.now)
     user_id = models.AutoField(primary_key=True)
 
+    #Replace username with email for authenticate function
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
 
