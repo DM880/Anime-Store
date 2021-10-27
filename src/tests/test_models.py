@@ -32,7 +32,7 @@ class UserTest(TestCase):
             'last_name': 'User',
             'username': 'Test',
             'date_of_birth': '2021-10-21',
-            'email': 'thisisatest@test.com',
+            'email': 'test@gmail.com',
             'password': 'test12345',
         }
 
@@ -42,3 +42,9 @@ class UserTest(TestCase):
     def test_user_create(self):
         user_ex = self.create_user()
         self.assertTrue(isinstance(user_ex, User))
+
+
+    # def test_user_login(self):
+    #     user = self.create_user()
+    #     response = self.client.post('/user/', user, follow=True)
+    #     self.assertTrue(response.context['user'].is_active)
