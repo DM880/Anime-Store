@@ -12,7 +12,7 @@ class LandingPage(generic_views.TemplateView):
 
 
 def sign_in(request):
-    if user.is_authenticated():
+    if request.user.is_authenticated:
         return redirect('main_store')
 
     if request.method == "POST":
@@ -25,14 +25,14 @@ def sign_in(request):
                 login(request, user)
                 return redirect('main_store')
 
-            else:
-                return render(request, "landing_page.html", {'error':True})
+        else:
+            return render(request, "user/sign_in.html", {'error':True})
 
     else:
-        return render(request, "user_signin.html")
+        return render(request, "user/sign_in.html")
 
 
-def user_creation(request):
+def signup(request):
     form = UserCreate()
 
     if request.method == "POST":
@@ -45,7 +45,7 @@ def user_creation(request):
     else:
         form = UserCreate()
 
-    return render(request, "user/user_creation.html", {'form': form})
+    return render(request, "user/signup.html", {'form': form})
 
 
 def main_store(request):

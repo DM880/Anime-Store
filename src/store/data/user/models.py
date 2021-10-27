@@ -13,6 +13,8 @@ class CustomUser(AbstractUser):
     time_created = models.DateTimeField(default=timezone.now)
     user_id = models.AutoField(primary_key=True)
 
+    USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = []
 
     class Meta:
         ordering = ('time_created',)
