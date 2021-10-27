@@ -53,6 +53,8 @@ INSTALLED_APPS = [
     'store.interfaces.appsite.apps.AppsiteConfig',
     'store.interfaces.djangoadmin',
 
+    'crispy_forms',
+
 ]
 
 MIDDLEWARE = [

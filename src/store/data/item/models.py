@@ -19,10 +19,16 @@ class Item(models.Model):
     price = models.DecimalField(max_digits=10, decimal_places=2)
     category = models.CharField(max_length=20, choices=CATEGORY_CHOICES, default=OTH)
 
+    def __str__(self):
+        return "{}/{}".format(self.item_name, self.category)
+
+    def first_image(self):
+        return self.image.all()[0]
+
 
 class ItemImage(models.Model):
-    item = models.ForeignKey(Item, on_delete=models.CASCADE)
-    item_image = models.ImageField(upload_to="item/")
+    item = models.ForeignKey(Item, on_delete=models.CASCADE, related_name='image')
+    item_image = models.ImageField(upload_to="item/",)
 
 
 class ItemReview(models.Model):

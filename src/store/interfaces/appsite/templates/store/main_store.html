@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Anime Store{% endblock %}
+
+{% block css %}<link rel="stylesheet" href="{% static 'css/store/main_store.css' %}">{% endblock %}
+
+{% block content %}
+<div class="row">
+{% for item in all_items %}
+    <div class="item-cont col-6 col-sm-3">
+      <img class="item-img" src="/media/{{item.first_image.item_image}}">
+      <h1 class="item-title">{{ item.item_name }}</h1>
+      <p>${{ item.price }}</p>
+    </div>
+
+        <div class="item-cont col-6 col-sm-3">
+      <img class="item-img" src="/media/{{item.first_image.item_image}}">
+      <h1 class="item-title">{{ item.item_name }}</h1>
+      <p>${{ item.price }}</p>
+    </div>
+        <div class="item-cont col-6 col-sm-3">
+      <img class="item-img" src="/media/{{item.first_image.item_image}}">
+      <h1 class="item-title">{{ item.item_name }}</h1>
+      <p>${{ item.price }}</p>
+    </div>
+{% endfor %}
+</div>
+
+{% endblock %}

@@ -1,12 +1,16 @@
 <!DOCTYPE html>
+{% load crispy_forms_tags %}
 <html lang="en">
     <head>
         <meta charset="utf-8">
         <title>User Creation</title>
+        <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/css/bootstrap.min.css'>
     </head>
     <body>
-
-    {{ form.as_p }}
-
+<form method="POST" enctype="multipart/form-data" action="{% url 'user_creation' %}">
+    {% csrf_token %}
+    {{ form|crispy }}
+    <button type="submit" class="btn btn-success">SEND</button>
+</form>
     </body>
 </html>

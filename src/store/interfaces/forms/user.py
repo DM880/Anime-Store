@@ -29,9 +29,13 @@ class UserCreationForm(forms.ModelForm):
         return user
 
 
+#Used for user creation in appsite
 class UserCreate(forms.ModelForm):
 
-    class Meta:
+    password = forms.CharField(widget=forms.PasswordInput)
+    date_of_birth = forms.DateField(input_formats=['%d/%m/%Y'], widget=forms.DateInput)
 
+    class Meta:
         model = CustomUser
-        fields = "__all__"
+        fields = ['first_name', 'last_name', 'username', 'date_of_birth','email', 'password']
+
