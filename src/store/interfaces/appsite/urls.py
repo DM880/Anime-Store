@@ -8,7 +8,8 @@ urlpatterns = [
     path('', pages.LandingPage.as_view(), name="landing_page"),
 
     #User
-    path('user/', pages.user_creation, name="user_creation"),
+    path('signup/', pages.signup, name="signup"),
+    path('login/', pages.sign_in, name="login"),
 
     #Store
     path('store/', pages.main_store, name="main_store"),
