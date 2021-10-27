@@ -5,8 +5,12 @@ from django.conf.urls.static import static
 from .views import pages
 
 urlpatterns = [
-    path('', pages.landing_page, name="landing_page"),
+    path('', pages.LandingPage.as_view(), name="landing_page"),
+
+    #User
     path('user/', pages.user_creation, name="user_creation"),
+
+    #Store
     path('store/', pages.main_store, name="main_store"),
 ]
 

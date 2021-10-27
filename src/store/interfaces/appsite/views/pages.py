@@ -1,17 +1,40 @@
 from django.shortcuts import render, redirect
+from django.contrib.auth import authenticate, login, logout
+from django.views import generic as generic_views
 
 from store.interfaces.forms.user import UserCreate
 from store.data.user.models import CustomUser as User
 from store.data.item.models import Item
 
 
-def landing_page(request):
-    return render(request, "landing_page.html")
+class LandingPage(generic_views.TemplateView):
+    template_name = "landing_page.html"
+
+
+def sign_in(request):
+    if user.is_authenticated():
+        return redirect('main_store')
+
+    if request.method == "POST":
+        email = request.POST.get('email')
+        password = request.POST.get('password')
+        user = authenticate(email=email, password=password)
+
+        if user:
+            if user.is_active:
+                login(request, user)
+                return redirect('main_store')
+
+            else:
+                return render(request, "landing_page.html", {'error':True})
+
+    else:
+        return render(request, "user_signin.html")
 
 
 def user_creation(request):
-
     form = UserCreate()
+
     if request.method == "POST":
         form = UserCreate(request.POST)
         if form.is_valid():
@@ -26,7 +49,8 @@ def user_creation(request):
 
 
 def main_store(request):
-
     all_items = Item.objects.all()
 
     return render(request, "store/main_store.html", {'all_items':all_items})
+
+
