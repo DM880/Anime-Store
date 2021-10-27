@@ -11,6 +11,8 @@ class LandingPage(generic_views.TemplateView):
     template_name = "landing_page.html"
 
 
+#User
+
 def sign_in(request):
     if request.user.is_authenticated:
         return redirect('main_store')
@@ -47,6 +49,8 @@ def signup(request):
 
     return render(request, "user/signup.html", {'form': form})
 
+
+#Store
 
 def main_store(request):
     all_items = Item.objects.all()

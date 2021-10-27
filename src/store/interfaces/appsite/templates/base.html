@@ -17,10 +17,10 @@
 <body>
 
 <div class="nav">
-    <img class="logo" src="{% static 'img/landing_page/logo.png' %}">
-    <a href="" method="POST"><i title="Your Cart" class="fas fa-shopping-cart"></i></a>
+    <a href="{% url 'landing_page' %}"><img class="logo" src="{% static 'img/landing_page/logo.png' %}"></a>
+    <a href=""><i title="Your Cart" class="fas fa-shopping-cart"></i></a>
     <a href="" method="GET"><i title="Search" class="fas fa-search"></i></a>
-    <a href="" method="POST"><i title="Account" class="fas fa-user"></i></a>
+    <a href="{% url 'login' %}"><i title="Account" class="fas fa-user"></i></a>
 </div>
 
 {% block content %}
