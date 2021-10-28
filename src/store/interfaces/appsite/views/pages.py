@@ -2,9 +2,12 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.views import generic as generic_views
 
-from store.interfaces.forms.user import UserCreate
+
 from store.data.user.models import CustomUser as User
 from store.data.item.models import Item
+
+
+from store.domain.user import validation
 
 
 class LandingPage(generic_views.TemplateView):
@@ -35,19 +38,28 @@ def sign_in(request):
 
 
 def sign_up(request):
-    form = UserCreate()
 
     if request.method == "POST":
-        form = UserCreate(request.POST)
-        if form.is_valid():
-            form.save(commit = False)
-            User.objects.create(**form.cleaned_data)
-        return redirect('landing_page')
 
-    else:
-        form = UserCreate()
+        if validation.sign_up_validation(request):
 
-    return render(request, "user/sign_up.html", {'form': form})
+            data_user = {
+                'first_name':request.POST.get('fname'),
+                'last_name':request.POST.get('lname'),
+                'username':request.POST.get('username'),
+                'date_of_birth':request.POST.get('birth'),
+                'email':request.POST.get('email'),
+                'password':request.POST.get('password1'),
+                }
+
+            User.objects.create(**data_user)
+
+            return redirect('login')
+
+        else:
+            return redirect('landing_page')
+
+    return render(request, "user/sign_up.html")
 
 
 #Store

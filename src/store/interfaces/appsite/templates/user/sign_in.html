@@ -16,8 +16,8 @@
 <div class="login">
     <form class="login-f" method="POST" action="{% url 'login' %}" enctype="multipart/form-data">
         {% csrf_token %}
-      <div class="lf"><input name="email" type="email" class="email" placeholder="Email"/></div>
-      <div class="lf"><input name="password" type="password" class="password" placeholder="Password"/></div>
+      <div class="lf"><input name="email" type="email" class="email" placeholder="Email" required/></div>
+      <div class="lf"><input name="password" type="password" class="password" placeholder="Password" required/></div>
       <div class="lf"><button type="submit" class="btn btn-primary btn-lg" value="Log In">Log In</button></div>
     </form>
   <div class="rst"><a class="reset" href="">Reset Password</a></div>
