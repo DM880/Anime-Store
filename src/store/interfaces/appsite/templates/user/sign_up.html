@@ -7,7 +7,7 @@
         <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/css/bootstrap.min.css'>
     </head>
     <body>
-<form method="POST" enctype="multipart/form-data" action="{% url 'user_creation' %}">
+<form method="POST" enctype="multipart/form-data" action="{% url 'sign_up' %}">
     {% csrf_token %}
     {{ form|crispy }}
     <button type="submit" class="btn btn-success">SEND</button>

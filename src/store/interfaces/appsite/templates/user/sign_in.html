@@ -9,6 +9,7 @@
 
 </head>
 <body>
+  <div class="img-c"></div>
 <div class="logo-cont">
 <a href="{% url 'landing_page' %}"><img title="Back" class="logo" src="{% static 'img/landing_page/logo.png' %}"></a>
 </div>
@@ -21,14 +22,13 @@
     </form>
   <div class="rst"><a class="reset" href="">Reset Password</a></div>
   <hr>
-  <div class="signup"><button class="btn btn-success" href="{% url 'signup' %}">Create New Account</button></div>
+  <div class="signup"><a href="{% url 'sign_up' %}"><button class="btn btn-success">Create New Account</button></a></div>
     </div>
 <div class="img-right"></div>
 
 {% if error %}
 <h1 style="color:white">Error</h1>
 {% endif %}
-
 
 </body>
 </html>

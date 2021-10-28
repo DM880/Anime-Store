@@ -34,7 +34,7 @@ def sign_in(request):
         return render(request, "user/sign_in.html")
 
 
-def signup(request):
+def sign_up(request):
     form = UserCreate()
 
     if request.method == "POST":
@@ -47,7 +47,7 @@ def signup(request):
     else:
         form = UserCreate()
 
-    return render(request, "user/signup.html", {'form': form})
+    return render(request, "user/sign_up.html", {'form': form})
 
 
 #Store

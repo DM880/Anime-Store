@@ -1,7 +1,17 @@
 body{
-  background-color: #262626;
+  /*background-color: #262626;*/
   margin: 0;
   overflow: hidden;
+}
+
+.img-c{
+  position: absolute;
+  background-image:url("https://coolbackgrounds.io/images/backgrounds/index/ranger-4df6c1b6.png");
+  background-size: cover;
+  opacity: 0.5;
+  height: 100%;
+  width: 100%;
+  z-index: -1;
 }
 
 .logo-cont{
