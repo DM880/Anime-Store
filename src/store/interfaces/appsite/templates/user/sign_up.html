@@ -22,11 +22,14 @@
         <input name="username" type="username" class="name" placeholder="Username" required/><input name="birth" id="datepicker" class="name" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" placeholder="Date of Birth" required/>
         </div>
       <div class="rf"><input name="email" type="email" class="email" placeholder="Email" required/></div>
-      <div class="rf"><input id="password1" name="password1" type="password" class="password" placeholder="New Password" required/><input id="password2" name="password2" type="password" class="password" placeholder="Confirm Password" required/>
+      <div class="rf">
+        <input  onkeyup="check_password();" id="password1" name="password1" type="password" class="password" placeholder="New Password" required/>
+      <input  onkeyup="check_password();" id="password2" name="password2" type="password" class="password" placeholder="Confirm Password" required/>
       </div>
-      <div class="rf"><button type="submit" class="btn btn-success btn-lg" value="CreateAccount">Create Account</button></div>
+      <div class="rf"><button id="submit-btn" type="button" class="btn btn-success btn-lg" value="CreateAccount">Create Account</button></div>
     </form>
     </div>
+    <h5 id='message'></h5>
 
 <script src="{% static 'js/user/sign_up.js' %}"></script>
 </body>
