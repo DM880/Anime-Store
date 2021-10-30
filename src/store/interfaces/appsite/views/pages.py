@@ -52,7 +52,7 @@ def sign_up(request):
                 'password':request.POST.get('password1'),
                 }
 
-            User.objects.create(**data_user)
+            User.objects.create_user(**data_user)
 
             return redirect('login')
 

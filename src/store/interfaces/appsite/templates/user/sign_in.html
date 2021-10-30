@@ -19,16 +19,15 @@
       <div class="lf"><input name="email" type="email" class="email" placeholder="Email" required/></div>
       <div class="lf"><input name="password" type="password" class="password" placeholder="Password" required/></div>
       <div class="lf"><button type="submit" class="btn btn-primary btn-lg" value="Log In">Log In</button></div>
+      {% if error %}
+      <h5 style="color:red">●Invalid Login details</h5>
+      {% endif %}
     </form>
   <div class="rst"><a class="reset" href="">Reset Password</a></div>
   <hr>
   <div class="signup"><a href="{% url 'sign_up' %}"><button class="btn btn-success">Create New Account</button></a></div>
     </div>
 <div class="img-right"></div>
-
-{% if error %}
-<h1 style="color:white">Error</h1>
-{% endif %}
 
 </body>
 </html>

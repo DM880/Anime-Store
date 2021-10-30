@@ -9,10 +9,10 @@ from store.interfaces.forms.user import UserCreationForm
 class CustomUserAdmin(UserAdmin):
     model = CustomUser
     add_form = UserCreationForm
-    list_display = ('email', 'is_staff', 'is_active',)
-    list_filter = ('email', 'is_staff', 'is_active',)
+    list_display = ('email', 'username', 'is_active',)
+    list_filter = ('email', 'username', 'is_active',)
     fieldsets = (
-        (None, {'fields': ('username','email', 'password','first_name','last_name','time_created')}),
+        (None, {'fields': ('username','email', 'password','first_name','last_name','date_of_birth','time_created')}),
         ('Permissions', {'fields': ('is_staff', 'is_active')}),
     )
     add_fieldsets = (
