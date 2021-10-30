@@ -68,5 +68,3 @@ def main_store(request):
     all_items = Item.objects.all()
 
     return render(request, "store/main_store.html", {'all_items':all_items})
-
-
