@@ -5,6 +5,7 @@ from django.views import generic as generic_views
 
 from store.data.user.models import CustomUser as User
 from store.data.item.models import Item
+from store.data.cart.models import Cart
 
 
 from store.domain.user import validation
@@ -68,3 +69,5 @@ def main_store(request):
     all_items = Item.objects.all()
 
     return render(request, "store/main_store.html", {'all_items':all_items})
+
+
