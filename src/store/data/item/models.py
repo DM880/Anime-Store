@@ -14,6 +14,7 @@ CATEGORY_CHOICES = (
 
 
 class Item(models.Model):
+    item_id= models.AutoField(primary_key=True)
     item_name = models.CharField(max_length=200)
     item_description = models.TextField(max_length=1000, blank=True)
     price = models.DecimalField(max_digits=10, decimal_places=2)
