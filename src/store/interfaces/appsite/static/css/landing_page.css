@@ -45,6 +45,24 @@ body{
   text-decoration: none;
 }
 
+.line{
+  display: inline-block;
+}
+
+.line::after{
+  content: '';
+  width: 0px;
+  height: 4px;
+  display: block;
+  background: #D92332;
+  transition: all 0.5s ease-in-out;
+  margin-left: 65px;
+}
+
+.line:hover::after{
+  width: 80%;
+}
+
 .explore{
   color: white;
   font-size: 30px;

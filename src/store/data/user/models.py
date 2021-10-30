@@ -16,7 +16,7 @@ class CustomUser(AbstractUser):
 
     #Replace username with email for authenticate function
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = []
+    REQUIRED_FIELDS = ['username']
 
     class Meta:
         ordering = ('time_created',)
