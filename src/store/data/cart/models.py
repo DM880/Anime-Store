@@ -15,18 +15,21 @@ class Cart(models.Model):
     updated = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return "{} have {} items, total price {}".format(self.user, self.tot_count, self.tot_price)
+        return self.user.username
 
 
 class EntryCart(models.Model):
     cart = models.ForeignKey(Cart, on_delete=models.CASCADE, blank=True, null=True)
     item = models.ForeignKey(Item, on_delete=models.CASCADE, blank=True, null=True)
-    quantity = models.PositiveIntegerField(default=1)
+    quantity = models.PositiveIntegerField(default=0)
+
+    def __str__(self):
+        return "{}/item:{} {}".format(self.cart.user.username, self.quantity, self.item.item_name)
 
 
-@receiver(post_save, sender=EntryCart)
-def update_cart(sender, instance, **kwargs):
-    tot_item_cost = instance.quantity * instance.item.price
-    instance.cart.tot_price += tot_item_cost
-    instance.cart.tot_count += instance.quantity
-    instance.cart.updated = datetime.now()
+# @receiver(post_save, sender=EntryCart)
+# def update_cart(sender, instance, **kwargs):
+#     tot_item_cost = instance.quantity * instance.item.price
+#     instance.cart.tot_price += tot_item_cost
+#     instance.cart.tot_count += instance.quantity
+#     instance.cart.updated = datetime.now()

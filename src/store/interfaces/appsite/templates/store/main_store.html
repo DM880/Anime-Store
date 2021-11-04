@@ -12,7 +12,7 @@
       {% if item.first_image.item_image %}<img class="item-img" src="/media/{{item.first_image.item_image}}">{% endif %}
       <h1 class="item-title">{{ item.item_name }}</h1>
       <p>${{ item.price }}</p>
-      <form class="add-to-cart" action="">
+      <form class="add-to-cart" action="{% url 'add_item' item=item.item_id %}">
         {% csrf_token %}
       <button class="cart-btn btn btn-success" type="submit" title="Add to Cart">+</button>
       </form>

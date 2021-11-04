@@ -10,6 +10,7 @@ from store.data.cart.models import Cart
 
 
 from store.domain.user import validation
+from store.domain.cart import queries
 
 
 class LandingPage(generic_views.TemplateView):
@@ -51,3 +52,11 @@ def main_store(request):
     return render(request, "store/main_store.html", {'all_items':all_items})
 
 
+#Cart
+
+def add_item_cart(request, item):
+    if request.user.is_authenticated:
+        queries.add_item_user(request, item)
+    else:
+        queries.add_item_guest(request, item)
+    return redirect('main_store')
