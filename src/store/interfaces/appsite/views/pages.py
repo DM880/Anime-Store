@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth import authenticate, login, logout
 from django.views import generic as generic_views
+from django.http import JsonResponse
+import json
 
 
 from store.data.user.models import CustomUser as User
@@ -9,6 +10,7 @@ from store.data.cart.models import Cart
 
 
 from store.domain.user import validation
+from store.domain.cart import queries
 
 
 class LandingPage(generic_views.TemplateView):
@@ -22,18 +24,10 @@ def sign_in(request):
         return redirect('main_store')
 
     if request.method == "POST":
-        email = request.POST.get('email')
-        password = request.POST.get('password')
-        user = authenticate(email=email, password=password)
-
-        if user:
-            if user.is_active:
-                login(request, user)
-                return redirect('main_store')
-
+        if validation.sign_in_validation(request):
+            return redirect('main_store')
         else:
             return render(request, "user/sign_in.html", {'error':True})
-
     else:
         return render(request, "user/sign_in.html")
 
@@ -43,20 +37,7 @@ def sign_up(request):
     if request.method == "POST":
 
         if validation.sign_up_validation(request):
-
-            data_user = {
-                'first_name':request.POST.get('fname'),
-                'last_name':request.POST.get('lname'),
-                'username':request.POST.get('username'),
-                'date_of_birth':request.POST.get('birth'),
-                'email':request.POST.get('email'),
-                'password':request.POST.get('password1'),
-                }
-
-            User.objects.create_user(**data_user)
-
             return redirect('login')
-
         else:
             return redirect('landing_page')
 
@@ -71,3 +52,11 @@ def main_store(request):
     return render(request, "store/main_store.html", {'all_items':all_items})
 
 
+#Cart
+
+def add_item_cart(request, item):
+    if request.user.is_authenticated:
+        queries.add_item_user(request, item)
+    else:
+        queries.add_item_guest(request, item)
+    return redirect('main_store')

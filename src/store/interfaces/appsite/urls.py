@@ -4,6 +4,7 @@ from django.conf.urls.static import static
 
 from .views import pages
 
+
 urlpatterns = [
     path('', pages.LandingPage.as_view(), name="landing_page"),
 
@@ -13,6 +14,9 @@ urlpatterns = [
 
     #Store
     path('store/', pages.main_store, name="main_store"),
+
+    #Cart
+    path('cart/add/<item>/', pages.add_item_cart, name="add_item"),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
