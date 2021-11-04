@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth import authenticate, login, logout
 from django.views import generic as generic_views
+from django.http import JsonResponse
+import json
 
 
 from store.data.user.models import CustomUser as User
@@ -22,18 +23,10 @@ def sign_in(request):
         return redirect('main_store')
 
     if request.method == "POST":
-        email = request.POST.get('email')
-        password = request.POST.get('password')
-        user = authenticate(email=email, password=password)
-
-        if user:
-            if user.is_active:
-                login(request, user)
-                return redirect('main_store')
-
+        if validation.sign_in_validation(request):
+            return redirect('main_store')
         else:
             return render(request, "user/sign_in.html", {'error':True})
-
     else:
         return render(request, "user/sign_in.html")
 
@@ -43,20 +36,7 @@ def sign_up(request):
     if request.method == "POST":
 
         if validation.sign_up_validation(request):
-
-            data_user = {
-                'first_name':request.POST.get('fname'),
-                'last_name':request.POST.get('lname'),
-                'username':request.POST.get('username'),
-                'date_of_birth':request.POST.get('birth'),
-                'email':request.POST.get('email'),
-                'password':request.POST.get('password1'),
-                }
-
-            User.objects.create_user(**data_user)
-
             return redirect('login')
-
         else:
             return redirect('landing_page')
 

@@ -11,7 +11,7 @@ from store.data.user.models import CustomUser as User
 class Cart(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
     tot_count = models.IntegerField(default=0)
-    tot_price = models.IntegerField(default=0)
+    tot_price = models.DecimalField(default=0, decimal_places=2, max_digits=10)
     updated = models.DateTimeField(auto_now=True)
 
     def __str__(self):
@@ -21,7 +21,7 @@ class Cart(models.Model):
 class EntryCart(models.Model):
     cart = models.ForeignKey(Cart, on_delete=models.CASCADE, blank=True, null=True)
     item = models.ForeignKey(Item, on_delete=models.CASCADE, blank=True, null=True)
-    quantity = models.IntegerField(default=0)
+    quantity = models.PositiveIntegerField(default=1)
 
 
 @receiver(post_save, sender=EntryCart)

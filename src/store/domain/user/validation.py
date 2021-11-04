@@ -1,3 +1,6 @@
+from django.contrib.auth import authenticate, login, logout
+
+
 from store.data.user.models import CustomUser as User
 
 
@@ -10,4 +13,26 @@ def sign_up_validation(request):
     if User.objects.filter(username=username).exists() or User.objects.filter(email=email).exists() or password1 != password2:
         return False
     else:
+        data_user = {
+            'first_name':request.POST.get('fname'),
+            'last_name':request.POST.get('lname'),
+            'username':request.POST.get('username'),
+            'date_of_birth':request.POST.get('birth'),
+            'email':request.POST.get('email'),
+            'password':request.POST.get('password1'),
+            }
+
+        User.objects.create_user(**data_user)
         return True
+
+
+def sign_in_validation(request):
+    email = request.POST.get('email')
+    password = request.POST.get('password')
+    user = authenticate(email=email, password=password)
+
+    if user:
+        if user.is_active:
+            login(request, user)
+            return True
+    return False

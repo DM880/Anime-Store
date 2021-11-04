@@ -12,7 +12,10 @@
       {% if item.first_image.item_image %}<img class="item-img" src="/media/{{item.first_image.item_image}}">{% endif %}
       <h1 class="item-title">{{ item.item_name }}</h1>
       <p>${{ item.price }}</p>
-      <button class="cart-btn btn btn-success" title="Add to Cart">+</button>
+      <form class="add-to-cart" action="">
+        {% csrf_token %}
+      <button class="cart-btn btn btn-success" type="submit" title="Add to Cart">+</button>
+      </form>
     </div>
 
 {% endfor %}

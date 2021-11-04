@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% load static %}
+
+<form class="add-to-cart" action="">
+{% csrf_token %}
+    <button class="cart-btn btn btn-success" type="submit" title="Add to Cart">+</button>
+</form>
+<form class="remove-from-cart" action="">
+{% csrf_token %}
+    <button class="cart-btn btn btn-success" type="submit" title="Remove from Cart">-</button>
+</form>
