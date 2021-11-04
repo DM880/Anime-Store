@@ -9,25 +9,12 @@
 <div class="row">
 {% for item in all_items %}
     <div class="item-cont col-6 col-sm-3">
-      <img class="item-img" src="/media/{{item.first_image.item_image}}">
+      {% if item.first_image.item_image %}<img class="item-img" src="/media/{{item.first_image.item_image}}">{% endif %}
       <h1 class="item-title">{{ item.item_name }}</h1>
       <p>${{ item.price }}</p>
       <button class="cart-btn btn btn-success" title="Add to Cart">+</button>
     </div>
 
-        <div class="item-cont col-6 col-sm-3">
-      <img class="item-img" src="/media/{{item.first_image.item_image}}">
-      <h1 class="item-title">{{ item.item_name }}</h1>
-      <p>${{ item.price }}</p>
-      <button class="cart-btn btn btn-success" title="Add to Cart">+</button>
-    </div>
-        <div class="item-cont col-6 col-sm-3">
-      <img class="item-img" src="/media/{{item.first_image.item_image}}">
-      <h1 class="item-title">{{ item.item_name }}</h1>
-      <p>${{ item.price }}</p>
-      <button class="cart-btn btn btn-success" title="Add to Cart">+</button>
-
-    </div>
 {% endfor %}
 </div>
 
