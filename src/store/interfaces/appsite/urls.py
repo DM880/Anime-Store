@@ -14,9 +14,12 @@ urlpatterns = [
 
     #Store
     path('store/', pages.main_store, name="main_store"),
+    path('store/<item_id>/', pages.item_page, name="item_page"),
 
     #Cart
-    path('cart/add/<item>/', pages.add_item_cart, name="add_item"),
+    path('cart/add/<item_id>/', pages.add_item_cart, name="add_item"),
+    path('cart/remove/<item_id>/', pages.remove_item_cart, name="remove_item"),
+
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

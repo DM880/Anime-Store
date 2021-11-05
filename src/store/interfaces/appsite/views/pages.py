@@ -52,27 +52,33 @@ def main_store(request):
     return render(request, "store/main_store.html", {'all_items':all_items})
 
 
+def item_page(request, item_id):
+    item = Item.objects.get(item_id=item_id)
+
+    return render(request, 'store/item_page.html', {'item':item})
+
+
 #Cart
 
-def add_item_cart(request, item):
+def add_item_cart(request, item_id):
 
     quantity = request.POST.get('quantity')
 
     if quantity is None:
         quantity = 1
 
-    queries.add_item(request, item, quantity)
+    queries.add_item(request, item_id, quantity)
 
     return redirect('main_store')
 
 
-def remove_item_cart(request, item):
+def remove_item_cart(request, item_id):
     quantity = request.POST.get('quantity')
 
     if quantity is None:
         quantity = 1
 
-    queries.remove_item(request, item, quantity)
+    queries.remove_item(request, item_id, quantity)
 
     return redirect('main_store')
 
