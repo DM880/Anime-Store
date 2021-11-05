@@ -10,8 +10,18 @@ def sign_up_validation(request):
     password1 = request.POST.get('password1')
     password2 = request.POST.get('password2')
 
-    if User.objects.filter(username=username).exists() or User.objects.filter(email=email).exists() or password1 != password2:
-        return False
+    if User.objects.filter(username=username).exists():
+        error="{} - Username already exist".format(username)
+        return error
+
+    elif User.objects.filter(email=email).exists():
+        error="{} - Email already exist".format(email)
+        return error
+
+    elif password1 != password2:
+        error="Passwords don't match"
+        return error
+
     else:
         data_user = {
             'first_name':request.POST.get('fname'),

@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, reverse
 from django.views import generic as generic_views
 from django.http import JsonResponse
 import json
@@ -35,11 +35,11 @@ def sign_in(request):
 def sign_up(request):
 
     if request.method == "POST":
-
-        if validation.sign_up_validation(request):
+        valid = validation.sign_up_validation(request)
+        if valid == True:
             return redirect('login')
         else:
-            return redirect('landing_page')
+            return render(request, "user/sign_up.html", {'valid':valid})
 
     return render(request, "user/sign_up.html")
 
