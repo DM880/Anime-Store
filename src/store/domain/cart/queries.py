@@ -3,55 +3,56 @@ from store.data.cart.models import Cart, EntryCart
 
 
 def update_cart(cart, item, quantity, command):
-    if command == "add":
-        cart.tot_count += 1
+    if command:
+        cart.tot_count += quantity
         cart.tot_price += item.price * quantity
         cart.save()
     else:
-        cart.tot_count -= 1
-        cart.tot_price += item.price * quantity
+        cart.tot_count -= quantity
+        cart.tot_price -= item.price * quantity
         cart.save()
 
 
-def add_item_user(request, item_id):
+def add_item(request, item_id, quantity):
 
     carts = Cart.objects.all()
     item = Item.objects.get(item_id=item_id)
 
-    for cart in carts:
-        if cart.user == request.user:
-            EntryCart.objects.create(cart=cart, item=item)
-            update_cart(cart, item, quantity=1, command="add")
-            return
+    if request.user.is_authenticated:
+        for cart in carts:
+            if cart.user == request.user:
+                EntryCart.objects.create(cart=cart, item=item, quantity=quantity)
+                update_cart(cart, item, quantity, command="add")
+                return
 
-    cart_user=Cart.objects.create(user=request.user)
-    EntryCart.objects.create(cart=cart_user, item=item)
-    update_cart(cart, item, quantity=1, command="add")
+        cart_user=Cart.objects.create(user=request.user)
+        EntryCart.objects.create(cart=cart_user, item=item, quantity=quantity)
+        update_cart(cart, item, quantity, command="add")
 
-
-def add_item_guest(request, item_id):
-
-    item = Item.objects.get(item_id=item_id)
-    EntryCart.objects.create(item=item)
+    else:
+        EntryCart.objects.create(item=item, quantity=quantity)
 
 
-def remove_item(request, item_id):
+def remove_item(request, item_id, quantity):
 
     cart = Cart.objects.get(user=request.user)
     item = Item.objects.get(item_id=item_id)
     entries = EntryCart.objects.filter(cart=cart, item=item)
     quantity_item = EntryCart.objects.filter(item=item).count()
-    quantity = 1
 
-    if quantity > quantity_item:
+    if quantity_item == 0:
+        return
+
+    elif quantity > quantity_item or quantity == quantity_item:
         for entry in entries:
             entry.delete()
-
-    for entry in entries:
-        if quantity == 0:
             update_cart(cart, item, quantity, command="")
             return
-        entry.delete()
-        quantity -= 1
-
-    update_cart(cart, item, quantity_item, command="")
+    else:
+        quantity_query = quantity
+        for entry in entries:
+            if quantity_query == 0:
+                update_cart(cart, item, quantity, command="")
+                return
+            entry.delete()
+            quantity_query -= 1

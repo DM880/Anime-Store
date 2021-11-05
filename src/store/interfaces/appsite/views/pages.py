@@ -55,8 +55,24 @@ def main_store(request):
 #Cart
 
 def add_item_cart(request, item):
-    if request.user.is_authenticated:
-        queries.add_item_user(request, item)
-    else:
-        queries.add_item_guest(request, item)
+
+    quantity = request.POST.get('quantity')
+
+    if quantity is None:
+        quantity = 1
+
+    queries.add_item(request, item, quantity)
+
     return redirect('main_store')
+
+
+def remove_item_cart(request, item):
+    quantity = request.POST.get('quantity')
+
+    if quantity is None:
+        quantity = 1
+
+    queries.remove_item(request, item, quantity)
+
+    return redirect('main_store')
+

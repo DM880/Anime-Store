@@ -25,11 +25,3 @@ class EntryCart(models.Model):
 
     def __str__(self):
         return "{}/item:{} {}".format(self.cart.user.username, self.quantity, self.item.item_name)
-
-
-# @receiver(post_save, sender=EntryCart)
-# def update_cart(sender, instance, **kwargs):
-#     tot_item_cost = instance.quantity * instance.item.price
-#     instance.cart.tot_price += tot_item_cost
-#     instance.cart.tot_count += instance.quantity
-#     instance.cart.updated = datetime.now()
