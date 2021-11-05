@@ -9,10 +9,12 @@
 <div class="row">
 {% for item in all_items %}
     <div class="item-cont col-6 col-sm-3">
-      {% if item.first_image.item_image %}<img class="item-img" src="/media/{{item.first_image.item_image}}">{% endif %}
+      {% if item.first_image.item_image %}
+      <a href="{% url 'item_page' item_id=item.item_id %}"><img class="item-img" src="/media/{{item.first_image.item_image}}"></a>
+      {% endif %}
       <h1 class="item-title">{{ item.item_name }}</h1>
       <p>${{ item.price }}</p>
-      <form class="add-to-cart" action="{% url 'add_item' item=item.item_id %}">
+      <form class="add-to-cart" action="{% url 'add_item' item_id=item.item_id %}">
         {% csrf_token %}
       <button class="cart-btn btn btn-success" type="submit" title="Add to Cart">+</button>
       </form>
@@ -20,5 +22,10 @@
 
 {% endfor %}
 </div>
+
+
+<script>
+  document.getElementById("nav").style.border = 'none';
+</script>
 
 {% endblock %}

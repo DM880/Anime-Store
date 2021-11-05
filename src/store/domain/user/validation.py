@@ -11,16 +11,13 @@ def sign_up_validation(request):
     password2 = request.POST.get('password2')
 
     if User.objects.filter(username=username).exists():
-        error="{} - Username already exist".format(username)
-        return error
+        return "{} - Username already exist".format(username)
 
     elif User.objects.filter(email=email).exists():
-        error="{} - Email already exist".format(email)
-        return error
+        return "{} - Email already exist".format(email)
 
     elif password1 != password2:
-        error="Passwords don't match"
-        return error
+        return "Passwords don't match"
 
     else:
         data_user = {

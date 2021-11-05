@@ -1,11 +1,31 @@
 {% extends 'base.html' %}
 {% load static %}
 
-<form class="add-to-cart" action="">
-{% csrf_token %}
-    <button class="cart-btn btn btn-success" type="submit" title="Add to Cart">+</button>
-</form>
-<form class="remove-from-cart" action="">
-{% csrf_token %}
-    <button class="cart-btn btn btn-success" type="submit" title="Remove from Cart">-</button>
-</form>
+{% block title %}Anime Slash-{{ item.item_name.title }}{% endblock %}
+
+{% block css %}<link rel="stylesheet" href="{% static 'css/store/item_page.css' %}">{% endblock %}
+
+{% block content %}
+
+<div class="wrapper">
+  <div class="img-cont">
+    <img src="/media/{{item.first_image.item_image}}">
+  </div>
+  <div class="item-section">
+    <div class="item-infos">
+      <h1 style="text-align:center;font-size: 45px;">{{ item.item_name.title }}</h1>
+      <p class="description">{{ item.item_description }}</p>
+      </div>
+      <form method="POST">
+      {% csrf_token %}
+    <button type="button" id="minus" class="plus-minus btn btn-danger" onclick="decrementValue()">-</button>
+    <input id="quantity" class="quantity"  value="1" name="quantity" readonly></input>
+    <button type="button" id="plus" class="plus-minus btn btn-danger" onclick="incrementValue()">+</button>
+    <button class="add btn btn-success" type="submit" url="{% url 'add_item' item_id=item.item_id %}">Add to Cart</button>
+    </form>
+    </div>
+</div>
+
+<script src="{% static 'js/store/item_page.js' %}"></script>
+
+{% endblock %}
