@@ -11,13 +11,18 @@ body,html{
 .img-cont{
   float: 1;
   margin-left: 100px;
-  height: 400px;
+  height: 100%;
   max-width: 400px;
   width: auto;
   border-radius: 25px;
   overflow: hidden;
   justify-content: center;
   margin-top: 100px;
+}
+
+img{
+  height: auto;
+  width: 100%;
 }
 
 .item-section{
