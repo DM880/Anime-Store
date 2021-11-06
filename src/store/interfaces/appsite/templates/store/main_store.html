@@ -6,6 +6,7 @@
 {% block css %}<link rel="stylesheet" href="{% static 'css/store/main_store.css' %}">{% endblock %}
 
 {% block content %}
+
 <div class="row">
 {% for item in all_items %}
     <div class="item-cont col-6 col-sm-3">
@@ -14,12 +15,11 @@
       {% endif %}
       <h1 class="item-title">{{ item.item_name }}</h1>
       <p>${{ item.price }}</p>
-      <form class="add-to-cart" action="{% url 'add_item' item_id=item.item_id %}">
+      <form class="add-to-cart" method="POST" action="{% url 'add_item' item_id=item.item_id %}">
         {% csrf_token %}
       <button class="cart-btn btn btn-success" type="submit" title="Add to Cart">+</button>
       </form>
     </div>
-
 {% endfor %}
 </div>
 
