@@ -15,19 +15,16 @@ def update_cart(cart, item, quantity, command):
 
 def add_item(request, item_id, quantity):
 
-    carts = Cart.objects.all()
     item = Item.objects.get(item_id=item_id)
 
     if request.user.is_authenticated:
-        for cart in carts:
-            if cart.user == request.user:
-                EntryCart.objects.create(cart=cart, item=item, quantity=quantity)
-                update_cart(cart, item, quantity, command="add")
-                return
+        try:
+            cart = Cart.objects.get(user=request.user)
+        except Cart.DoesNotExist:
+            cart=Cart.objects.create(user=request.user)
 
-        cart_user=Cart.objects.create(user=request.user)
-        EntryCart.objects.create(cart=cart_user, item=item, quantity=quantity)
-        update_cart(cart_user, item, quantity, command="add")
+        EntryCart.objects.create(cart=cart, item=item, quantity=quantity)
+        update_cart(cart, item, quantity, command="add")
 
     else:
         EntryCart.objects.create(user='guest',item=item, quantity=quantity)
