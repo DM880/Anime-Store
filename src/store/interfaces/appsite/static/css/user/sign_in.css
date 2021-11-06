@@ -5,7 +5,7 @@ body{
 
 .img-c{
   position: absolute;
-  background-image:url("https://coolbackgrounds.io/images/backgrounds/index/ranger-4df6c1b6.png");
+  background-image:url("../../img/login/background.png");
   background-size: cover;
   opacity: 0.5;
   height: 100%;
