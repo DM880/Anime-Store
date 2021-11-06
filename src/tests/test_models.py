@@ -44,7 +44,3 @@ class UserTest(TestCase):
         self.assertTrue(isinstance(user_ex, User))
 
 
-    # def test_user_login(self):
-    #     user = self.create_user()
-    #     response = self.client.post('/user/', user, follow=True)
-    #     self.assertTrue(response.context['user'].is_active)
