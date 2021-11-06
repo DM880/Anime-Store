@@ -40,11 +40,12 @@ def remove_item(request, item_id, quantity):
     if quantity_item == 0:
         return
 
-    elif quantity > quantity_item or quantity == quantity_item:
+     elif quantity > quantity_item or quantity == quantity_item:
         for entry in entries:
             entry.delete()
-            update_cart(cart, item, quantity, command="")
-            return
+        quantity = quantity_item
+        update_cart(cart, item, quantity, command="")
+        return
     else:
         quantity_query = quantity
         for entry in entries:
