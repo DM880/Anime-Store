@@ -66,10 +66,13 @@ def add_item_cart(request, item_id):
 
     if quantity is None:
         quantity = 1
+    else:
+        quantity = int(quantity)
 
     queries.add_item(request, item_id, quantity)
 
-    return redirect('main_store')
+    #redirect to same page,if not found redirect to 'main_store'
+    return redirect(request.META.get('HTTP_REFERER', 'main_store'))
 
 
 def remove_item_cart(request, item_id):
@@ -77,8 +80,10 @@ def remove_item_cart(request, item_id):
 
     if quantity is None:
         quantity = 1
+    else:
+        quantity = int(quantity)
 
     queries.remove_item(request, item_id, quantity)
 
-    return redirect('main_store')
+    return redirect(request.META.get('HTTP_REFERER', 'main_store'))
 

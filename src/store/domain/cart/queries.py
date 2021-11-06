@@ -30,7 +30,7 @@ def add_item(request, item_id, quantity):
         update_cart(cart, item, quantity, command="add")
 
     else:
-        EntryCart.objects.create(item=item, quantity=quantity)
+        EntryCart.objects.create(user='guest',item=item, quantity=quantity)
 
 
 def remove_item(request, item_id, quantity):
