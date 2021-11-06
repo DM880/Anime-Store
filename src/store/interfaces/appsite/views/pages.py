@@ -76,7 +76,8 @@ def add_item_cart(request, item_id):
 
 
 def remove_item_cart(request, item_id):
-    quantity = request.POST.get('quantity')
+
+    quantity = int(request.POST.get('quantity'))
 
     if quantity is None:
         quantity = 1
