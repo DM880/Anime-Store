@@ -15,7 +15,7 @@ class Cart(models.Model):
     updated = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return "{} have {} items for {} $".format(self.user.username, self.tot_count, self.tot_price)
+        return "{} have {} items for ${}".format(self.user.username, self.tot_count, self.tot_price)
 
 
 class EntryCart(models.Model):
@@ -24,4 +24,4 @@ class EntryCart(models.Model):
     quantity = models.PositiveIntegerField(default=0)
 
     def __str__(self):
-        return "item:{} {}".format(self.quantity, self.item.item_name)
+        return "{}/item:{} {}".format(self.cart.user.username, self.quantity, self.item.item_name)
