@@ -1,3 +1,4 @@
+from store.data.user.models import CustomUser as User
 from store.data.item.models import Item
 from store.data.cart.models import Cart, EntryCart
 
@@ -27,12 +28,18 @@ def add_item(request, item_id, quantity):
         update_cart(cart, item, quantity, command="add")
 
     else:
-        EntryCart.objects.create(user='guest',item=item, quantity=quantity)
+        cart = guest_cart()
+        EntryCart.objects.create(cart=cart, item=item, quantity=quantity)
+        update_cart(cart, item, quantity, command="add")
 
 
 def remove_item(request, item_id, quantity):
 
-    cart = Cart.objects.get(user=request.user)
+    if user.is_authenticated:
+        cart = Cart.objects.get(user=request.user)
+    else:
+        cart = guest_cart()
+        
     item = Item.objects.get(item_id=item_id)
     entries = EntryCart.objects.filter(cart=cart, item=item)
     quantity_item = EntryCart.objects.filter(item=item).count()
@@ -54,3 +61,9 @@ def remove_item(request, item_id, quantity):
                 return
             entry.delete()
             quantity_query -= 1
+
+
+def guest_cart():
+    user = User.objects.get(username='guest')
+    cart = Cart.objects.get(user=user)
+    return cart
