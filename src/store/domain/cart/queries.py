@@ -2,10 +2,15 @@ from store.data.user.models import CustomUser as User
 from store.data.item.models import Item
 from store.data.cart.models import Cart, EntryCart
 
+"""
+Queries sono in sola lettura qui vedo parecche "operations"
+"""
 
+
+# definisci i tipi
+# se c'e' un problema dovresti fare un revert altrimenti ti ritrovi il db corrotto
 def update_cart(cart, item, quantity, command):
-    
-    if command:
+    if command:  # cosa significa command?
         cart.tot_count += quantity
         cart.tot_price += item.price * quantity
         cart.save()
@@ -15,6 +20,8 @@ def update_cart(cart, item, quantity, command):
         cart.save()
 
 
+# non si passa la request al domain.
+# qui stai crendo una relazione alla request di cui `add_item` conosce "is_autenthicated"
 def add_item(request, item_id, quantity):
 
     item = Item.objects.get(item_id=item_id)
@@ -36,7 +43,9 @@ def add_item(request, item_id, quantity):
 
 def remove_item(request, item_id, quantity):
 
-    if user.is_authenticated:
+    # user non e' identificato qui. Hai passato la request
+    # la request e' MALE
+    if request.user.is_authenticated:
         cart = Cart.objects.get(user=request.user)
     else:
         cart = guest_cart()
@@ -52,11 +61,11 @@ def remove_item(request, item_id, quantity):
         for entry in entries:
             entry.delete()
         quantity = quantity_item
-        update_cart(cart, item, quantity, command="")
+        update_cart(cart, item, quantity, command="")  # questo command che mandi e' davvero strano
         return
 
     else:
-        quantity_query = quantity
+        quantity_query = quantity  # strano anche questo perche' query mi viene in mente una queryset, ma quantity e' un int.
         for entry in entries:
             if quantity_query == 0:
                 update_cart(cart, item, quantity, command="")
@@ -65,6 +74,7 @@ def remove_item(request, item_id, quantity):
             quantity_query -= 1
 
 
+# hai un guest cart unico per tutti gli user?
 def guest_cart():
     user = User.objects.get(username='guest')
     cart = Cart.objects.get(user=user)

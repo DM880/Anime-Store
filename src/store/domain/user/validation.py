@@ -4,6 +4,7 @@ from django.contrib.auth import authenticate, login, logout
 from store.data.user.models import CustomUser as User
 
 
+# di nuovo qui passi la request. None ' bene
 def sign_up_validation(request):
     username = request.POST.get('username')
     email = request.POST.get('email')

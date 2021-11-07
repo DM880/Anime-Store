@@ -24,6 +24,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
+# Questo e' interessante ma devi spiegarlo che serve settare delle variabili di ambiente altrimenti si va avanti
+# per errore
 SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
@@ -44,12 +46,12 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django_cleanup.apps.CleanupConfig',
     # Data
-    'store.data',
+    'store.data',  # non penso che serva
     'store.data.cart',
     'store.data.item',
     'store.data.user.apps.CustomUserConfig',
     # Domain
-    'store.domain',
+    'store.domain',  # non penso che serva
     # Interface
     'store.interfaces',
     'store.interfaces.appsite.apps.AppsiteConfig',
@@ -95,7 +97,7 @@ WSGI_APPLICATION = 'store.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
+        'ENGINE': 'django.db.backends.sqlite3',  # impara ad usare postgres e soprattutto a non committare anche il db nel repo
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
         'TEST': {
             'NAME': os.path.join(BASE_DIR, 'db_test.sqlite3')
