@@ -84,8 +84,8 @@ def main_store(request):
 def item_page(request, item_id):
     item = Item.objects.get(id=item_id)
     reviews = ItemReview.objects.filter(item=item_id)
-    avg_rating = rating_avg(reviews)
-    return render(request, 'store/item_page.html', {'item':item, 'reviews':reviews, 'avg_rating':avg_rating})
+    avg_rating_data = rating_avg(reviews)
+    return render(request, 'store/item_page.html', {'item':item, 'reviews':reviews, 'avg_rating_data':avg_rating_data})
 
 
 #Cart
