@@ -18,10 +18,10 @@
     </div>
       <br>
       <span class="rev">
-        {% with i|center:avg_rating.rating as range %}
-        {% for i in range %}⭐{% endfor %}
+        {% with i|center:avg_rating_data.rating as rating_range %}
+        {% for i in rating_range %}⭐{% endfor %}
         {% endwith %}
-      </span><h5 style="opacity:0.5;" class="rev">{{ avg_rating.counter }} reviews</h5>
+      </span><h5 style="opacity:0.5;" class="rev">{{ avg_rating_data.counter }} reviews</h5>
       <br>
       <form method="POST" action="{% url 'add_item' item_id=item.id %}">
       {% csrf_token %}
