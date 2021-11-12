@@ -4,7 +4,7 @@ from store.data.cart.models import Cart, EntryCart
 
 
 def update_cart(cart, item, quantity, command):
-    
+
     if command:
         cart.tot_count += quantity
         cart.tot_price += item.price * quantity
@@ -15,11 +15,11 @@ def update_cart(cart, item, quantity, command):
         cart.save()
 
 
-def add_item(request, item_id, quantity):
+def add_item(item_id, quantity):
 
     item = Item.objects.get(item_id=item_id)
 
-    if request.user.is_authenticated:
+    if user.is_authenticated:
         try:
             cart = Cart.objects.get(user=request.user)
         except Cart.DoesNotExist:
@@ -34,7 +34,7 @@ def add_item(request, item_id, quantity):
         update_cart(cart, item, quantity, command="add")
 
 
-def remove_item(request, item_id, quantity):
+def remove_item(item_id, quantity):
 
     if user.is_authenticated:
         cart = Cart.objects.get(user=request.user)

@@ -12,7 +12,7 @@ class CustomUser(AbstractUser):
     email = models.EmailField(max_length=200,unique=True, blank=False)
     password = models.CharField(max_length=50, blank=False)
     time_created = models.DateTimeField(default=timezone.now)
-    user_id = models.AutoField(primary_key=True)
+    id = models.AutoField(primary_key=True)
 
     #Replace username with email for authenticate function
     USERNAME_FIELD = 'email'

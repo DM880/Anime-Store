@@ -4,7 +4,7 @@ from django.contrib.auth import authenticate, login, logout
 from store.data.user.models import CustomUser as User
 
 
-def sign_up_validation(request):
+def sign_up_validation():
     username = request.POST.get('username')
     email = request.POST.get('email')
     password1 = request.POST.get('password1')
@@ -33,7 +33,7 @@ def sign_up_validation(request):
         return True
 
 
-def sign_in_validation(request):
+def sign_in_validation():
     email = request.POST.get('email')
     password = request.POST.get('password')
     user = authenticate(email=email, password=password)

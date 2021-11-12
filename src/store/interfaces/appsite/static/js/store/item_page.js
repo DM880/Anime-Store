@@ -19,5 +19,3 @@ function incrementValue()
     }
 }
 
-
-document.getElementById("nav").style.border = 'none';

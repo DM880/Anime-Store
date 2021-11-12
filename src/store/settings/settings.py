@@ -44,12 +44,11 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django_cleanup.apps.CleanupConfig',
     # Data
-    'store.data',
     'store.data.cart',
     'store.data.item',
     'store.data.user.apps.CustomUserConfig',
     # Domain
-    'store.domain',
+
     # Interface
     'store.interfaces',
     'store.interfaces.appsite.apps.AppsiteConfig',

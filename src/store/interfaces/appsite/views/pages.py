@@ -24,7 +24,7 @@ def sign_in(request):
         return redirect('main_store')
 
     if request.method == "POST":
-        if validation.sign_in_validation(request):
+        if validation.sign_in_validation():
             return redirect('main_store')
         else:
             return render(request, "user/sign_in.html", {'error':True})
@@ -35,7 +35,7 @@ def sign_in(request):
 def sign_up(request):
 
     if request.method == "POST":
-        valid = validation.sign_up_validation(request)
+        valid = validation.sign_up_validation()
         if valid == True:
             return redirect('login')
         else:
@@ -69,7 +69,7 @@ def add_item_cart(request, item_id):
     else:
         quantity = int(quantity)
 
-    queries.add_item(request, item_id, quantity)
+    queries.add_item(item_id, quantity)
 
     #redirect to same page,if not found redirect to 'main_store'
     return redirect(request.META.get('HTTP_REFERER', 'main_store'))
@@ -84,7 +84,7 @@ def remove_item_cart(request, item_id):
     else:
         quantity = int(quantity)
 
-    queries.remove_item(request, item_id, quantity)
+    queries.remove_item(item_id, quantity)
 
     return redirect(request.META.get('HTTP_REFERER', 'main_store'))
 

@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}Anime Slash-{{ item.item_name.title }}{% endblock %}
+{% block title %}Anime Slash-{{ item.name.title }}{% endblock %}
 
 {% block css %}<link rel="stylesheet" href="{% static 'css/store/item_page.css' %}">{% endblock %}
 
@@ -9,17 +9,17 @@
 
 <div class="wrapper">
   <div class="img-cont">
-    <img src="/media/{{item.first_image.item_image}}">
+    <img src="/media/{{item.first_image.image}}">
   </div>
   <div class="item-section">
     <div class="item-infos">
-      <h1 style="text-align:center;font-size: 45px;">{{ item.item_name.title }}</h1>
-      <p class="description">{{ item.item_description }}</p>
+      <h1 style="text-align:center;font-size: 45px;">{{ item.name.title }}</h1>
+      <p class="description">{{ item.description }}</p>
     </div>
       <br>
-      <span class="rev">⭐⭐⭐⭐⭐</span><h5 class="rev"># reviews</h5>
+      <!--<span class="rev">⭐⭐⭐⭐⭐</span><h5 class="rev"># reviews</h5>-->
       <br>
-      <form method="POST" action="{% url 'add_item' item_id=item.item_id %}">
+      <form method="POST" action="{% url 'add_item' item_id=item.id %}">
       {% csrf_token %}
       <button type="button" id="minus" class="plus-minus btn btn-danger" onclick="decrementValue()">-</button>
       <input id="quantity" class="quantity"  value="1" name="quantity" readonly></input>
