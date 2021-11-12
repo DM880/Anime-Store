@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>{% block title %}{% endblock %}</title>
+  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css'>
+<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/css/bootstrap.min.css'>
+<link rel="stylesheet" href="{% static 'css/base.css' %}">
+{% block css %}{% endblock %}
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@500&family=Permanent+Marker&family=Rock+Salt&display=swap" rel="stylesheet">
+
+</head>
+<body>
+
+<div id="nav" class="nav">
+    <a href="{% url 'landing_page' %}"><img class="logo" src="{% static 'img/landing_page/logo.png' %}"></a>
+    <a href=""><i title="Your Cart" class="fas fa-shopping-cart"></i></a>
+    <a href="" method="GET"><i title="Search" class="fas fa-search"></i></a>
+    <a href="{% url 'login' %}"><i title="Account" class="fas fa-user"></i></a>
+</div>
+
+{% block content %}
+
+{% endblock %}
+
+</body>
+</html>

@@ -1,0 +1,87 @@
+body,html{
+  background-color: #F7F6F2;
+  min-height: 100%;
+}
+
+.wrapper{
+  margin-top: 150px;
+  display: flex;
+}
+
+.img-cont{
+  float: 1;
+  margin-left: 100px;
+  height: 100%;
+  max-width: 400px;
+  width: auto;
+  border-radius: 25px;
+  overflow: hidden;
+  justify-content: center;
+  margin-top: 100px;
+}
+
+img{
+  height: auto;
+  width: 100%;
+}
+
+.item-section{
+  margin-left: 50px;
+  margin-right: 10px;
+}
+
+.item-infos{
+  background-color: white;
+  max-height: 350px;
+  min-height: 200px;
+  height: auto;
+  min-width: 300px;
+  width: auto;
+  max-width: 400px;
+  word-break: break-all;
+  border-radius: 25px;
+  margin-top:100px;
+}
+
+.description{
+  text-align:left;
+  margin: 55px 10px 10px 10px;
+  font-size: 25px;
+}
+
+.quantity{
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-top: 32px;
+  height: 35px;
+  width: 35px;
+  border-radius: 10px;
+  border: solid 1px black;
+  text-align: center;
+}
+
+.add{
+  float: right;
+  border-radius: 10px;
+  margin-top: 30px;
+  height: 40px;
+  width: 120px;
+  margin-right: 50px;
+}
+
+.plus-minus{
+  text-align: center;
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+  text-align: center;
+  margin-bottom:5px;
+  padding: 0px;
+  background-color: #FF4848;
+}
+
+
+.rev{
+  display: inline;
+  margin-right:10px;
+}

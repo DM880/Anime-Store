@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Sign Up</title>
+  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/css/bootstrap.min.css'>
+  <link rel="stylesheet" href="{% static 'css/user/sign_up.css' %}">
+
+</head>
+<body>
+<div class="img-c"></div>
+
+<a href="{% url 'landing_page' %}"><img title="Back" class="logo" src="{% static 'img/landing_page/logo.png' %}"></a>
+
+<div class="register">
+    <form id="form" method="POST" class="register-f" enctype="multipart/form-data" action="{% url 'sign_up' %}">
+      {% csrf_token %}
+      <div class="rf">
+        <input name="fname" type="text" class="name" placeholder="First Name" required/><input name="lname" type="text" class="name" placeholder="Last Name" required/>
+      </div>
+      <div class="rf">
+        <input name="username" type="username" class="name" placeholder="Username" required/><input name="birth" id="datepicker" class="name" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" placeholder="Date of Birth" required/>
+        </div>
+      <div class="rf"><input name="email" type="email" class="email" placeholder="Email" required/></div>
+      <div class="rf">
+        <input  onkeyup="check_password();" id="password1" name="password1" type="password" class="password" placeholder="New Password" required/>
+      <input  onkeyup="check_password();" id="password2" name="password2" type="password" class="password" placeholder="Confirm Password" required/>
+      </div>
+      <div class="rf"><button id="submit-btn" type="button" class="btn btn-success btn-lg" value="CreateAccount">Create Account</button></div>
+    </form>
+    </div>
+    <h5 style="color:red">{{ valid }}</h5>
+    <h5 id='message'></h5>
+
+<script src="{% static 'js/user/sign_up.js' %}"></script>
+</body>
+</html>

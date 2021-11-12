@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Anime Slash{% endblock %}
+
+{% block css %}<link rel="stylesheet" href="{% static 'css/landing_page.css' %}">{% endblock %}
+
+{% block content %}
+
+<div class="img-c"></div>
+<div class="wrapper">
+  <div class="main-page">
+    <div class="store-name">
+    <h1 class="name">ANIME SLASH</h1>
+    <a class="a-explore" href="{% url 'main_store' %}"><span class="line"><h2 class="explore">Explore</h2></span></a>
+    </div>
+   <div class="image-container"></div>
+  </div>
+</div>
+
+
+<script>
+  document.getElementById("nav").style.borderColor = '#D92332';
+</script>
+
+{% endblock %}
