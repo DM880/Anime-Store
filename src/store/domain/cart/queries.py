@@ -15,15 +15,15 @@ def update_cart(cart, item, quantity, command):
         cart.save()
 
 
-def add_item(item_id, quantity):
+def add_item(user, item_id, quantity):
 
     item = Item.objects.get(item_id=item_id)
 
     if user.is_authenticated:
         try:
-            cart = Cart.objects.get(user=request.user)
+            cart = Cart.objects.get(user=user)
         except Cart.DoesNotExist:
-            cart=Cart.objects.create(user=request.user)
+            cart=Cart.objects.create(user=user)
 
         EntryCart.objects.create(cart=cart, item=item, quantity=quantity)
         update_cart(cart, item, quantity, command="add")
@@ -34,10 +34,10 @@ def add_item(item_id, quantity):
         update_cart(cart, item, quantity, command="add")
 
 
-def remove_item(item_id, quantity):
+def remove_item(user, item_id, quantity):
 
     if user.is_authenticated:
-        cart = Cart.objects.get(user=request.user)
+        cart = Cart.objects.get(user=user)
     else:
         cart = guest_cart()
 
@@ -56,9 +56,9 @@ def remove_item(item_id, quantity):
         return
 
     else:
-        quantity_query = quantity
+        temp_quantity = quantity
         for entry in entries:
-            if quantity_query == 0:
+            if temp_quantity == 0:
                 update_cart(cart, item, quantity, command="")
                 return
             entry.delete()
