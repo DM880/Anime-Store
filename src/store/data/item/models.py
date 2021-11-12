@@ -40,6 +40,7 @@ class ItemReview(models.Model):
     username = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
     title = models.CharField(max_length=20, blank=True)
     review = models.TextField(max_length=500, blank=True)
+    rating = models.IntegerField(choices=[(i, i) for i in range(1, 5+1)], blank=True)
     posted = models.DateTimeField(blank=True, null=True,default=datetime.datetime.now)
 
     class Meta:

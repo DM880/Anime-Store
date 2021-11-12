@@ -6,12 +6,15 @@ import json
 
 
 from store.data.user.models import CustomUser as User
-from store.data.item.models import Item
+from store.data.item.models import Item, ItemReview
 from store.data.cart.models import Cart
 
 
 from store.domain.user import validation
 from store.domain.cart import queries
+
+
+from .utils import rating_avg
 
 
 class LandingPage(generic_views.TemplateView):
@@ -80,7 +83,9 @@ def main_store(request):
 
 def item_page(request, item_id):
     item = Item.objects.get(id=item_id)
-    return render(request, 'store/item_page.html', {'item':item})
+    reviews = ItemReview.objects.filter(item=item_id)
+    avg_rating = rating_avg(reviews)
+    return render(request, 'store/item_page.html', {'item':item, 'reviews':reviews, 'avg_rating':avg_rating})
 
 
 #Cart
