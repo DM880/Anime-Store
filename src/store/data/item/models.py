@@ -2,6 +2,9 @@ from django.db import models
 import datetime
 
 
+from store.data.user.models import CustomUser as User
+
+
 CATEGORY_CHOICES = (
     (ANI := "ANIME", "anime"),
     (MAN := "MANGA", "manga"),
@@ -14,11 +17,11 @@ CATEGORY_CHOICES = (
 
 
 class Item(models.Model):
-    id= models.AutoField(primary_key=True)
     name = models.CharField(max_length=200)
     description = models.TextField(max_length=1000, blank=True)
     price = models.DecimalField(max_digits=10, decimal_places=2)
     category = models.CharField(max_length=20, choices=CATEGORY_CHOICES, default=OTH)
+    available = models.BooleanField(default=True)
 
     def __str__(self):
         return f"{self.name}/{self.category}"
@@ -34,12 +37,13 @@ class ItemImage(models.Model):
 
 class ItemReview(models.Model):
     item = models.ForeignKey(Item, on_delete=models.CASCADE)
+    username = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
     title = models.CharField(max_length=20, blank=True)
     review = models.TextField(max_length=500, blank=True)
-    timestamp = models.DateTimeField(blank=True, null=True,default=datetime.datetime.now)
+    posted = models.DateTimeField(blank=True, null=True,default=datetime.datetime.now)
 
     class Meta:
-        ordering = ('-timestamp',)
+        ordering = ('-posted',)
 
     def __str__(self):
         return self.title

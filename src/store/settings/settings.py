@@ -55,7 +55,6 @@ INSTALLED_APPS = [
     'store.interfaces.djangoadmin',
 
     'crispy_forms',
-
 ]
 
 MIDDLEWARE = [

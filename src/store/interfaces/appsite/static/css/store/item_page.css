@@ -85,3 +85,51 @@ img{
   display: inline;
   margin-right:10px;
 }
+
+hr{
+  width: 80%;
+  margin: 100px 10% auto 10%;
+  text-align: center;
+}
+
+/* Review Section */
+
+
+.user-div{
+  width: 100%;
+}
+
+.user-rev{
+  margin-left: 5%;
+  margin-top: 60px;
+  min-height: 50px;
+  height: auto;
+  width: 80%;
+  border-radius: 10px;
+  font-family: 'Roboto', sans-serif;
+  font-size: 1.2em;
+  overflow: auto;
+  white-space: normal;
+  word-wrap: break-word;
+}
+
+.username{
+  padding: 10px;
+  font-family:'Roboto', sans-serif;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.review-txt{
+  margin-top: 20px;
+  padding: 10px;
+  margin-bottom: 20px;
+}
+
+.date{
+  text-align: left;
+  font-family:'Roboto', sans-serif;
+  opacity: 50%;
+  margin-left: 5%;
+  padding: 10px;
+}
