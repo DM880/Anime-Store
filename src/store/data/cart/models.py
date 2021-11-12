@@ -12,7 +12,7 @@ class Cart(models.Model):
     updated = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return f"{self.id} price={self.tot_price} user={self.user_id}"
+        return f"user={self.user.username}/price={self.tot_price}/id={self.user_id}"
 
 
 class EntryCart(models.Model):

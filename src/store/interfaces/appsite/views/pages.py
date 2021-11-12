@@ -79,7 +79,7 @@ def main_store(request):
 
 
 def item_page(request, item_id):
-    item = Item.objects.get(item_id=item_id)
+    item = Item.objects.get(id=item_id)
     return render(request, 'store/item_page.html', {'item':item})
 
 

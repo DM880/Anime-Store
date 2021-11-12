@@ -17,7 +17,7 @@
       <p class="description">{{ item.description }}</p>
     </div>
       <br>
-      <!--<span class="rev">⭐⭐⭐⭐⭐</span><h5 class="rev"># reviews</h5>-->
+      <span class="rev">⭐⭐⭐⭐⭐</span><h5 class="rev"># reviews</h5>
       <br>
       <form method="POST" action="{% url 'add_item' item_id=item.id %}">
       {% csrf_token %}

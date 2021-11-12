@@ -3,21 +3,16 @@ from store.data.item.models import Item
 from store.data.cart.models import Cart, EntryCart
 
 
-def update_cart(cart, item, quantity, command):
+def update_cart(cart, item, quantity):
 
-    if command:
-        cart.tot_count += quantity
-        cart.tot_price += item.price * quantity
-        cart.save()
-    else:
-        cart.tot_count -= quantity
-        cart.tot_price -= item.price * quantity
-        cart.save()
+    cart.tot_count += quantity
+    cart.tot_price += item.price * quantity
+    cart.save()
 
 
 def add_item(user, item_id, quantity):
 
-    item = Item.objects.get(item_id=item_id)
+    item = Item.objects.get(id=item_id)
 
     if user.is_authenticated:
         try:
@@ -26,12 +21,12 @@ def add_item(user, item_id, quantity):
             cart=Cart.objects.create(user=user)
 
         EntryCart.objects.create(cart=cart, item=item, quantity=quantity)
-        update_cart(cart, item, quantity, command="add")
 
     else:
         cart = guest_cart()
         EntryCart.objects.create(cart=cart, item=item, quantity=quantity)
-        update_cart(cart, item, quantity, command="add")
+
+    update_cart(cart, item, quantity)
 
 
 def remove_item(user, item_id, quantity):
@@ -41,28 +36,29 @@ def remove_item(user, item_id, quantity):
     else:
         cart = guest_cart()
 
-    item = Item.objects.get(item_id=item_id)
+    item = Item.objects.get(id=item_id)
     entries = EntryCart.objects.filter(cart=cart, item=item)
     quantity_item = EntryCart.objects.filter(cart=cart, item=item).count()
 
     if quantity_item == 0:
         return
 
-    elif quantity > quantity_item or quantity == quantity_item:
+    elif quantity >= quantity_item:
         for entry in entries:
             entry.delete()
-        quantity = quantity_item
-        update_cart(cart, item, quantity, command="")
+        quantity = quantity_item * -1
+        update_cart(cart, item, quantity)
         return
 
     else:
         temp_quantity = quantity
         for entry in entries:
             if temp_quantity == 0:
-                update_cart(cart, item, quantity, command="")
+                quantity *= -1
+                update_cart(cart, item, quantity)
                 return
             entry.delete()
-            quantity_query -= 1
+            temp_quantity -= 1
 
 
 def guest_cart():
