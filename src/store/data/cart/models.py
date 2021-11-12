@@ -10,6 +10,7 @@ class Cart(models.Model):
     tot_count = models.IntegerField(default=0)
     tot_price = models.DecimalField(default=0, decimal_places=2, max_digits=10)
     updated = models.DateTimeField(auto_now=True)
+    purchase = models.BooleanField(default=False)
 
     def __str__(self):
         return f"user={self.user.username}/price={self.tot_price}/id={self.user_id}"

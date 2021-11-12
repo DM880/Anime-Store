@@ -11,7 +11,7 @@ class CustomUser(AbstractUser):
     date_of_birth = models.DateField(auto_now=False, null=True, blank=True)
     email = models.EmailField(max_length=200,unique=True, blank=False)
     password = models.CharField(max_length=50, blank=False)
-    time_created = models.DateTimeField(default=timezone.now)
+    created = models.DateTimeField(default=timezone.now)
     id = models.AutoField(primary_key=True)
 
     #Replace username with email for authenticate function
@@ -19,5 +19,5 @@ class CustomUser(AbstractUser):
     REQUIRED_FIELDS = ['username']
 
     class Meta:
-        ordering = ('time_created',)
+        ordering = ('created',)
         db_table = 'store_user'
