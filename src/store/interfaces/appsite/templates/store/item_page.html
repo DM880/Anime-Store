@@ -17,7 +17,11 @@
       <p class="description">{{ item.description }}</p>
     </div>
       <br>
-      <span class="rev">⭐⭐⭐⭐⭐</span><h5 class="rev"># reviews</h5>
+      <span class="rev">
+        {% with i|center:avg_rating.rating as range %}
+        {% for i in range %}⭐{% endfor %}
+        {% endwith %}
+      </span><h5 style="opacity:0.5;" class="rev">{{ avg_rating.counter }} reviews</h5>
       <br>
       <form method="POST" action="{% url 'add_item' item_id=item.id %}">
       {% csrf_token %}
@@ -31,12 +35,22 @@
 <hr>
 <div style="margin-top: 50px;">
   <h1 style="text-align:center;"> Reviews </h1>
-  <div class="user-rev"><h5 class="username rev">Username</h5><span class="rev">⭐⭐⭐⭐⭐</span>
-  <p class="review-txt" name="review_id">Post content</p>
-  </div>
-  <p class="date">Timestamp</p>
-</div>
 
+  {% for review in reviews %}
+  {% with ''|center:review.rating as range %}
+  <div class="user-rev">
+    <h5 class="username rev">{{ review.username }}</h5>
+  <span class="rev">
+    {% for _ in range %}
+    ⭐
+    {% endfor %}</span>
+  <p class="review-txt" name="review_id">{{ review.review }}</p>
+  </div>
+  <p class="date">{{ review.posted }}</p>
+  {% endwith %}
+  {% endfor %}
+
+</div>
 
 <script src="{% static 'js/store/item_page.js' %}"></script>
 
