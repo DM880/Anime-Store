@@ -37,11 +37,11 @@
   <h1 style="text-align:center;"> Reviews </h1>
 
   {% for review in reviews %}
-  {% with ''|center:review.rating as range %}
+  {% with x|center:review.rating as range %}
   <div class="user-rev">
-    <h5 class="username rev">{{ review.username }}</h5>
+    <h5 class="username rev">{{ review.username.username }}</h5>
   <span class="rev">
-    {% for _ in range %}
+    {% for x in range %}
     ⭐
     {% endfor %}</span>
   <p class="review-txt" name="review_id">{{ review.review }}</p>
