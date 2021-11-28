@@ -7,8 +7,13 @@ def rating_avg(reviews):
         avg_rating += review.rating
         counter += 1
 
+    if avg_rating == 0:
+        rating = 0
+    else:
+        rating = round(avg_rating/counter)
+
     data_rating = {
-        'rating':round(avg_rating/counter),
+        'rating': rating,
         'counter':counter
         }
 

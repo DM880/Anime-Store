@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Checkout{% endblock %}
+
+{% block css %}<link rel="stylesheet" href="{% static 'css/store/checkout.css' %}">{% endblock %}
+
+{% block content %}
+
+<div class="wrapper">
+  {% for item in items %}
+  <div class="item-cont">
+    <div class="itm-img col"><img src="/media/{{ item.item.first_image.image }}"></div>
+    <div class="itm-name col"><h5>{{ item.item.name }}</h5></div>
+    <div class="quantity-cont col">
+    <button type="button" id="minus" class="plus-minus btn btn-danger" onclick="decrementValue({{item.id}})">-</button>
+      <input id="quantity{{item.id}}" class="quantity"  value="{{ item.quantity }}" name="quantity" readonly></input>
+      <button type="button" id="plus" class="plus-minus btn btn-danger" onclick="incrementValue({{item.id}})">+</button>
+</div>
+  <div class="btn-update"><button class="update btn btn-success" title="Update Quantity" style="margin-left:100px;">UPDATE</div>
+  </div>
+<br>
+  <hr>
+  {% endfor %}
+
+</div>
+
+
+
+  <script  src="{% static 'js/store/checkout.js' %}"></script>
+
+{% endblock %}

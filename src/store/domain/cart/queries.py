@@ -61,6 +61,7 @@ def remove_item(user, item_id, quantity):
             temp_quantity -= 1
 
 
+#Temporary, only for testing
 def guest_cart():
     user = User.objects.get(username='guest')
     cart = Cart.objects.get(user=user)
