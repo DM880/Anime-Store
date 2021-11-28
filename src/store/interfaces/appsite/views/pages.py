@@ -1,13 +1,15 @@
 from django.shortcuts import render, redirect, reverse
 from django.views import generic as generic_views
 from django.contrib.auth import authenticate, login
-from django.http import JsonResponse
-import json
+
+#For AJAX
+# from django.http import JsonResponse
+# import json
 
 
 from store.data.user.models import CustomUser as User
 from store.data.item.models import Item, ItemReview
-from store.data.cart.models import Cart
+from store.data.cart.models import Cart, EntryCart
 
 
 from store.domain.user import validation
@@ -78,6 +80,7 @@ def sign_up(request):
 
 def main_store(request):
     all_items = Item.objects.all()
+
     return render(request, "store/main_store.html", {'all_items':all_items})
 
 
@@ -87,6 +90,12 @@ def item_page(request, item_id):
     avg_rating_data = rating_avg(reviews)
     return render(request, 'store/item_page.html', {'item':item, 'reviews':reviews, 'avg_rating_data':avg_rating_data})
 
+
+def checkout(request):
+    user = User.objects.get(email=request.user.email)
+    cart = Cart.objects.get(user=user)
+    items = EntryCart.objects.filter(cart=cart)
+    return render(request, "store/checkout.html", {'cart':cart, 'items':items})
 
 #Cart
 
