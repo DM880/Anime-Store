@@ -13,7 +13,7 @@ from store.data.cart.models import Cart, EntryCart
 
 
 from store.domain.user import validation
-from store.domain.cart import queries
+from store.domain.cart import queries, checkout
 
 
 from .utils import rating_avg
@@ -21,13 +21,6 @@ from .utils import rating_avg
 
 class LandingPage(generic_views.TemplateView):
     template_name = "landing_page.html"
-
-
-def checkout(request):
-    user = User.objects.get(email=request.user.email)
-    cart = Cart.objects.get(user=user)
-    items = EntryCart.objects.filter(cart=cart)
-    return render(request, "checkout.html", {'cart':cart, 'items':items})
 
 
 #User
@@ -95,6 +88,7 @@ def item_page(request, item_id):
     item = Item.objects.get(id=item_id)
     reviews = ItemReview.objects.filter(item=item_id)
     avg_rating_data = rating_avg(reviews)
+
     return render(request, 'store/item_page.html', {'item':item, 'reviews':reviews, 'avg_rating_data':avg_rating_data})
 
 
@@ -107,7 +101,6 @@ def add_item_cart(request, item_id):
 
     if quantity is None:
         quantity = 1
-
     else:
         quantity = int(quantity)
 
@@ -118,17 +111,36 @@ def add_item_cart(request, item_id):
 
 
 def remove_item_cart(request, item_id):
-
     quantity = request.POST.get('quantity')
     user = request.user
 
     if quantity is None:
         quantity = 1
-
     else:
         quantity = int(quantity)
 
     queries.remove_item(user, item_id, quantity)
+
+    return redirect(request.META.get('HTTP_REFERER', 'main_store'))
+
+
+#Checkout
+
+def checkout_page(request):
+    user = User.objects.get(email=request.user.email)
+    cart = Cart.objects.get(user=user)
+    items = EntryCart.objects.filter(cart=cart)
+
+    subtotal = cart.tot_price
+    total = 4.99 + float(subtotal)
+
+    return render(request, "checkout_page.html", {'cart':cart, 'items':items, 'subtotal':subtotal, 'total':total})
+
+
+def checkout_remove_entry(request, entry):
+    # item = Item.objects.get(id=entry.item)
+    user = User.objects.get(email=request.user.email)
+    checkout.remove_entry(entry,user)
 
     return redirect(request.META.get('HTTP_REFERER', 'main_store'))
 
