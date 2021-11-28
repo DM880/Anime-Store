@@ -6,8 +6,8 @@ from .views import pages
 
 
 urlpatterns = [
+
     path('', pages.LandingPage.as_view(), name="landing_page"),
-    path('checkout/', pages.checkout, name="checkout"),
 
     #User
     path('signup/', pages.sign_up, name="sign_up"),
@@ -20,6 +20,10 @@ urlpatterns = [
     #Cart
     path('cart/add/<item_id>/', pages.add_item_cart, name="add_item"),
     path('cart/remove/<item_id>/', pages.remove_item_cart, name="remove_item"),
+
+    #Checkout
+    path('checkout/', pages.checkout_page, name="checkout_page"),
+    path('checkout/<entry>/', pages.checkout_remove_entry, name="checkout_remove_entry")
 
 ]
 
