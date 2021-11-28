@@ -20,3 +20,6 @@ class EntryCart(models.Model):
     cart = models.ForeignKey(Cart, on_delete=models.CASCADE, blank=True, null=True)
     item = models.ForeignKey(Item, on_delete=models.CASCADE)
     quantity = models.PositiveIntegerField(default=0)
+
+    def total_price(self):
+        return self.item.price * self.quantity

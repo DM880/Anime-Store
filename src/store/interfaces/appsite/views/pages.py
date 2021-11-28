@@ -23,6 +23,13 @@ class LandingPage(generic_views.TemplateView):
     template_name = "landing_page.html"
 
 
+def checkout(request):
+    user = User.objects.get(email=request.user.email)
+    cart = Cart.objects.get(user=user)
+    items = EntryCart.objects.filter(cart=cart)
+    return render(request, "checkout.html", {'cart':cart, 'items':items})
+
+
 #User
 
 def sign_in(request):
@@ -90,12 +97,6 @@ def item_page(request, item_id):
     avg_rating_data = rating_avg(reviews)
     return render(request, 'store/item_page.html', {'item':item, 'reviews':reviews, 'avg_rating_data':avg_rating_data})
 
-
-def checkout(request):
-    user = User.objects.get(email=request.user.email)
-    cart = Cart.objects.get(user=user)
-    items = EntryCart.objects.filter(cart=cart)
-    return render(request, "store/checkout.html", {'cart':cart, 'items':items})
 
 #Cart
 
