@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Checkout{% endblock %}
+
+{% block css %}<link rel="stylesheet" href="{% static 'css/checkout.css' %}">{% endblock %}
+
+{% block content %}
+
+<div class="wrapper">
+
+    <div class="row">
+      <div class="col"><h5>Item details</h5></div>
+      <div class="col"></div>
+      <div class="col"><h5 style="margin-left:-20px">Price</h5></div>
+      <div class="col"><h5 style="margin-left:-45px">Quantity</h5></div>
+      <div class="col"></div>
+    </div>
+   <hr style="margin-top:-10px;">
+
+  {% for item in items %}
+  <div class="item-cont">
+    <div class="itm-img col col-itm"><img src="/media/{{ item.item.first_image.image }}"></div>
+    <div class="itm-name col col-itm"><p>{{ item.item.name }}</p></div>
+    <div class="price-div col col-itm"><p>${{ item.total_price }}</p></div>
+    <div class="quantity-cont col col-itm">
+    <button type="button" id="minus" class="plus-minus btn btn-info" onclick="decrementValue({{item.id}})" title="Remove From Cart">-</button>
+    <input id="quantity{{item.id}}" class="quantity"  value="{{ item.quantity }}" name="quantity" readonly></input>
+    <button type="button" id="plus" class="plus-minus btn btn-info" onclick="incrementValue({{item.id}})" title="Add To Cart">+</button>
+    </div>
+    <div class="btn-update col col-itm"><button class="update btn btn-success" title="Update Quantity" style="margin-left:100px;">UPDATE</div>
+    <div class="col"><a class="delete-itm" href="" title="Delete Entry">X</a></div>
+  </div>
+<br>
+  <hr>
+  {% endfor %}
+
+</div>
+
+
+
+  <script  src="{% static 'js/checkout.js' %}"></script>
+
+{% endblock %}
