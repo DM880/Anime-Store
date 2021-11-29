@@ -1,6 +1,11 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block title %}Checkout{% endblock %}
+{% block title %}{% if request.user.is_authenticated %}
+                {{ request.user.username }}
+                {% else %}
+                Guest
+                {% endif %}
+                Checkout{% endblock %}
 
 {% block css %}<link rel="stylesheet" href="{% static 'css/checkout_page.css' %}">{% endblock %}
 
@@ -42,7 +47,7 @@
         <form method="POST" action="">
           {% csrf_token %}
     <button type="button" id="minus" class="plus-minus btn btn-danger" onclick="decrementValue({{item.id}})" title="Remove From Cart">-</button>
-    <input id="quantity{{item.id}}" class="quantity"  value="1" name="quantity" readonly></input>
+    <input id="quantity{{item.id}}" class="quantity"  value="{{ item.quantity }}" name="quantity" readonly></input>
     <button type="button" id="plus" class="plus-minus btn btn-danger" onclick="incrementValue({{item.id}})" title="Add To Cart">+</button>
     </div>
     </td>
