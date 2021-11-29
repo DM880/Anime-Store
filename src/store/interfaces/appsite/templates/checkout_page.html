@@ -8,33 +8,60 @@
 
 <div class="wrapper">
 
-    <div class="row">
-      <div class="col"><h5>Item details</h5></div>
-      <div class="col"></div>
-      <div class="col"><h5 style="margin-left:-20px">Price</h5></div>
-      <div class="col"><h5 style="margin-left:-45px">Quantity</h5></div>
-      <div class="col"></div>
-    </div>
-   <hr style="margin-top:-10px;">
+<table class="spacing-table">
+  <tr style="border-bottom: 1px solid #000;">
+    <th>
+      <h5>Item Details</h5>
+    </th>
+    <th>
+    </th>
+    <th>
+      <h5>Price</h5>
+    </th>
+    <th>
+      <h5 style="margin-left:20px;">Quantity</h5>
+    </th>
+    <th>
+    </th>
+    <th>
+    </th>
+  </tr>
+    {% for item in items %}
 
-  {% for item in items %}
-  <div class="item-cont">
-    <div class="itm-img col col-itm"><img src="/media/{{ item.item.first_image.image }}"></div>
-    <div class="itm-name col col-itm"><p>{{ item.item.name }}</p></div>
-    <div class="price-div col col-itm"><p>${{ item.total_price }}</p></div>
-    <div class="quantity-cont col col-itm">
-    <button type="button" id="minus" class="plus-minus btn btn-info" onclick="decrementValue({{item.id}})" title="Remove From Cart">-</button>
-    <input id="quantity{{item.id}}" class="quantity"  value="{{ item.quantity }}" name="quantity" readonly></input>
-    <button type="button" id="plus" class="plus-minus btn btn-info" onclick="incrementValue({{item.id}})" title="Add To Cart">+</button>
+   <tr style="border-bottom: 1px solid #000;">
+    <td>
+      <div class="itm-img"><img src="/media/{{ item.item.first_image.image }}"></div>
+    </td>
+    <td><div class="itm-name"><p>{{ item.item.name }}</p>
+    </td>
+    <td>
+      <div class="price-div"><p>${{ item.total_price }}</p></div>
+    </td>
+    <td>
+      <div class="quantity-cont">
+        <form method="POST" action="">
+          {% csrf_token %}
+    <button type="button" id="minus" class="plus-minus btn btn-danger" onclick="decrementValue({{item.id}})" title="Remove From Cart">-</button>
+    <input id="quantity{{item.id}}" class="quantity"  value="1" name="quantity" readonly></input>
+    <button type="button" id="plus" class="plus-minus btn btn-danger" onclick="incrementValue({{item.id}})" title="Add To Cart">+</button>
     </div>
-    <div class="btn-update col col-itm"><button class="update btn btn-outline-success" title="Update Quantity" style="margin-left:100px;">UPDATE</div>
-    <div class="col">
-      <a class="delete-itm" href="{% url 'checkout_remove_entry' entry=item.id %}"  title="Delete Entry">X</a></div>
+    </td>
+    <td>
+       <div class="btn-update"><button type="submit" class="btn btn-outline-success" title="Update Quantity" style="margin-left:100px;">UPDATE</div>
+  </form>
+    </td>
+     <td>
+          <div ><a class="delete-itm" href="{% url 'checkout_remove_entry' entry=item.id %}" title="Delete Entry">X</a></div>
   </div>
-<br>
-  <hr>
+     </td>
+  </tr>
   {% endfor %}
+
+</table>
+  <hr>
+
 </div>
+
 <div class="tot" style="float:right; margin:20px 100px 50px auto;"><p>Subtotal ${{ subtotal }}</p>
   <br>
        <p>Delivery $4.99</p>

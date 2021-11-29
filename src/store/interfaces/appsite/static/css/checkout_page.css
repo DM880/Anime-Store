@@ -2,43 +2,40 @@
   margin-top: 100px;
 }
 
-.item-cont, .row{
-  width: 100%;
-  display: table;
-  table-layout: fixed;
-  border-spacing: 10px
-}
-
-.col{
-  display: table-cell;
-  margin-bottom: -40px;
-}
-
-.col-itm{
-  width:20%;
-  text-align: center;
-}
-
-.itm-img{
-  width: 100px;
-  height: 100px;
-  overflow:hidden;
-  float: left;
-}
-
-.itm-img img{
-  width: 100px;
-  height: 100px;
+td{
+  width: 20em;
 }
 
 p{
   font-size: 18px;
 }
 
+table{
+ border-collapse:separate;
+ border-spacing: 10px;
+
+}
+
+.spacing-table th {
+  text-align: left;
+  padding-bottom: 10px;
+}
+
+.itm-img{
+  width: 100px;
+  height: 100px;
+  overflow:hidden;
+}
+
+.itm-img img{
+  width: 100px;
+  height: 100px;
+  border-radius: 5px;
+}
+
 .quantity{
   margin-left: 10px;
   margin-right: 10px;
-  margin-top: 32px;
   height: 35px;
   width: 35px;
   border-radius: 10px;
@@ -48,26 +45,19 @@ p{
 
 .plus-minus{
   text-align: center;
-  height: 30px;
-  width: 30px;
-  border-radius: 50%;
+  height: 20px;
+  width: 20px;
+  border-radius: 5px;
   text-align: center;
   margin-bottom:5px;
   padding: 0px;
-  background-color: #A2D2FF;
-  border-color: #A2D2FF;
-  color: white;
-}
-
-.plus-minus:hover{
-  background-color: #3DB2FF;
-  border-color: #3DB2FF;
+  background-color: #FF4848;
+  font-size: 10px;
 }
 
 .delete-itm{
   width: 10%;
   float: right;
-  margin-bottom: -7px;
   color: red;
   text-decoration: none;
   font-weight: bold;
@@ -76,3 +66,7 @@ p{
 .delete-itm:hover{
   color: #CD1818;
 }
+
+
+
+
