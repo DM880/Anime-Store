@@ -127,7 +127,12 @@ def remove_item_cart(request, item_id):
 #Checkout
 
 def checkout_page(request):
-    user = User.objects.get(email=request.user.email)
+
+    if request.user.is_authenticated:
+        user = User.objects.get(email=request.user.email)
+    else:
+        user = User.objects.get(username='guest')
+
     cart = Cart.objects.get(user=user)
     items = EntryCart.objects.filter(cart=cart)
 
@@ -138,8 +143,11 @@ def checkout_page(request):
 
 
 def checkout_remove_entry(request, entry):
-    # item = Item.objects.get(id=entry.item)
-    user = User.objects.get(email=request.user.email)
+    if request.user.is_authenticated:
+        user = User.objects.get(email=request.user.email)
+    else:
+        user = User.objects.get(username='guest')
+
     checkout.remove_entry(entry,user)
 
     return redirect(request.META.get('HTTP_REFERER', 'main_store'))

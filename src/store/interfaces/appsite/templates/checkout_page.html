@@ -27,7 +27,7 @@
     <input id="quantity{{item.id}}" class="quantity"  value="{{ item.quantity }}" name="quantity" readonly></input>
     <button type="button" id="plus" class="plus-minus btn btn-info" onclick="incrementValue({{item.id}})" title="Add To Cart">+</button>
     </div>
-    <div class="btn-update col col-itm"><button class="update btn btn-success" title="Update Quantity" style="margin-left:100px;">UPDATE</div>
+    <div class="btn-update col col-itm"><button class="update btn btn-outline-success" title="Update Quantity" style="margin-left:100px;">UPDATE</div>
     <div class="col">
       <a class="delete-itm" href="{% url 'checkout_remove_entry' entry=item.id %}"  title="Delete Entry">X</a></div>
   </div>
@@ -40,6 +40,7 @@
        <p>Delivery $4.99</p>
   <hr>
   <h5>Total<span style="font-size:12px;">(include GST)</span> ${{ total|floatformat:2 }}</h5>
+    <a href=""><button class="btn btn-success" style="margin-top:20px;margin-left:30px;" title="Checkout">Checkout</button></a>
 </div>
 
   <script  src="{% static 'js/checkout_page.js' %}"></script>
