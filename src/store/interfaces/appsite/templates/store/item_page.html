@@ -23,7 +23,7 @@
         {% endwith %}
       </span><h5 style="opacity:0.5;" class="rev">{{ avg_rating_data.counter }} reviews</h5>
       <br>
-      <form method="POST" action="{% url 'add_item' item_id=item.id %}">
+      <form method="POST" id="form" data-id="{{ item.id }}" action="{% url 'add_item' item_id=item.id %}">
       {% csrf_token %}
       <button type="button" id="minus" class="plus-minus btn btn-danger" onclick="decrementValue()">-</button>
       <input id="quantity" class="quantity"  value="1" name="quantity" readonly></input>
@@ -52,6 +52,7 @@
 
 </div>
 
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 <script src="{% static 'js/store/item_page.js' %}"></script>
 
 {% endblock %}

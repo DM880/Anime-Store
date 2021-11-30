@@ -19,3 +19,27 @@ function incrementValue()
     }
 }
 
+
+
+
+var btn = $('.add');
+btn.on('click', function(e){
+  e.preventDefault();
+    var quantity = parseInt(document.getElementById('quantity').value);
+    var form = $('#form').attr('action');
+    var csrftoken = $("[name=csrfmiddlewaretoken]").val();
+      // Ajax Call
+      $.ajax({
+        type: 'POST',
+        url: form,
+        headers: {"X-CSRFToken": csrftoken},
+        data:  {"quantity":quantity},
+        dataType: 'json',
+        success: function(response){
+          document.getElementById('quantity').value  = 1;
+        }
+      });
+    });
+
+
+
