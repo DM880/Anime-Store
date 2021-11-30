@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     'store.interfaces.djangoadmin',
 
     'crispy_forms',
+    'django_ajax',
 ]
 
 MIDDLEWARE = [
