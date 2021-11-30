@@ -23,6 +23,7 @@ function incrementValue()
 var btn = $('.add');
 btn.on('click', function(e){
   e.preventDefault();
+    document.getElementById("added").style.visibility = "hidden";
     var quantity = parseInt(document.getElementById('quantity').value);
     var url = $('#form').attr('action');
     var csrftoken = $("[name=csrfmiddlewaretoken]").val();
@@ -34,8 +35,12 @@ btn.on('click', function(e){
         data:  {"quantity":quantity},
         dataType: 'json',
         success: function(response){
-          document.getElementById('quantity').value  = 1;
-        }
+        $(".q-add").innerHTML = quantity;
+        setTimeout(function() {
+            document.getElementById("added").style.visibility = "visible";
+        }, 1000);
+        document.getElementById('quantity').value  = 1;
+      }
       });
     });
 

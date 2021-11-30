@@ -3,6 +3,35 @@ body,html{
   min-height: 100%;
 }
 
+/*Added to Cart div*/
+.added{
+  visibility: hidden;
+  height: 100px;
+  width: 150px;
+  border-radius: 5px;
+  top: 80px;
+  right: 5px;
+  display: flex;
+  z-index:99;
+  border: solid 1px black;
+  position: fixed;
+  background-color: white;
+}
+
+.img-cart{
+  height: 75px;
+  width: 75px;
+  margin-top: 13px;
+  overflow: hidden;
+}
+
+.img-cart img{
+  border-radius: 5px;
+  height: 75px;
+  width: 75px;
+}
+/*//////////////////////*/
+
 .wrapper{
   margin-top: 150px;
   display: flex;
