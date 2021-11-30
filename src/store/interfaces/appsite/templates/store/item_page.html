@@ -23,7 +23,7 @@
         {% endwith %}
       </span><h5 style="opacity:0.5;" class="rev">{{ avg_rating_data.counter }} reviews</h5>
       <br>
-      <form method="POST" id="form" data-id="{{ item.id }}" action="{% url 'add_item' item_id=item.id %}">
+      <form method="POST" id="form" action="{% url 'add_item' item_id=item.id %}">
       {% csrf_token %}
       <button type="button" id="minus" class="plus-minus btn btn-danger" onclick="decrementValue()">-</button>
       <input id="quantity" class="quantity"  value="1" name="quantity" readonly></input>

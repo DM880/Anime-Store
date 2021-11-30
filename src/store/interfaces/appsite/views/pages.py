@@ -3,9 +3,8 @@ from django.views import generic as generic_views
 from django.contrib.auth import authenticate, login
 
 #For AJAX
-from django.http import JsonResponse, HttpResponse
+from django.http import JsonResponse
 import json
-from django.views.decorators.csrf import csrf_exempt
 
 
 from store.data.user.models import CustomUser as User
@@ -94,7 +93,7 @@ def item_page(request, item_id):
 
 
 #Cart
-@csrf_exempt
+
 def add_item_cart(request, item_id):
 
     quantity = request.POST.get('quantity')
@@ -151,5 +150,11 @@ def checkout_remove_entry(request, entry):
 
     checkout.remove_entry(entry,user)
 
-    return redirect(request.META.get('HTTP_REFERER', 'main_store'))
+    data = {
+        'valid':True,
+        'url':reverse('checkout_page'),
+    }
+
+    return JsonResponse(data, status = 200)
+
 

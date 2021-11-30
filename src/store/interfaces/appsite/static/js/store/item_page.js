@@ -20,18 +20,16 @@ function incrementValue()
 }
 
 
-
-
 var btn = $('.add');
 btn.on('click', function(e){
   e.preventDefault();
     var quantity = parseInt(document.getElementById('quantity').value);
-    var form = $('#form').attr('action');
+    var url = $('#form').attr('action');
     var csrftoken = $("[name=csrfmiddlewaretoken]").val();
       // Ajax Call
       $.ajax({
         type: 'POST',
-        url: form,
+        url: url,
         headers: {"X-CSRFToken": csrftoken},
         data:  {"quantity":quantity},
         dataType: 'json',
