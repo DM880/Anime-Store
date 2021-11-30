@@ -56,7 +56,9 @@
   </form>
     </td>
      <td>
-          <div ><a class="delete-itm" href="{% url 'checkout_remove_entry' entry=item.id %}" title="Delete Entry">X</a></div>
+      <div>
+      <a class="delete-itm" id="delete-entry{{item.id}}" data-id="{{item.id}}" href="{% url 'checkout_remove_entry' entry=item.id %}" title="Delete Entry">X</a>
+      </div>
   </div>
      </td>
   </tr>
@@ -75,6 +77,8 @@
     <a href=""><button class="btn btn-success" style="margin-top:20px;margin-left:30px;" title="Checkout">Checkout</button></a>
 </div>
 
-  <script  src="{% static 'js/checkout_page.js' %}"></script>
+
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+<script  src="{% static 'js/checkout_page.js' %}"></script>
 
 {% endblock %}
