@@ -92,6 +92,15 @@ def item_page(request, item_id):
     return render(request, 'store/item_page.html', {'item':item, 'reviews':reviews, 'avg_rating_data':avg_rating_data})
 
 
+def search_item(request):
+
+    searched_item = request.GET.get('search-item')
+
+    items = Item.objects.filter(name__contains=searched_item)
+
+    return render(request, 'store/search_page.html', {'items':items, 'searched_item':searched_item})
+
+
 #Cart
 
 def add_item_cart(request, item_id):

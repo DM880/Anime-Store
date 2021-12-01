@@ -16,6 +16,7 @@ urlpatterns = [
     #Store
     path('store/', pages.main_store, name="main_store"),
     path('store/<item_id>/', pages.item_page, name="item_page"),
+    path('search/', pages.search_item, name="search_item"),
 
     #Cart
     path('cart/add/<item_id>/', pages.add_item_cart, name="add_item"),

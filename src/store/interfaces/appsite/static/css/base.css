@@ -40,6 +40,7 @@
   padding: 20px;
   color: #262626;
   transition: color 0.3s ease-in;
+  cursor: pointer;
 }
 
 .fa-user{
@@ -55,4 +56,29 @@
   color: #D92332;
 }
 
-/*////////////////*/
+/*Search Bar*/
+
+.search-input-div{
+  height: 50px;
+  width: 100px;
+  top: 70px;
+  right: 100px;
+  position: fixed;
+  z-index:99;
+  visibility: hidden;
+}
+
+input[type="submit"] {
+    height: 30px;
+    width: 60px;
+    background: green;
+    color: white;
+    border: 0;
+    top:70px;
+    right: 10px;
+    -webkit-appearance: none;
+    position: fixed;
+    z-index:99;
+}
+
+/*///////////////////////////*/

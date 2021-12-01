@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ searched_item }} Results{% endblock %}
+
+{% block css %} <link rel="stylesheet" href="{% static 'css/store/main_store.css' %}"> {% endblock %}
+
+{% block content %}
+
+
+<div class="row">
+
+{% for item in items %}
+
+<div class="added" id="added{{item.id}}"><div class="img-cart"><img src="/media/{{item.first_image.image}}"></div>
+  <div class="details" style="float:right;"><h5 style="margin-top:20px;margin-left:50px;">1</h5><h5 style="margin-left:25px;">{{ item.name }}</h5>
+  </div>
+</div>
+
+    <div class="item-cont col-6 col-sm-3">
+      {% if item.first_image.image %}
+      <a href="{% url 'item_page' item_id=item.id %}"><img class="item-img" src="/media/{{item.first_image.image}}"></a>
+      {% endif %}
+      <h1 class="item-title">{{ item.name }}</h1>
+      <p>${{ item.price }}</p>
+      <form class="add-to-cart" id="form-item{{item.id}}" method="POST" action="{% url 'add_item' item_id=item.id %}">
+        {% csrf_token %}
+      <button class="add cart-btn btn btn-success" id="add" data-id="{{item.id}}" type="submit" title="Add to Cart">+</button>
+      </form>
+    </div>
+{% endfor %}
+</div>
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+<script src="{% static 'js/store/main_store.js' %}"></script>
+
+
+
+{% endblock %}

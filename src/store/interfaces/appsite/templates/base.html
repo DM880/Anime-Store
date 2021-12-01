@@ -19,13 +19,36 @@
 <div id="nav" class="nav">
     <a href="{% url 'landing_page' %}"><img class="logo" src="{% static 'img/landing_page/logo.png' %}"></a>
     <a href="{% url 'checkout_page' %}"><i title="Your Cart" class="fas fa-shopping-cart"></i></a>
-    <a href="" method="GET"><i title="Search" class="fas fa-search"></i></a>
+    <i onclick="searchDiv()" title="Search" class="fas fa-search"></i>
     <a href="{% url 'login' %}"><i title="Account" class="fas fa-user"></i></a>
 </div>
+<div class="search-input-div" id="search_bar">
+  <form action="{% url 'search_item' %}" method="GET">
+    <input name="search-item" class="search-item-input"></input><input type="submit" value="Search"/>
+    </form>
+    </div>
 
 {% block content %}
 
 {% endblock %}
+
+<script>
+  window.onscroll = function () {
+    if (document.documentElement.scrollTop > 10) {
+      document.getElementById('nav').style.borderBottom = '1px solid black';
+    } else {
+    	document.getElementById('nav').style.borderBottom = 'none';
+    }
+}
+
+function searchDiv(){
+  if(document.getElementById('search_bar').style.visibility === 'visible'){ document.getElementById('search_bar').style.visibility = 'hidden';
+  }
+  else{
+    document.getElementById('search_bar').style.visibility = 'visible';
+  }
+};
+</script>
 
 </body>
 </html>
