@@ -10,6 +10,37 @@ body{
     overflow-y: scroll;
 }
 
+/*Added to Cart div*/
+.added{
+  visibility: hidden;
+  height: 100px;
+  width: 200px;
+  border-radius: 5px;
+  top: 80px;
+  right: 5px;
+  display: flex;
+  z-index:99;
+  border: solid 1px black;
+  position: fixed;
+  background-color: white;
+}
+
+.img-cart{
+  height: 75px;
+  width: 75px;
+  margin-top: 13px;
+  overflow: hidden;
+}
+
+.img-cart img{
+  border-radius: 5px;
+  height: 75px;
+  width: 75px;
+}
+
+
+/*//////////////////////*/
+
 .row{
     margin-top: 150px;
     margin: 150px 1px 0 1px;

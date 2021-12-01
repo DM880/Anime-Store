@@ -7,8 +7,16 @@
 
 {% block content %}
 
+
 <div class="row">
+
 {% for item in all_items %}
+
+<div class="added" id="added{{item.id}}"><div class="img-cart"><img src="/media/{{item.first_image.image}}"></div>
+  <div class="details" style="float:right;"><h5 style="margin-top:20px;margin-left:50px;">1</h5><h5 style="margin-left:25px;">{{ item.name }}</h5>
+  </div>
+</div>
+
     <div class="item-cont col-6 col-sm-3">
       {% if item.first_image.image %}
       <a href="{% url 'item_page' item_id=item.id %}"><img class="item-img" src="/media/{{item.first_image.image}}"></a>
@@ -17,7 +25,7 @@
       <p>${{ item.price }}</p>
       <form class="add-to-cart" id="form-item{{item.id}}" method="POST" action="{% url 'add_item' item_id=item.id %}">
         {% csrf_token %}
-      <button class="add cart-btn btn btn-success" data-id="{{item.id}}" type="submit" title="Add to Cart">+</button>
+      <button class="add cart-btn btn btn-success" id="add" data-id="{{item.id}}" type="submit" title="Add to Cart">+</button>
       </form>
     </div>
 {% endfor %}

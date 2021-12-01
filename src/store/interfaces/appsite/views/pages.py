@@ -158,3 +158,14 @@ def checkout_remove_entry(request, entry):
     return JsonResponse(data, status = 200)
 
 
+def checkout_update_quantity(request, entry):
+    if request.user.is_authenticated:
+        user = User.objects.get(email=request.user.email)
+    else:
+        user = User.objects.get(username='guest')
+
+    quantity = int(request.POST.get('quantity'))
+
+    checkout.update_quantity(entry, quantity, user)
+
+    return redirect(request.META.get('HTTP_REFERER', 'main_store'))

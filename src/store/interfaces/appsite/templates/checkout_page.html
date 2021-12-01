@@ -44,7 +44,7 @@
     </td>
     <td>
       <div class="quantity-cont">
-        <form method="POST" action="">
+        <form method="POST" action="{% url 'checkout_update_quantity' entry=item.id %}">
           {% csrf_token %}
     <button type="button" id="minus" class="plus-minus btn btn-danger" onclick="decrementValue({{item.id}})" title="Remove From Cart">-</button>
     <input id="quantity{{item.id}}" class="quantity"  value="{{ item.quantity }}" name="quantity" readonly></input>

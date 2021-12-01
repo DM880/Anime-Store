@@ -23,7 +23,8 @@ urlpatterns = [
 
     #Checkout
     path('checkout/', pages.checkout_page, name="checkout_page"),
-    path('checkout/<entry>/', pages.checkout_remove_entry, name="checkout_remove_entry")
+    path('checkout/remove/<entry>/', pages.checkout_remove_entry, name="checkout_remove_entry"),
+    path('checkout/update/<entry>/', pages.checkout_update_quantity, name="checkout_update_quantity"),
 
 ]
 
