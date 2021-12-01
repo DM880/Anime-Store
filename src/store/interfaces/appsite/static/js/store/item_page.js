@@ -45,7 +45,7 @@ btn.on('click', function(e){
         data:  {"quantity":quantity},
         dataType: 'json',
         success: function(response){
-        addedCart()
+        addedCart();
         quantity = document.getElementById('quantity').value;
         document.getElementById("q-add").innerText = quantity;
         document.getElementById('quantity').value  = 1;
@@ -53,8 +53,3 @@ btn.on('click', function(e){
       });
     });
 
-
-
-// For smoother transition
-// document.getElementById('added').className = 'show'; // Fade in
-// document.getElementById('added').className = 'hide';

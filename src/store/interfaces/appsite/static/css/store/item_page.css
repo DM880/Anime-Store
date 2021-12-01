@@ -18,20 +18,6 @@ body,html{
   background-color: white;
 }
 
-/*.hide {*/
-/*  opacity: 0;*/
-/*  transition: opacity 1s linear;*/
-/*  -webkit-transition: opacity 1s linear;*/
-/*  -moz-transition: opacity 1s linear;*/
-/*  -o-transition: opacity 1s linear;*/
-/*}*/
-/*.show {*/
-/*  opacity: 1;*/
-/*  transition: opacity 1s linear;*/
-/*  -webkit-transition: opacity 1s linear;*/
-/*  -moz-transition: opacity 1s linear;*/
-/*  -o-transition: opacity 1s linear;*/
-/*}*/
 
 .img-cart{
   height: 75px;
