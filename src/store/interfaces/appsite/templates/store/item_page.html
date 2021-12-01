@@ -7,6 +7,11 @@
 
 {% block content %}
 
+<div class="added hide" id="added"><div class="img-cart"><img src="/media/{{item.first_image.image}}"></div>
+  <div class="details" style="float:right;"><h5 id="q-add" style="margin-top:20px;margin-left:50px;"></h5><h5 style="margin-left:25px;">{{ item.name }}</h5>
+  </div>
+</div>
+
 <div class="wrapper">
   <div class="img-cont">
     <img src="/media/{{item.first_image.image}}">

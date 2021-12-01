@@ -19,6 +19,17 @@ function incrementValue()
     }
 }
 
+function addedCart() {
+  if (document.getElementById("added") != null) {
+    setTimeout(function() {
+      document.getElementById('added').style.visibility = 'visible';
+    }, 500);
+    setTimeout(function(){
+      document.getElementById('added').style.visibility = 'hidden';
+    }, 2000);
+  }
+}
+
 
 var btn = $('.add');
 btn.on('click', function(e){
@@ -34,10 +45,16 @@ btn.on('click', function(e){
         data:  {"quantity":quantity},
         dataType: 'json',
         success: function(response){
-          document.getElementById('quantity').value  = 1;
-        }
+        addedCart()
+        quantity = document.getElementById('quantity').value;
+        document.getElementById("q-add").innerText = quantity;
+        document.getElementById('quantity').value  = 1;
+      }
       });
     });
 
 
 
+// For smoother transition
+// document.getElementById('added').className = 'show'; // Fade in
+// document.getElementById('added').className = 'hide';

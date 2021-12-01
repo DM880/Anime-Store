@@ -106,7 +106,7 @@ def add_item_cart(request, item_id):
 
     queries.add_item(user, item_id, quantity)
 
-    return JsonResponse({"valid":True}, status = 200)
+    return JsonResponse({"valid":True,"quantity":quantity}, status = 200)
 
 
 def remove_item_cart(request, item_id):
