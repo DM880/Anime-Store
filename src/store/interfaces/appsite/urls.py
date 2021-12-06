@@ -12,6 +12,7 @@ urlpatterns = [
     #User
     path('signup/', pages.sign_up, name="sign_up"),
     path('login/', pages.sign_in, name="login"),
+    path('logout/', pages.sign_out, name="logout"),
 
     #Store
     path('store/', pages.main_store, name="main_store"),
