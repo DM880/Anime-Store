@@ -10,8 +10,7 @@ def update_cart(cart, item, quantity):
     cart.save()
 
 
-def remove_entry(entry, user):
-    cart = Cart.objects.get(user=user)
+def remove_entry(entry, cart):
     entry_cart = EntryCart.objects.get(cart=cart, id=entry)
     item = entry_cart.item
     quantity = entry_cart.quantity * -1
@@ -22,8 +21,7 @@ def remove_entry(entry, user):
     return
 
 
-def update_quantity(entry, quantity, user):
-    cart = Cart.objects.get(user=user)
+def update_quantity(entry, quantity, cart):
     entry_cart = EntryCart.objects.get(cart=cart, id=entry)
     item = entry_cart.item
     quantity_remove = entry_cart.quantity * -1
