@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, reverse
 from django.views import generic as generic_views
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 
 #For AJAX
 from django.http import JsonResponse
@@ -74,6 +75,12 @@ def sign_up(request):
             return render(request, "user/sign_up.html", {'valid':valid})
 
     return render(request, "user/sign_up.html")
+
+
+@login_required
+def sign_out(request):
+    logout(request)
+    return redirect('main_store')
 
 
 #Store

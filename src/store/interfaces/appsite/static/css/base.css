@@ -35,7 +35,7 @@
 
 .fa-search{
   position: absolute;
-  right: 50px;
+  right: 60px;
   font-size: 30px;
   padding: 20px;
   color: #262626;
@@ -45,7 +45,7 @@
 
 .fa-user{
   position: absolute;
-  right: 100px;
+  right: 120px;
   font-size: 30px;
   padding: 20px;
   color: #262626;
@@ -90,7 +90,6 @@ input[type="submit"] {
   width: 150px;
   line-height: 2;
   border: solid 0.5px black;
-  tex-align: center;
   background-color: white;
   border-radius: 5px;
   top: 70px;
