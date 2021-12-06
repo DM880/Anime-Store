@@ -50,6 +50,7 @@
   padding: 20px;
   color: #262626;
   transition: color 0.3s ease-in;
+  cursor: pointer;
 }
 
 .fas:hover{
@@ -81,4 +82,39 @@ input[type="submit"] {
     z-index:99;
 }
 
-/*///////////////////////////*/
+/*User Menu*/
+
+.user-div{
+  padding-top: 15px;
+  height: auto;
+  width: 150px;
+  line-height: 2;
+  border: solid 0.5px black;
+  tex-align: center;
+  background-color: white;
+  border-radius: 5px;
+  top: 70px;
+  right: 100px;
+  position: fixed;
+  z-index:99;
+  opacity: 0;
+  -webkit-transition: all 500ms ease-in-out;
+  -moz-transition: all 500ms ease-in-out;
+  -ms-transition: all 500ms ease-in-out;
+  -o-transition: all 500ms ease-in-out;
+  transition: all 500ms ease-in-out;
+}
+
+.user-div ul{
+  list-style: none;
+}
+
+.user-a{
+  font-weight: bold;
+  text-decoration: none;
+  color: black;
+}
+
+.user-a:hover{
+  color: #D92332
+}
