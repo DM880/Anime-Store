@@ -20,13 +20,26 @@
     <a href="{% url 'landing_page' %}"><img class="logo" src="{% static 'img/landing_page/logo.png' %}"></a>
     <a href="{% url 'checkout_page' %}"><i title="Your Cart" class="fas fa-shopping-cart"></i></a>
     <i onclick="searchDiv()" title="Search" class="fas fa-search"></i>
+    {% if user.is_authenticated %}
+    <i title="Account" class="fas fa-user" id="user-menu"></i>
+    {% else %}
     <a href="{% url 'login' %}"><i title="Account" class="fas fa-user"></i></a>
+    {% endif %}
 </div>
 <div class="search-input-div" id="search_bar">
   <form action="{% url 'search_item' %}" method="GET">
     <input name="search-item" class="search-item-input"></input><input type="submit" value="Search"/>
     </form>
     </div>
+
+<div id="user-div" class="user-div">
+  <ul>
+    <a class="user-a" href=""><li>Account</li></a>
+    <a class="user-a" href=""><li>My Orders</li></a>
+    <a class="user-a" href=""><li>Settings</li></a>
+    <a class="user-a" href=""><li>Log Out</li></a>
+  </ul>
+</div>
 
 {% block content %}
 
@@ -41,6 +54,8 @@
     }
 }
 
+// Search Bar
+
 function searchDiv(){
   if(document.getElementById('search_bar').style.visibility === 'visible'){ document.getElementById('search_bar').style.visibility = 'hidden';
   }
@@ -48,6 +63,34 @@ function searchDiv(){
     document.getElementById('search_bar').style.visibility = 'visible';
   }
 };
+
+
+// User Menu (Signed In User Only)
+
+var timeout;
+
+function showMenu () {
+  clearTimeout(timeout)
+  document.getElementById('user-div').style.opacity = 1.0;
+  timeout = setTimeout(function(){document.getElementById('user-div').style.opacity = 0.0;}, 3000);
+}
+
+function keepMenu () {
+  clearTimeout(timeout)
+}
+
+function hideMenu () {
+  clearTimeout(timeout)
+  document.getElementById('user-div').style.opacity = 0.0;
+}
+
+var hover = document.getElementById('user-menu')
+hover.onmouseover = showMenu
+
+user_div =  document.getElementById('user-div');
+
+user_div.onmouseover = keepMenu;
+user_div.onmouseleave = hideMenu;
 </script>
 
 </body>
