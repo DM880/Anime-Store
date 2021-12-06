@@ -4,7 +4,6 @@
 {% block title %}Anime Slash-{{ item.name.title }}{% endblock %}
 
 {% block css %}<link rel="stylesheet" href="{% static 'css/store/item_page.css' %}">{% endblock %}
-
 {% block content %}
 
 <div class="added" id="added"><div class="img-cart"><img src="/media/{{item.first_image.image}}"></div>
@@ -38,7 +37,7 @@
     </div>
 </div>
 <hr>
-<div style="margin-top: 50px;">
+<div style="margin-top: 50px;min-height: 200px;">
   <h1 style="text-align:center;"> Reviews </h1>
 
   {% for review in reviews %}
@@ -56,6 +55,18 @@
   {% endfor %}
 
 </div>
+
+<hr style="margin-bottom: 50px;">
+
+ <div class="reccomendations row">
+   {% for item in reccomendations %}
+   <div class="rec-cont col">
+     <a href="{% url 'item_page' item_id=item.id %}"><img src="/media/{{ item.first_image.image }}"></a>
+     <p>{{ item.name.title }}</p>
+     </div>
+     {% endfor %}
+ </div>
+
 
 <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 <script src="{% static 'js/store/item_page.js' %}"></script>

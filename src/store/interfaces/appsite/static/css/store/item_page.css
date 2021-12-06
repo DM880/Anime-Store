@@ -167,3 +167,24 @@ hr{
   margin-left: 5%;
   padding: 10px;
 }
+
+/*Reccomendations*/
+
+
+.reccomendations{
+  width: 100%;
+  height: 20%;
+  text-align: center;
+  margin: 0;
+}
+
+.rec-cont{
+  height: 100%;
+}
+
+.rec-cont img{
+  max-width: 80%;
+  height: 80%;
+}
+
+
