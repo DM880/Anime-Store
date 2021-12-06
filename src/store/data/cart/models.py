@@ -7,13 +7,19 @@ from store.data.user.models import CustomUser as User
 
 class Cart(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
+    session_key = models.CharField(max_length=40)
     tot_count = models.IntegerField(default=0)
     tot_price = models.DecimalField(default=0, decimal_places=2, max_digits=10)
     updated = models.DateTimeField(auto_now=True)
-    purchase = models.BooleanField(default=False)
+    purchased = models.BooleanField(default=False)
+
+
+    class Meta:
+        unique_together = ('user', 'session_key',)
+
 
     def __str__(self):
-        return f"user={self.user.username}/price={self.tot_price}/id={self.user_id}"
+        return f"user={self.user}/price={self.tot_price}/id={self.user_id}"
 
 
 class EntryCart(models.Model):

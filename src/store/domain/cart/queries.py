@@ -10,31 +10,20 @@ def update_cart(cart, item, quantity):
     cart.save()
 
 
-def add_item(user, item_id, quantity):
+def add_item(user, item_id, quantity, session_key):
 
     item = Item.objects.get(id=item_id)
 
-    if user.is_authenticated:
-        try:
-            cart = Cart.objects.get(user=user)
-        except Cart.DoesNotExist:
-            cart=Cart.objects.create(user=user)
+    cart = get_cart(user, session_key)
 
-        EntryCart.objects.create(cart=cart, item=item, quantity=quantity)
-
-    else:
-        cart = guest_cart()
-        EntryCart.objects.create(cart=cart, item=item, quantity=quantity)
+    EntryCart.objects.create(cart=cart, item=item, quantity=quantity)
 
     update_cart(cart, item, quantity)
 
 
-def remove_item(user, item_id, quantity):
+def remove_item(user, item_id, quantity, session_key):
 
-    if user.is_authenticated:
-        cart = Cart.objects.get(user=user)
-    else:
-        cart = guest_cart()
+    cart = get_cart(user, session_key)
 
     item = Item.objects.get(id=item_id)
     entries = EntryCart.objects.filter(cart=cart, item=item)
@@ -61,8 +50,13 @@ def remove_item(user, item_id, quantity):
             temp_quantity -= 1
 
 
-#Temporary, only for testing
-def guest_cart():
-    user = User.objects.get(username='guest')
-    cart = Cart.objects.get(user=user)
+def get_cart(user, session_key):
+    if user.is_authenticated:
+        try:
+            cart = Cart.objects.get(user=user)
+        except Cart.DoesNotExist:
+            cart=Cart.objects.create(user=user)
+    else:
+        cart = Cart.objects.get_or_create(session_key=session_key)[0]
+
     return cart

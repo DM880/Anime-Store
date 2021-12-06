@@ -104,16 +104,20 @@ def search_item(request):
 #Cart
 
 def add_item_cart(request, item_id):
-
     quantity = request.POST.get('quantity')
     user = request.user
+    if not request.session.session_key:
+        request.session.create()
+        session_key = request.session.session_key
+    else:
+        session_key = request.session.session_key
 
     if quantity is None:
         quantity = 1
     else:
         quantity = int(quantity)
 
-    queries.add_item(user, item_id, quantity)
+    queries.add_item(user, item_id, quantity, session_key)
 
     return JsonResponse({"valid":True,"quantity":quantity}, status = 200)
 
@@ -121,13 +125,18 @@ def add_item_cart(request, item_id):
 def remove_item_cart(request, item_id):
     quantity = request.POST.get('quantity')
     user = request.user
+    if not request.session.session_key:
+        request.session.create()
+        session_key = request.session.session_key
+    else:
+        session_key = request.session.session_key
 
     if quantity is None:
         quantity = 1
     else:
         quantity = int(quantity)
 
-    queries.remove_item(user, item_id, quantity)
+    queries.remove_item(user, item_id, quantity, session_key)
 
     # redirect to same page,if not found redirect to 'main_store'
     return redirect(request.META.get('HTTP_REFERER', 'main_store'))
@@ -139,10 +148,15 @@ def checkout_page(request):
 
     if request.user.is_authenticated:
         user = User.objects.get(email=request.user.email)
+        cart = Cart.objects.get(user=user)
     else:
-        user = User.objects.get(username='guest')
+        if not request.session.session_key:
+            request.session.create()
+            session_key = request.session.session_key
+        else:
+            session_key = request.session.session_key
+        cart = Cart.objects.get_or_create(session_key=session_key)[0]
 
-    cart = Cart.objects.get(user=user)
     items = EntryCart.objects.filter(cart=cart)
 
     subtotal = cart.tot_price
@@ -154,10 +168,11 @@ def checkout_page(request):
 def checkout_remove_entry(request, entry):
     if request.user.is_authenticated:
         user = User.objects.get(email=request.user.email)
+        cart = Cart.objects.get(user=user)
     else:
-        user = User.objects.get(username='guest')
+        cart = Cart.objects.get(session_key=request.session.session_key)
 
-    checkout.remove_entry(entry,user)
+    checkout.remove_entry(entry,cart)
 
     data = {
         'valid':True,
@@ -170,11 +185,12 @@ def checkout_remove_entry(request, entry):
 def checkout_update_quantity(request, entry):
     if request.user.is_authenticated:
         user = User.objects.get(email=request.user.email)
+        cart = Cart.objects.get(user=user)
     else:
-        user = User.objects.get(username='guest')
+        cart = Cart.objects.get(session_key=request.session.session_key)
 
     quantity = int(request.POST.get('quantity'))
 
-    checkout.update_quantity(entry, quantity, user)
+    checkout.update_quantity(entry, quantity, cart)
 
     return redirect(request.META.get('HTTP_REFERER', 'main_store'))
