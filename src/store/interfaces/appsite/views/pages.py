@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, reverse
 from django.views import generic as generic_views
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+import random
 
 #For AJAX
 from django.http import JsonResponse
@@ -95,8 +96,17 @@ def item_page(request, item_id):
     item = Item.objects.get(id=item_id)
     reviews = ItemReview.objects.filter(item=item_id)
     avg_rating_data = rating_avg(reviews)
+    all_items = Item.objects.all()
+    tot_items_count = Item.objects.all().count()
 
-    return render(request, 'store/item_page.html', {'item':item, 'reviews':reviews, 'avg_rating_data':avg_rating_data})
+    reccomendations = []
+
+    for x in range(5):
+        n = random.randint(0,tot_items_count-1)
+        reccomendations.append(all_items[n])
+
+
+    return render(request, 'store/item_page.html', {'item':item, 'reviews':reviews, 'avg_rating_data':avg_rating_data, 'reccomendations':reccomendations})
 
 
 def search_item(request):
