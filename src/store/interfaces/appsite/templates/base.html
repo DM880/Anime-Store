@@ -72,7 +72,8 @@ var timeout;
 function showMenu () {
   clearTimeout(timeout)
   document.getElementById('user-div').style.opacity = 1.0;
-  timeout = setTimeout(function(){document.getElementById('user-div').style.opacity = 0.0;}, 3000);
+  document.getElementById('user-div').style.display = 'block';
+  timeout = setTimeout(function(){document.getElementById('user-div').style.opacity = 0.0;}, 1000);
 }
 
 function keepMenu () {
@@ -82,6 +83,7 @@ function keepMenu () {
 function hideMenu () {
   clearTimeout(timeout)
   document.getElementById('user-div').style.opacity = 0.0;
+  timeout = setTimeout(function(){document.getElementById('user-div').style.display = 'none';}, 1000);
 }
 
 var hover = document.getElementById('user-menu')
