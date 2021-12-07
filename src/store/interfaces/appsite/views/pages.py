@@ -109,6 +109,12 @@ def item_page(request, item_id):
     return render(request, 'store/item_page.html', {'item':item, 'reviews':reviews, 'avg_rating_data':avg_rating_data, 'reccomendations':reccomendations})
 
 
+def category_search(request, items_category):
+    items = Item.objects.filter(category=items_category)
+
+    return render(request, 'store/search_page.html', {'items':items, 'searched_item':items_category})
+
+
 def search_item(request):
 
     searched_item = request.GET.get('search-item')

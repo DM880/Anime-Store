@@ -52,7 +52,7 @@ body,html{
   margin-top: 100px;
 }
 
-img{
+.img-cont img{
   height: auto;
   width: 100%;
 }
@@ -128,10 +128,6 @@ hr{
 
 /* Review Section */
 
-
-.user-div{
-  width: 100%;
-}
 
 .user-rev{
   margin-left: 5%;

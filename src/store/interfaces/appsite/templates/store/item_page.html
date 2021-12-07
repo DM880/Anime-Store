@@ -59,6 +59,7 @@
 <hr style="margin-bottom: 50px;">
 
  <div class="reccomendations row">
+   <h3 style="text-align:center;margin-bottom:50px;opacity:0.5;">Related Products</h3>
    {% for item in reccomendations %}
    <div class="rec-cont col">
      <a href="{% url 'item_page' item_id=item.id %}"><img src="/media/{{ item.first_image.image }}"></a>
