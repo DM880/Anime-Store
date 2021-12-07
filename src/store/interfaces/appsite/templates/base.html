@@ -25,6 +25,17 @@
     {% else %}
     <a href="{% url 'login' %}"><i title="Account" class="fas fa-user"></i></a>
     {% endif %}
+      <div class="categories">
+    <ul>
+    <a href="{% url 'category_search' items_category='ANIME' %}"><li class="category">Anime</li></a>
+     <a href="{% url 'category_search' items_category='MANGA' %}"><li class="category">Manga</li></a>
+     <a href="{% url 'category_search' items_category='ACTION FIGURE' %}"><li class="category">Action Figure</li></a>
+     <a href="{% url 'category_search' items_category='APPAREL' %}"><li class="category">Apparel</li></a>
+     <a href="{% url 'category_search' items_category='OTHER' %}"><li class="category">Other</li></a>
+     <a href="{% url 'main_store' %}"><li class="category">All</li></a>
+    </u>
+  </div>
+
 </div>
 <div class="search-input-div" id="search_bar">
   <form action="{% url 'search_item' %}" method="GET">

@@ -9,7 +9,6 @@ CATEGORY_CHOICES = (
     (ANI := "ANIME", "anime"),
     (MAN := "MANGA", "manga"),
     (ACT := "ACTION_FIGURE", "action_figure"),
-    (COS := "COSPLAY", "cosplay"),
     (APP := "APPAREL", "apparel"),
     (GAM := "GAMING", "gaming"),
     (OTH := "OTHER", "other"),
