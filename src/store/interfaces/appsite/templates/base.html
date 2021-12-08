@@ -25,23 +25,30 @@
     {% else %}
     <a href="{% url 'login' %}"><i title="Account" class="fas fa-user"></i></a>
     {% endif %}
-      <div class="categories">
-    <ul>
-    <a href="{% url 'category_search' items_category='ANIME' %}"><li class="category">Anime</li></a>
-     <a href="{% url 'category_search' items_category='MANGA' %}"><li class="category">Manga</li></a>
-     <a href="{% url 'category_search' items_category='ACTION FIGURE' %}"><li class="category">Action Figure</li></a>
-     <a href="{% url 'category_search' items_category='APPAREL' %}"><li class="category">Apparel</li></a>
-     <a href="{% url 'category_search' items_category='OTHER' %}"><li class="category">Other</li></a>
-     <a href="{% url 'main_store' %}"><li class="category">All</li></a>
-    </u>
+
+  <div id="dropdown" class="dropdown">
+  <button class="dropbtn">☰</button>
+  <div class="dropdown-content">
+    <a href="{% url 'category_search' items_category='ANIME' %}">Anime</a>
+     <a href="{% url 'category_search' items_category='MANGA' %}">Manga</a>
+     <a href="{% url 'category_search' items_category='ACTION FIGURE' %}">Action Figure</a>
+     <a href="{% url 'category_search' items_category='APPAREL' %}">Apparel</a>
+     <a href="{% url 'category_search' items_category='OTHER' %}">Other</a>
+     <a href="{% url 'main_store' %}">All</a>
   </div>
 
 </div>
+
+</div>
+
 <div class="search-input-div" id="search_bar">
   <form action="{% url 'search_item' %}" method="GET">
     <input name="search-item" class="search-item-input"></input><input type="submit" value="Search"/>
     </form>
     </div>
+
+
+
 
 <div id="user-div" class="user-div">
   <ul>
