@@ -19,6 +19,10 @@ body,html{
   position: fixed;
 }
 
+.nav i{
+  margin-top: 10px;
+}
+
 .logo{
   margin-top: -13px;
   margin-left: -5px;
@@ -72,7 +76,6 @@ body,html{
   border: none;
 }
 
-
 .dropdown {
   margin-left: 100px;
   position: fixed;
@@ -99,7 +102,6 @@ body,html{
   font-weight:bold;
 }
 
-
 .dropdown-content a:hover {
   background-color: #D92332;
   color: white;
@@ -119,20 +121,20 @@ body,html{
 .search-input-div{
   height: 50px;
   width: 100px;
-  top: 70px;
+  top: 80px;
   right: 100px;
   position: fixed;
   z-index:99;
   visibility: hidden;
 }
 
-input[type="submit"] {
+.search-input-div input[type="submit"] {
     height: 30px;
     width: 60px;
     background: green;
     color: white;
     border: 0;
-    top:70px;
+    top:80px;
     right: 10px;
     -webkit-appearance: none;
     position: fixed;
@@ -142,19 +144,17 @@ input[type="submit"] {
 /*User Menu*/
 
 .user-div{
-  padding-top: 15px;
   height: auto;
   width: 150px;
   line-height: 2;
-  border: solid 0.5px black;
   background-color: white;
-  border-radius: 5px;
   top: 70px;
-  right: 100px;
+  right: 80px;
   position: fixed;
-  z-index:99;
+  z-index:97;
   display:none;
   opacity: 0;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   -webkit-transition: all 500ms ease-in-out;
   -moz-transition: all 500ms ease-in-out;
   -ms-transition: all 500ms ease-in-out;
@@ -162,17 +162,17 @@ input[type="submit"] {
   transition: all 500ms ease-in-out;
 }
 
-.user-div ul{
-  list-style: none;
-}
-
 .user-a{
   font-weight: bold;
   text-decoration: none;
-  color: black;
+  color: #D92332;
+  font-size: 15px;
+  display:block;
+  padding: 16px;
 }
 
 .user-a:hover{
-  color: #D92332
+  color: white;
+  background-color: #D92332;
 }
 

@@ -1,0 +1,14 @@
+<form method="GET" action="{% url 'sort_items' %}">
+  <div style="margin-left:20px;margin-top:100px;">
+    <p style="margin-bottom:-2px;">Sort by:</p>
+  <select id="sort" name="sorting_by">
+<option value="price">ascending:price</option>
+<option value="-price" selected>descending:price</option>
+<option value="itemreview__rating">rating</option>
+<option value="itemreview__posted">date</option>
+<option value="name">name</option>
+</select>
+    <button style="height:25px;tex-align:center;font-size:15px;margin-top:-5px;line-height:5px;" type="submit" class="btn btn-success">Sort</button>
+  </div>
+</form>
+

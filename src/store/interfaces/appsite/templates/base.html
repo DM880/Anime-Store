@@ -28,7 +28,7 @@
 
   <div id="dropdown" class="dropdown">
   <button class="dropbtn">☰</button>
-  <div class="dropdown-content">
+  <div id="drop-menu" class="dropdown-content">
     <a href="{% url 'category_search' items_category='ANIME' %}">Anime</a>
      <a href="{% url 'category_search' items_category='MANGA' %}">Manga</a>
      <a href="{% url 'category_search' items_category='ACTION FIGURE' %}">Action Figure</a>
@@ -47,21 +47,18 @@
     </form>
     </div>
 
-
-
-
 <div id="user-div" class="user-div">
-  <ul>
-    <a class="user-a" href=""><li>Account</li></a>
-    <a class="user-a" href=""><li>My Orders</li></a>
-    <a class="user-a" href=""><li>Settings</li></a>
-    <a class="user-a" href="{% url 'logout' %}"><li>Log Out</li></a>
-  </ul>
+    <a class="user-a" href="">Account</a>
+    <a class="user-a" href="">My Orders</a>
+    <a class="user-a" href="">Settings</a>
+    <a class="user-a" href="{% url 'logout' %}">Log Out</a>
 </div>
+
 
 {% block content %}
 
 {% endblock %}
+
 
 <script src="{% static 'js/base.js' %}"></script>
 

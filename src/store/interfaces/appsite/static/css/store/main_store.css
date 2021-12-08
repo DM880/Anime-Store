@@ -1,7 +1,6 @@
 body{
     background-color: #F6F6F6;
     overflow:hidden;
-    display:block;
     z-index: 3;
     margin: 0;
     padding: 0;
@@ -42,8 +41,7 @@ body{
 /*//////////////////////*/
 
 .row{
-    margin-top: 150px;
-    margin: 150px 1px 0 1px;
+    margin:50px 1px 0 1px;
 }
 
 .item-cont{
