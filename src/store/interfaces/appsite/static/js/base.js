@@ -1,10 +1,10 @@
-window.onscroll = function () {
-    if (document.documentElement.scrollTop > 10) {
-      document.getElementById('nav').style.borderBottom = '1px solid black';
-    } else {
-    	document.getElementById('nav').style.borderBottom = 'none';
-    }
-}
+// window.onscroll = function () {
+//     if (document.documentElement.scrollTop > 10) {
+//       document.getElementById('nav').style.borderBottom = '1px solid black';
+//     } else {
+//     	document.getElementById('nav').style.borderBottom = 'none';
+//     }
+// }
 
 // Search Bar
 
