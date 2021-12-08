@@ -105,23 +105,39 @@ def item_page(request, item_id):
         n = random.randint(0,tot_items_count-1)
         reccomendations.append(all_items[n])
 
-
     return render(request, 'store/item_page.html', {'item':item, 'reviews':reviews, 'avg_rating_data':avg_rating_data, 'reccomendations':reccomendations})
 
 
 def category_search(request, items_category):
-    items = Item.objects.filter(category=items_category)
+    sorting_element = request.GET.get('sorting_by')
 
-    return render(request, 'store/search_page.html', {'items':items, 'searched_item':items_category})
+    if sorting_element is None:
+        sorting_element = 'itemreview__rating'
+
+    all_items = Item.objects.filter(category=items_category).order_by(sorting_element)
+
+    return render(request, 'store/main_store.html', {'all_items':all_items})
 
 
 def search_item(request):
-
     searched_item = request.GET.get('search-item')
+    sorting_element = request.GET.get('sorting_by')
 
-    items = Item.objects.filter(name__contains=searched_item)
+    if searched_item is None:
+        searched_item = request.GET.get('search-val')
+    if sorting_element is None:
+        sorting_element = "itemreview__rating"
+
+    items = Item.objects.filter(name__contains=searched_item).order_by(sorting_element)
 
     return render(request, 'store/search_page.html', {'items':items, 'searched_item':searched_item})
+
+
+def sort_items(request):
+    sorting_element = request.GET.get('sorting_by')
+    all_items = Item.objects.all().order_by(sorting_element)
+
+    return render(request, 'store/main_store.html', {'all_items':all_items})
 
 
 #Cart

@@ -21,7 +21,7 @@ function searchDiv(){
 
 var timeout;
 
-function showMenu () {
+function showUserMenu () {
   clearTimeout(timeout)
   document.getElementById('user-div').style.opacity = 1.0;
   document.getElementById('user-div').style.display = 'block';
@@ -32,16 +32,18 @@ function keepMenu () {
   clearTimeout(timeout)
 }
 
-function hideMenu () {
+function hideUserMenu () {
   clearTimeout(timeout)
   document.getElementById('user-div').style.opacity = 0.0;
   timeout = setTimeout(function(){document.getElementById('user-div').style.display = 'none';}, 1000);
 }
 
-var hover = document.getElementById('user-menu')
-hover.onmouseover = showMenu
+var hover_user = document.getElementById('user-menu')
+hover_user.onmouseover = showUserMenu
 
 user_div =  document.getElementById('user-div');
 
 user_div.onmouseover = keepMenu;
-user_div.onmouseleave = hideMenu;
+user_div.onmouseleave = hideUserMenu;
+
+ $("#sort")[0].selectedIndex = 0;
