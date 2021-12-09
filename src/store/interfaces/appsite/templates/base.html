@@ -43,8 +43,7 @@
 
 <div class="search-input-div" id="search_bar">
   <form action="{% url 'search_item' %}" method="GET">
-    {% if searched_item is not None %}<input type="hidden" name="search-val" value='{{ searched_item }}'>{% endif %}
-     {% if items_category is not None %}<input type="hidden" name="items_category" value='{{ items_category }}'>{% endif %}
+     <input type="hidden" name="items_category" value='{{ items_category }}'>
     <input name="search-item" class="search-item-input"></input><input type="submit" value="Search"/>
     </form>
     </div>
