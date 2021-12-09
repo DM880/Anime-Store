@@ -29,11 +29,11 @@
   <div id="dropdown" class="dropdown">
   <button class="dropbtn">☰</button>
   <div id="drop-menu" class="dropdown-content">
-    <a href="{% url 'category_search' items_category='ANIME' %}">Anime</a>
-     <a href="{% url 'category_search' items_category='MANGA' %}">Manga</a>
-     <a href="{% url 'category_search' items_category='ACTION FIGURE' %}">Action Figure</a>
-     <a href="{% url 'category_search' items_category='APPAREL' %}">Apparel</a>
-     <a href="{% url 'category_search' items_category='OTHER' %}">Other</a>
+    <a href="{% url 'search_item' %}?items_category=ANIME">Anime</a>
+     <a href="{% url 'search_item' %}?items_category=MANGA">Manga</a>
+     <a href="{% url 'search_item' %}?items_category=ACTION FIGURE">Action Figure</a>
+     <a href="{% url 'search_item' %}?items_category=APPAREL">Apparel</a>
+     <a href="{% url 'search_item' %}?items_category=OTHER">Other</a>
      <a href="{% url 'main_store' %}">All</a>
   </div>
 
@@ -43,6 +43,8 @@
 
 <div class="search-input-div" id="search_bar">
   <form action="{% url 'search_item' %}" method="GET">
+    {% if searched_item is not None %}<input type="hidden" name="search-val" value='{{ searched_item }}'>{% endif %}
+     {% if items_category is not None %}<input type="hidden" name="items_category" value='{{ items_category }}'>{% endif %}
     <input name="search-item" class="search-item-input"></input><input type="submit" value="Search"/>
     </form>
     </div>

@@ -1,31 +1,17 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}{{ searched_item }} Results{% endblock %}
+{% block title %} Anime Slash {% endblock %}
 
 {% block css %} <link rel="stylesheet" href="{% static 'css/store/main_store.css' %}"> {% endblock %}
 
 {% block content %}
 
-<form method="GET" action="{% url 'search_item' %}">
-  <input type="hidden" name="search-val" value="{{ searched_item }}">
-  <div style="margin-left:20px;margin-top:100px;">
-    <p style="margin-bottom:-2px;">Sort by:</p>
-  <select id="sort" name="sorting_by">
-<option value="price">ascending:price</option>
-<option value="-price" selected>descending:price</option>
-<option value="itemreview__rating">rating</option>
-<option value="itemreview__posted">date</option>
-<option value="name">name</option>
-</select>
-    <button style="height:25px;tex-align:center;font-size:15px;margin-top:-5px;line-height:5px;" type="submit" class="btn btn-success">Sort</button>
-  </div>
-</form>
-
+{% include 'sort_by.html' %}
 
 <div class="row">
 
-{% for item in items %}
+{% for item in all_items %}
 
 <div class="added" id="added{{item.id}}"><div class="img-cart"><img src="/media/{{item.first_image.image}}"></div>
   <div class="details" style="float:right;"><h5 style="margin-top:20px;margin-left:50px;">1</h5><h5 style="margin-left:25px;">{{ item.name }}</h5>
