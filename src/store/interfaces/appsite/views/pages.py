@@ -127,6 +127,7 @@ def add_item_cart(request, item_id):
     quantity = request.POST.get('quantity')
     user = request.user
 
+    #For guest users
     session_key = get_session_key(request)
 
     if quantity is None:
