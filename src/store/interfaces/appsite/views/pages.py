@@ -109,12 +109,10 @@ def item_page(request, item_id):
 
 
 def search_item(request):
+    items_category = request.GET.get('items_category')
     searched_item = request.GET.get('search-item')
     sorting_element = request.GET.get('sorting_by')
-    items_category = request.GET.get('items_category')
 
-    if searched_item is None:
-        searched_item = request.GET.get('search-val')
     if sorting_element is None:
         sorting_element = "price"
 
@@ -129,6 +127,7 @@ def add_item_cart(request, item_id):
     quantity = request.POST.get('quantity')
     user = request.user
 
+    #For guest users
     session_key = get_session_key(request)
 
     if quantity is None:

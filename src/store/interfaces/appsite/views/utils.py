@@ -1,4 +1,4 @@
-from store.data.item.models import Item, ItemReview
+from store.data.item.models import Item
 
 
 def rating_avg(reviews):

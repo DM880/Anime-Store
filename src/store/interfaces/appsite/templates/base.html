@@ -4,7 +4,11 @@
 <head>
   <meta charset="UTF-8">
   <title>{% block title %}{% endblock %}</title>
-  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css'>
+  <link rel="apple-touch-icon" sizes="180x180" href="{% static 'img/favicon/apple-touch-icon.png' %}">
+<link rel="icon" type="image/png" sizes="32x32" href="{% static 'img/favicon/favicon-32x32.png' %}">
+<link rel="icon" type="image/png" sizes="16x16" href="{% static 'img/favicon/favicon-16x16.png' %}">
+<link rel="manifest" href="{% static 'img/favicon/site.webmanifest' %}">
+<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css'>
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/css/bootstrap.min.css'>
 <link rel="stylesheet" href="{% static 'css/base.css' %}">
 {% block css %}{% endblock %}
@@ -43,8 +47,7 @@
 
 <div class="search-input-div" id="search_bar">
   <form action="{% url 'search_item' %}" method="GET">
-    {% if searched_item is not None %}<input type="hidden" name="search-val" value='{{ searched_item }}'>{% endif %}
-     {% if items_category is not None %}<input type="hidden" name="items_category" value='{{ items_category }}'>{% endif %}
+     <input type="hidden" name="items_category" value='{{ items_category }}'>
     <input name="search-item" class="search-item-input"></input><input type="submit" value="Search"/>
     </form>
     </div>
