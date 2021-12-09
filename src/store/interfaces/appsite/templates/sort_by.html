@@ -1,14 +1,15 @@
-<form method="GET" action="{% url 'sort_items' %}">
+<form method="GET" action="{% url 'search_item' %}">
+  {% if searched_item is not None %}<input type="hidden" name="search-val" value='{{ searched_item }}'>{% endif %}
+  {% if items_category is not None %}<input type="hidden" name="items_category" value='{{ items_category }}'>{% endif %}
   <div style="margin-left:20px;margin-top:100px;">
     <p style="margin-bottom:-2px;">Sort by:</p>
   <select id="sort" name="sorting_by">
-<option value="price">ascending:price</option>
-<option value="-price" selected>descending:price</option>
-<option value="itemreview__rating">rating</option>
-<option value="itemreview__posted">date</option>
-<option value="name">name</option>
+<option value="price">Price(Low First)</option>
+<option value="-price">Price(High First)</option>
+<!--<option value="itemreview__rating">Rating</option>-->
+<!--<option value="itemreview__posted">Date</option>-->
+<option value="name">Name</option>
 </select>
     <button style="height:25px;tex-align:center;font-size:15px;margin-top:-5px;line-height:5px;" type="submit" class="btn btn-success">Sort</button>
   </div>
 </form>
-

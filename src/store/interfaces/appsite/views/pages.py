@@ -18,7 +18,7 @@ from store.domain.user import validation
 from store.domain.cart import queries, checkout
 
 
-from .utils import rating_avg
+from .utils import rating_avg, search_and_sort, get_session_key
 
 
 class LandingPage(generic_views.TemplateView):
@@ -108,36 +108,19 @@ def item_page(request, item_id):
     return render(request, 'store/item_page.html', {'item':item, 'reviews':reviews, 'avg_rating_data':avg_rating_data, 'reccomendations':reccomendations})
 
 
-def category_search(request, items_category):
-    sorting_element = request.GET.get('sorting_by')
-
-    if sorting_element is None:
-        sorting_element = 'itemreview__rating'
-
-    all_items = Item.objects.filter(category=items_category).order_by(sorting_element)
-
-    return render(request, 'store/main_store.html', {'all_items':all_items})
-
-
 def search_item(request):
     searched_item = request.GET.get('search-item')
     sorting_element = request.GET.get('sorting_by')
+    items_category = request.GET.get('items_category')
 
     if searched_item is None:
         searched_item = request.GET.get('search-val')
     if sorting_element is None:
-        sorting_element = "itemreview__rating"
+        sorting_element = "price"
 
-    items = Item.objects.filter(name__contains=searched_item).order_by(sorting_element)
+    items = search_and_sort(items_category, searched_item, sorting_element)
 
-    return render(request, 'store/search_page.html', {'items':items, 'searched_item':searched_item})
-
-
-def sort_items(request):
-    sorting_element = request.GET.get('sorting_by')
-    all_items = Item.objects.all().order_by(sorting_element)
-
-    return render(request, 'store/main_store.html', {'all_items':all_items})
+    return render(request, 'store/search_page.html', {'all_items':items, 'searched_item':searched_item, 'items_category':items_category})
 
 
 #Cart
@@ -145,11 +128,8 @@ def sort_items(request):
 def add_item_cart(request, item_id):
     quantity = request.POST.get('quantity')
     user = request.user
-    if not request.session.session_key:
-        request.session.create()
-        session_key = request.session.session_key
-    else:
-        session_key = request.session.session_key
+
+    session_key = get_session_key(request)
 
     if quantity is None:
         quantity = 1
@@ -164,11 +144,8 @@ def add_item_cart(request, item_id):
 def remove_item_cart(request, item_id):
     quantity = request.POST.get('quantity')
     user = request.user
-    if not request.session.session_key:
-        request.session.create()
-        session_key = request.session.session_key
-    else:
-        session_key = request.session.session_key
+
+    session_key = get_session_key(request)
 
     if quantity is None:
         quantity = 1
@@ -189,11 +166,7 @@ def checkout_page(request):
         user = User.objects.get(email=request.user.email)
         cart = Cart.objects.get(user=user)
     else:
-        if not request.session.session_key:
-            request.session.create()
-            session_key = request.session.session_key
-        else:
-            session_key = request.session.session_key
+        session_key = get_session_key(request)
         cart = Cart.objects.get_or_create(session_key=session_key)[0]
 
     items = EntryCart.objects.filter(cart=cart)
