@@ -1,5 +1,6 @@
 <form method="GET" action="{% url 'search_item' %}">
-  <input type="hidden" name="items_category" value='{{ items_category }}'>
+  {% if searched_item %}<input type="hidden" name="searched_item" value='{{ searched_item }}'>{% endif %}
+  {% if items_category %}<input type="hidden" name="items_category" value='{{ items_category }}'>{% endif %}
   <div style="margin-left:20px;margin-top:100px;">
     <p style="margin-bottom:-2px;">Sort by:</p>
   <select id="sort" name="sorting_by">
