@@ -18,7 +18,7 @@ from store.domain.user import validation
 from store.domain.cart import queries, checkout
 
 
-from .utils import rating_avg, search_and_sort, get_session_key
+from .utils import rating_avg, pagination, search_and_sort, get_session_key
 
 
 class LandingPage(generic_views.TemplateView):
@@ -87,7 +87,10 @@ def sign_out(request):
 #Store
 
 def main_store(request):
-    all_items = Item.objects.all()
+    obj_items = Item.objects.all()
+    page = request.GET.get('page', 1)
+
+    all_items = pagination(page, obj_items)
 
     return render(request, "store/main_store.html", {'all_items':all_items})
 
@@ -116,9 +119,13 @@ def search_item(request):
     if sorting_element is None:
         sorting_element = "price"
 
-    items = search_and_sort(items_category, searched_item, sorting_element)
+    obj_items = search_and_sort(items_category, searched_item, sorting_element)
 
-    return render(request, 'store/search_page.html', {'all_items':items, 'searched_item':searched_item, 'items_category':items_category})
+    page = request.GET.get('page', 1)
+
+    all_items = pagination(page, obj_items)
+
+    return render(request, 'store/search_page.html', {'all_items':all_items, 'searched_item':searched_item, 'items_category':items_category})
 
 
 #Cart

@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load pagination_tag %}
 
 {% block title %} Anime Slash {% endblock %}
 
@@ -32,10 +33,33 @@
 {% endfor %}
 </div>
 
+<div class="pagination-div">
+{% if all_items.has_other_pages %}
+  <ul class="pagination">
+    {% if all_items.has_previous %}
+      <li><a class="page-n btn btn-outline-danger" href="?{% param_replace page=all_items.previous_page_number %}">&laquo;</a></li>
+    {% else %}
+      <li class="page-n disabled btn btn-outline-danger"><span>&laquo;</span></li>
+    {% endif %}
+    {% for i in all_items.paginator.page_range %}
+      {% if all_items.number == i %}
+        <li class="current active btn btn-outline-danger"><span>{{ i }}</span></li>
+      {% else %}
+        <li><a class="page-n btn btn-outline-danger" href="?{% param_replace page=i %}">{{ i }}</a></li>
+      {% endif %}
+    {% endfor %}
+    {% if all_items.has_next %}
+      <li><a class="page-n btn btn-outline-danger" href="?{% param_replace page=all_items.next_page_number %}">&raquo;</a></li>
+    {% else %}
+      <li class="page-n disabled btn btn-outline-danger"><span>&raquo;</span></li>
+    {% endif %}
+  </ul>
+{% endif %}
+</div>
+
 
 <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 <script src="{% static 'js/store/main_store.js' %}"></script>
-
 
 
 {% endblock %}
