@@ -1,3 +1,6 @@
+from django.core.paginator import Paginator
+
+
 from store.data.item.models import Item
 
 
@@ -21,6 +24,19 @@ def rating_avg(reviews):
         }
 
     return data_rating
+
+
+def pagination(page, obj_items):
+    paginator = Paginator(obj_items, 2)
+
+    try:
+        all_items = paginator.page(page)
+    except PageNotAnInteger:
+        all_items = paginator.page(1)
+    except EmptyPage:
+        all_items = paginator.page(paginator.num_pages)
+
+    return all_items
 
 
 def search_and_sort(items_category, searched_item, sorting_element):
