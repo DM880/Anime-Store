@@ -1,9 +1,6 @@
 from django.core.paginator import Paginator
 
 
-from store.data.item.models import Item
-
-
 def rating_avg(reviews):
 
     avg_rating = 0
@@ -27,7 +24,7 @@ def rating_avg(reviews):
 
 
 def pagination(page, obj_items):
-    paginator = Paginator(obj_items, 2)
+    paginator = Paginator(obj_items, 4)
 
     try:
         all_items = paginator.page(page)
@@ -37,20 +34,6 @@ def pagination(page, obj_items):
         all_items = paginator.page(paginator.num_pages)
 
     return all_items
-
-
-def search_and_sort(items_category, searched_item, sorting_element):
-
-    if items_category is not None and searched_item is not None:
-        items = Item.objects.filter(category=items_category, name__contains=searched_item).order_by(sorting_element)
-    elif items_category is None and searched_item is not None:
-        items = Item.objects.filter(name__contains=searched_item).order_by(sorting_element)
-    elif items_category is not None and searched_item is None:
-        items = Item.objects.filter(category=items_category).order_by(sorting_element)
-    else:
-        items = Item.objects.all().order_by(sorting_element)
-
-    return items
 
 
 def get_session_key(request):

@@ -1,11 +1,3 @@
-// window.onscroll = function () {
-//     if (document.documentElement.scrollTop > 10) {
-//       document.getElementById('nav').style.borderBottom = '1px solid black';
-//     } else {
-//     	document.getElementById('nav').style.borderBottom = 'none';
-//     }
-// }
-
 // Search Bar
 
 function searchDiv(){
@@ -38,8 +30,8 @@ function hideUserMenu () {
   timeout = setTimeout(function(){document.getElementById('user-div').style.display = 'none';}, 1000);
 }
 
-var hover_user = document.getElementById('user-menu')
-hover_user.onmouseover = showUserMenu
+var hover_user = document.getElementById('user-menu');
+hover_user.onmouseover = showUserMenu;
 
 user_div =  document.getElementById('user-div');
 

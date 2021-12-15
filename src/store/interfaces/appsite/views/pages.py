@@ -15,10 +15,11 @@ from store.data.cart.models import Cart, EntryCart
 
 
 from store.domain.user import validation
-from store.domain.cart import queries, checkout
+from store.domain.cart import queries as cart_queries, checkout
+from store.domain.item import queries as item_queries
 
 
-from .utils import rating_avg, pagination, search_and_sort, get_session_key
+from .utils import rating_avg, pagination, get_session_key
 
 
 class LandingPage(generic_views.TemplateView):
@@ -108,7 +109,14 @@ def item_page(request, item_id):
         n = random.randint(0,tot_items_count-1)
         reccomendations.append(all_items[n])
 
-    return render(request, 'store/item_page.html', {'item':item, 'reviews':reviews, 'avg_rating_data':avg_rating_data, 'reccomendations':reccomendations})
+    context = {
+        'item':item,
+        'reviews':reviews,
+        'avg_rating_data':avg_rating_data,
+        'reccomendations':reccomendations
+    }
+
+    return render(request, 'store/item_page.html', context)
 
 
 def search_item(request):
@@ -119,13 +127,19 @@ def search_item(request):
     if sorting_element is None:
         sorting_element = "price"
 
-    obj_items = search_and_sort(items_category, searched_item, sorting_element)
+    obj_items = item_queries.search_and_sort(items_category, searched_item, sorting_element)
 
     page = request.GET.get('page', 1)
 
     all_items = pagination(page, obj_items)
 
-    return render(request, 'store/search_page.html', {'all_items':all_items, 'searched_item':searched_item, 'items_category':items_category})
+    context = {
+        'all_items':all_items,
+        'searched_item':searched_item,
+        'items_category':items_category
+    }
+
+    return render(request, 'store/search_page.html', context)
 
 
 #Cart
@@ -142,9 +156,14 @@ def add_item_cart(request, item_id):
     else:
         quantity = int(quantity)
 
-    queries.add_item(user, item_id, quantity, session_key)
+    cart_queries.add_item(user, item_id, quantity, session_key)
 
-    return JsonResponse({"valid":True,"quantity":quantity}, status = 200)
+    data = {
+        "valid":True,
+        "quantity":quantity
+    }
+
+    return JsonResponse(data, status = 200)
 
 
 def remove_item_cart(request, item_id):
@@ -158,7 +177,7 @@ def remove_item_cart(request, item_id):
     else:
         quantity = int(quantity)
 
-    queries.remove_item(user, item_id, quantity, session_key)
+    cart_queries.remove_item(user, item_id, quantity, session_key)
 
     # redirect to same page,if not found redirect to 'main_store'
     return redirect(request.META.get('HTTP_REFERER', 'main_store'))
@@ -180,7 +199,14 @@ def checkout_page(request):
     subtotal = cart.tot_price
     total = 4.99 + float(subtotal)
 
-    return render(request, "checkout_page.html", {'cart':cart, 'items':items, 'subtotal':subtotal, 'total':total})
+    context = {
+        'cart':cart,
+        'items':items,
+        'subtotal':subtotal,
+        'total':total
+    }
+
+    return render(request, "checkout_page.html", context)
 
 
 def checkout_remove_entry(request, entry):
@@ -212,3 +238,4 @@ def checkout_update_quantity(request, entry):
     checkout.update_quantity(entry, quantity, cart)
 
     return redirect(request.META.get('HTTP_REFERER', 'main_store'))
+
