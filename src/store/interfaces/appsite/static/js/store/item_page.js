@@ -8,7 +8,6 @@ function decrementValue()
     }
 }
 
-
 function incrementValue()
 {
     var value = parseInt(document.getElementById('quantity').value);
@@ -30,6 +29,32 @@ function addedCart() {
   }
 }
 
+// For posting review
+
+// If logged in
+function openDiv(){
+  document.getElementById('rev-wrap-div').style.display = 'block';
+  document.getElementById('change-div').style.opacity = '0.5';
+}
+
+function closeDiv(){
+  document.getElementById('rev-wrap-div').style.display = 'none';
+  document.getElementById('change-div').style.opacity = '1';
+}
+
+// If not logged in
+
+function openLogDiv(){
+  document.getElementById('log-wrap-div').style.display = 'block';
+  document.getElementById('change-div').style.opacity = '0.5';
+}
+
+function closeLogDiv(){
+  document.getElementById('log-wrap-div').style.display = 'none';
+  document.getElementById('change-div').style.opacity = '1';
+}
+
+/////////
 
 var btn = $('.add');
 btn.on('click', function(e){

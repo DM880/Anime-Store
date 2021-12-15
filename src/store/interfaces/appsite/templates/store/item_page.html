@@ -6,6 +6,7 @@
 {% block css %}<link rel="stylesheet" href="{% static 'css/store/item_page.css' %}">{% endblock %}
 {% block content %}
 
+<div id="change-div">
 <div class="added" id="added"><div class="img-cart"><img src="/media/{{item.first_image.image}}"></div>
   <div class="details" style="float:right;"><h5 id="q-add" style="margin-top:20px;margin-left:50px;"></h5><h5 style="margin-left:25px;">{{ item.name }}</h5>
   </div>
@@ -53,8 +54,11 @@
   <p class="date">{{ review.posted }}</p>
   {% endwith %}
   {% endfor %}
-
 </div>
+<button style="margin:50px auto -50px 150px;" class="btn btn-outline-success"
+ {% if user.is_authenticated %} onclick="openDiv()"
+ {% else %} onclick="openLogDiv()"
+ {% endif %}>Write Review</button>
 
 <hr style="margin-bottom: 50px;">
 
@@ -67,7 +71,43 @@
      </div>
      {% endfor %}
  </div>
+</div>
 
+<div id="rev-wrap-div" class="rev-wrap">
+  <a title="Close" class="close-rev" onclick="closeDiv()">X</a>
+  <form action="{% url 'post_review'  item_id=item.id %}" method="POST">
+    {% csrf_token %}
+  <div class="review-div">
+    <div class="title-rev">
+      <input name="title-rev-input" maxlength="15" type="text" placeholder="Title Review" required='True'>
+      </input>
+    </div>
+    <div class="review-txt-div">
+      <textarea name="txt-rev-description" maxlength="400" placeholder="Write here..." required='True'></textarea>
+    </div>
+     <fieldset class="rating">
+    <input type="radio" id="star5" name="rating" value="5" required="True" /><label class="full" for="star5" title="5 stars"></label>
+    <input type="radio" id="star4" name="rating" value="4" required="True" /><label class="full" for="star4" title="4 stars"></label>
+    <input type="radio" id="star3" name="rating" value="3" required="True" /><label class="full" for="star3" title="3 stars"></label>
+    <input type="radio" id="star2" name="rating" value="2" required="True" /><label class="full" for="star2" title="2 stars"></label>
+    <input type="radio" id="star1" name="rating" value="1" required="True" /><label class="full" for="star1" title="1 star"></label>
+</fieldset>
+  <br>
+  <br>
+    <button class="rev-btn btn btn-success" type="submit">Post</button>
+  </div>
+  </form>
+</div>
+
+<div style="text-align:center;margin-left: 10%;" id="log-wrap-div" class="rev-wrap">
+  <a title="Close" class="close-rev" onclick="closeLogDiv()">X</a>
+  <div style="text-align:center;">
+    <h1>Sign In
+      <br>
+      to write a review</h1>
+  </div>
+    <a type="button" href="{% url 'login' %}" class="btn btn-success" style="margin-top: 25px;" type="submit">Sign In</a>
+  </div>
 
 <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 <script src="{% static 'js/store/item_page.js' %}"></script>
