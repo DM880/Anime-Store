@@ -3,6 +3,12 @@ from django.views import generic as generic_views
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 import random
+import stripe
+from django.views.decorators.csrf import csrf_exempt
+from django.conf import settings
+
+
+
 
 #For AJAX
 from django.http import JsonResponse
@@ -222,7 +228,7 @@ def checkout_page(request):
         'total':total
     }
 
-    return render(request, "checkout_page.html", context)
+    return render(request, "checkout/checkout_page.html", context)
 
 
 def checkout_remove_entry(request, entry):
@@ -255,3 +261,58 @@ def checkout_update_quantity(request, entry):
 
     return redirect(request.META.get('HTTP_REFERER', 'main_store'))
 
+
+# Stripe Checkout
+
+@csrf_exempt
+def stripe_config(request):
+    if request.method == 'GET':
+        stripe_config = {'publicKey': settings.STRIPE_PUBLISHABLE_KEY}
+        return JsonResponse(stripe_config, safe=False)
+
+@csrf_exempt
+def create_checkout_session(request):
+
+    if request.method == 'GET':
+        domain_url = 'https://ide-d552d84f01fc444aacb387647fc6cca7-8080.cs50.ws/' #for testing only
+        stripe.api_key = settings.STRIPE_SECRET_KEY
+
+        try:
+
+            if request.user.is_authenticated:
+                user = User.objects.get(email=request.user.email)
+                cart = Cart.objects.get(user=user)
+            else:
+                cart = Cart.objects.get(session_key=request.session.session_key)
+
+            subtotal = cart.tot_price
+            total = 4.99 + float(subtotal)
+            total = int(round(total, 2) *100)
+
+            # ?session_id={CHECKOUT_SESSION_ID} means the redirect will have the session ID set as a query param
+            checkout_session = stripe.checkout.Session.create(
+                success_url=domain_url + 'payment/success?session_id={CHECKOUT_SESSION_ID}',
+                cancel_url=domain_url + 'payment/cancelled/',
+                payment_method_types=['card'],
+                mode='payment',
+                line_items=[
+                    {
+                        'name': "Cart",
+                        'quantity': 1,
+                        'currency': 'usd',
+                        'amount': f"{total}",
+                    }
+                ]
+            )
+            context = checkout_session.id
+            return JsonResponse({'sessionId': context})
+        except Exception as e:
+            return JsonResponse({'error': str(e)})
+
+
+class PaymentSuccessful(generic_views.TemplateView):
+    template_name = 'chackout/payment_successful.html'
+
+
+class PaymentCancelled(generic_views.TemplateView):
+    template_name = 'checkout/payment_cancelled.html'
