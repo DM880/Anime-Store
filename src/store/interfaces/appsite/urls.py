@@ -29,6 +29,12 @@ urlpatterns = [
     path('checkout/remove/<entry>/', pages.checkout_remove_entry, name="checkout_remove_entry"),
     path('checkout/update/<entry>/', pages.checkout_update_quantity, name="checkout_update_quantity"),
 
+    #Stripe Checkout
+    path('config/', pages.stripe_config , name="stripe_config"),
+    path('create-checkout-session/', pages.create_checkout_session, name="create_checkout_session"),
+    path('payment/success/', pages.PaymentSuccessful.as_view(), name="payment_successful"),
+    path('payment/cancelled/', pages.PaymentCancelled.as_view(), name="payment_cancelled"),
+
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

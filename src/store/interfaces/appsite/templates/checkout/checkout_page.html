@@ -74,10 +74,11 @@
        <p>Delivery $4.99</p>
   <hr>
   <h5>Total<span style="font-size:12px;">(include GST)</span> ${{ total|floatformat:2 }}</h5>
-    <a href=""><button class="btn btn-success" style="margin-top:20px;margin-left:30px;" title="Checkout">Checkout</button></a>
+    <button class="btn btn-success" style="margin-top:20px;margin-left:30px;" id="submitBtn" title="Checkout">Checkout</button>
 </div>
 
 
+<script src="https://js.stripe.com/v3/"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 <script src="{% static 'js/checkout_page.js' %}"></script>
 
