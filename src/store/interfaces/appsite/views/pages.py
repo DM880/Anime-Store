@@ -119,6 +119,22 @@ def item_page(request, item_id):
     return render(request, 'store/item_page.html', context)
 
 
+def post_review(request, item_id):
+
+    if request.method == "POST":
+        data = {
+            'username': User.objects.get(email=request.user.email),
+            'item': Item.objects.get(id=item_id),
+            'title': request.POST.get('title-rev-input'),
+            'review': request.POST.get('txt-rev-description'),
+            'rating': request.POST.get('rating')
+        }
+
+        ItemReview.objects.create(**data)
+
+        return redirect(reverse('item_page', args=(item_id,)))
+
+
 def search_item(request):
     items_category = request.GET.get('items_category')
     searched_item = request.GET.get('search-item')
