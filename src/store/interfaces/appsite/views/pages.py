@@ -1,18 +1,13 @@
+from django.conf import settings
 from django.shortcuts import render, redirect, reverse
 from django.views import generic as generic_views
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-import random
-import stripe
 from django.views.decorators.csrf import csrf_exempt
-from django.conf import settings
-
-
-
-
-#For AJAX
 from django.http import JsonResponse
 import json
+import random
+import stripe
 
 
 from store.data.user.models import CustomUser as User
