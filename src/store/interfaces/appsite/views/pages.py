@@ -1,18 +1,13 @@
+from django.conf import settings
 from django.shortcuts import render, redirect, reverse
 from django.views import generic as generic_views
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-import random
-import stripe
 from django.views.decorators.csrf import csrf_exempt
-from django.conf import settings
-
-
-
-
-#For AJAX
 from django.http import JsonResponse
 import json
+import random
+import stripe
 
 
 from store.data.user.models import CustomUser as User
@@ -274,20 +269,17 @@ def stripe_config(request):
 def create_checkout_session(request):
 
     if request.method == 'GET':
-        domain_url = 'https://ide-d552d84f01fc444aacb387647fc6cca7-8080.cs50.ws/' #for testing only
+        domain_url = settings.DOMAIN_URL
         stripe.api_key = settings.STRIPE_SECRET_KEY
 
         try:
-
             if request.user.is_authenticated:
                 user = User.objects.get(email=request.user.email)
                 cart = Cart.objects.get(user=user)
             else:
                 cart = Cart.objects.get(session_key=request.session.session_key)
 
-            subtotal = cart.tot_price
-            total = 4.99 + float(subtotal)
-            total = int(round(total, 2) *100)
+            subtotal = int(round(cart.tot_price, 2) * 100)
 
             # ?session_id={CHECKOUT_SESSION_ID} means the redirect will have the session ID set as a query param
             checkout_session = stripe.checkout.Session.create(
@@ -295,12 +287,25 @@ def create_checkout_session(request):
                 cancel_url=domain_url + 'payment/cancelled/',
                 payment_method_types=['card'],
                 mode='payment',
+                shipping_options=[
+                    {
+                        'shipping_rate_data':{
+                            'type': 'fixed_amount',
+                            'fixed_amount': {
+                            'amount': 499,
+                            'currency': 'usd',
+                      },
+                      'display_name':'Shipping',
+                     }
+                    },
+                  ],
+
                 line_items=[
                     {
                         'name': "Cart",
                         'quantity': 1,
                         'currency': 'usd',
-                        'amount': f"{total}",
+                        'amount': f"{subtotal}",
                     }
                 ]
             )
@@ -311,7 +316,7 @@ def create_checkout_session(request):
 
 
 class PaymentSuccessful(generic_views.TemplateView):
-    template_name = 'chackout/payment_successful.html'
+    template_name = 'checkout/payment_successful.html'
 
 
 class PaymentCancelled(generic_views.TemplateView):
