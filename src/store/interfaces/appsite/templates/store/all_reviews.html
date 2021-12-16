@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}All Reviews{% endblock %}
+
+{% block css %}<link rel="stylesheet" href="{% static 'css/store/item_page.css' %}">{% endblock %}
+
+{% block content %}
+<div style="margin-top:150px;">
+  {% for review in reviews %}
+  {% with x|center:review.rating as range %}
+  <div class="user-rev">
+    <h5 class="username rev">{{ review.username.username }}</h5>
+  <span class="rev">
+    {% for x in range %}
+    ⭐
+    {% endfor %}</span>
+  <p class="review-txt" name="review_id">{{ review.review }}</p>
+  </div>
+  <p class="date">{{ review.posted }}</p>
+  {% endwith %}
+  {% endfor %}
+</div>
+{% endblock %}

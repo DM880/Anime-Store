@@ -16,9 +16,10 @@ urlpatterns = [
 
     #Store
     path('store/', pages.main_store, name="main_store"),
+    path('search/', pages.search_item, name="search_item"),
     path('store/<item_id>/', pages.item_page, name="item_page"),
     path('store/<item_id>/post_review/', pages.post_review, name="post_review"),
-    path('search/', pages.search_item, name="search_item"),
+    path('store/reviews/<item_id>/', pages.AllReviews.as_view(), name="all_reviews"),
 
     #Cart
     path('cart/add/<item_id>/', pages.add_item_cart, name="add_item"),

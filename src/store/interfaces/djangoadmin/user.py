@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 
 
-from store.data.user.models import CustomUser
+from store.data.user.models import CustomUser, AccountDetail
 from store.interfaces.forms.user import UserCreationForm
 
 
@@ -24,4 +24,15 @@ class CustomUserAdmin(UserAdmin):
     search_fields = ('email','username','created')
 
 
-admin.site.register(CustomUser, CustomUserAdmin)
+class AccountDetailInLine(admin.TabularInline):
+    model = AccountDetail
+    extra = 0
+
+
+class UserAccountAdmin(admin.ModelAdmin):
+     inlines = [
+         AccountDetailInLine,
+         ]
+
+
+admin.site.register(CustomUser, UserAccountAdmin)
