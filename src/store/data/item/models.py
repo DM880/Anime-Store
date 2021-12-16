@@ -1,4 +1,5 @@
 from django.db import models
+from django.db.models import Avg
 import datetime
 
 
@@ -27,6 +28,18 @@ class Item(models.Model):
 
     def first_image(self):
         return self.image.first()
+
+    def average_review(self):
+        review = ItemReview.objects.filter(item=self.id).aggregate(average=Avg('rating'))
+        count = ItemReview.objects.filter(item=self.id).count()
+        avg=0
+        if review["average"] is not None:
+            avg=float(review["average"])
+        data = {
+            'avg':avg,
+            'count':count,
+        }
+        return data
 
 
 class ItemImage(models.Model):

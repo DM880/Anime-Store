@@ -21,3 +21,13 @@ class CustomUser(AbstractUser):
     class Meta:
         ordering = ('created',)
         db_table = 'store_user'
+
+
+class AccountDetail(models.Model):
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    shipping_address = models.CharField(max_length=50)
+    city = models.CharField(max_length=20)
+    state = models.CharField(max_length=20)
+    zip_code = models.CharField(max_length=20)
+    phone_number = models.IntegerField()
+    created = models.DateField(auto_now_add=True)
