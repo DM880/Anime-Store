@@ -90,6 +90,7 @@ def sign_out(request):
 
 def main_store(request):
     obj_items = Item.objects.all()
+    
     page = request.GET.get('page', 1)
 
     all_items = pagination(page, obj_items)
@@ -105,35 +106,32 @@ def item_page(request, item_id):
     tot_items_count = Item.objects.all().count()
 
     reccomendations = []
+    shown_reviews = []
 
     for x in range(5):
         n = random.randint(0,tot_items_count-1)
         reccomendations.append(all_items[n])
 
+    reviews_count = reviews.count()
+    more_reviews = False
+
+    if reviews_count >= 5:
+        more_reviews = True
+        for y in range(5):
+            shown_reviews.append(reviews[y])
+    else:
+        for i in reviews:
+            shown_reviews.append(i)
+
     context = {
         'item':item,
-        'reviews':reviews,
+        'reviews':shown_reviews,
+        'more_reviews': more_reviews,
         'avg_rating_data':avg_rating_data,
         'reccomendations':reccomendations
     }
 
     return render(request, 'store/item_page.html', context)
-
-
-def post_review(request, item_id):
-
-    if request.method == "POST":
-        data = {
-            'username': User.objects.get(email=request.user.email),
-            'item': Item.objects.get(id=item_id),
-            'title': request.POST.get('title-rev-input'),
-            'review': request.POST.get('txt-rev-description'),
-            'rating': request.POST.get('rating')
-        }
-
-        ItemReview.objects.create(**data)
-
-        return redirect(reverse('item_page', args=(item_id,)))
 
 
 def search_item(request):
@@ -157,6 +155,33 @@ def search_item(request):
     }
 
     return render(request, 'store/search_page.html', context)
+
+
+def post_review(request, item_id):
+
+    if request.method == "POST":
+        data = {
+            'username': User.objects.get(email=request.user.email),
+            'item': Item.objects.get(id=item_id),
+            'title': request.POST.get('title-rev-input'),
+            'review': request.POST.get('txt-rev-description'),
+            'rating': request.POST.get('rating')
+        }
+
+        ItemReview.objects.create(**data)
+
+        return redirect(reverse('item_page', args=(item_id,)))
+
+
+class AllReviews(generic_views.TemplateView):
+    template_name = "store/all_reviews.html"
+
+    def get_context_data(self, **kwargs):
+       context = super(AllReviews, self).get_context_data(**kwargs)
+       item = self.kwargs['item_id']
+       context['reviews'] = ItemReview.objects.filter(item=item)
+       return context
+
 
 
 #Cart

@@ -54,8 +54,11 @@
   <p class="date">{{ review.posted }}</p>
   {% endwith %}
   {% endfor %}
+
+  {% if more_reviews %}<a style="margin-left:150px;" href="{% url 'all_reviews' item_id=item.id %}">More reviews...</a>{% endif %}
+
 </div>
-<button style="margin:50px auto -50px 150px;" class="btn btn-outline-success"
+<button style="margin:50px auto -50px 45%;" class="btn btn-outline-success"
  {% if user.is_authenticated %} onclick="openDiv()"
  {% else %} onclick="openLogDiv()"
  {% endif %}>Write Review</button>
