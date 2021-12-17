@@ -11,6 +11,7 @@
   <div class="details" style="float:right;"><h5 id="q-add" style="margin-top:20px;margin-left:50px;"></h5><h5 style="margin-left:25px;">{{ item.name }}</h5>
   </div>
 </div>
+</div>
 
 <div class="wrapper">
   <div class="img-cont">
@@ -18,17 +19,20 @@
   </div>
   <div class="item-section">
     <div class="item-infos">
-      <h1 style="text-align:center;font-size: 45px;">{{ item.name }}</h1>
+      <h1>{{ item.name }}</h1>
       <p class="description">{{ item.description }}</p>
-    </div>
       <br>
+       <p style="display:inline-block;">Price:</p>
+   <p class="price-txt">$</p>
+   <p class="price-txt">{{ item.price }}</p>
+   <br>
       <span class="rev" style="display:inline;">
                 <span class="fa fa-star {% if item.average_review.avg > 0 %} checked {% endif %}"></span>
                 <span class="fa fa-star {% if item.average_review.avg > 1 %} checked {% endif %}"></span>
                 <span class="fa fa-star {% if item.average_review.avg > 2 %} checked {% endif %}"></span>
                 <span class="fa fa-star {% if item.average_review.avg > 3 %} checked {% endif %}"></span>
                 <span class="fa fa-star {% if item.average_review.avg > 4 %} checked {% endif %}"></span>
-                <p class="price-txt" style="display:inline;">{{ item.average_review.count | stringformat:".0f" }} reviews</p>
+                <p style="display:inline;">{{ item.average_review.count | stringformat:".0f" }} reviews</p>
       </span>
       <form method="POST" id="form" action="{% url 'add_item' item_id=item.id %}">
       {% csrf_token %}
@@ -38,7 +42,10 @@
       <button class="add btn btn-success" type="submit">Add to Cart</button>
       </form>
     </div>
+    </div>
+      <br>
 </div>
+
 <hr>
 <div style="margin-top: 50px;min-height: 200px;">
   <h1 style="text-align:center;font-family:'Roboto',sans-serif;"> Reviews </h1>
@@ -60,10 +67,14 @@
   {% if more_reviews %}<a style="margin-left:150px;" href="{% url 'all_reviews' item_id=item.id %}">More reviews...</a>{% endif %}
 
 </div>
-<button style="margin:50px auto -50px 45%;" class="btn btn-outline-success"
+<div style="width:100%">
+  <div style="margin:auto;">
+<button style="margin:60px auto -50px 45%;" class="btn btn-outline-success"
  {% if user.is_authenticated %} onclick="openDiv()"
  {% else %} onclick="openLogDiv()"
  {% endif %}>Write Review</button>
+ </div>
+</div>
 
 <hr style="margin-bottom: 50px;">
 
@@ -72,11 +83,10 @@
    {% for item in reccomendations %}
    <div class="rec-cont col">
      <a href="{% url 'item_page' item_id=item.id %}"><img src="/media/{{ item.first_image.image }}"></a>
-     <p>{{ item.name.title }}</p>
+     <p>{{ item.name }}</p>
      </div>
      {% endfor %}
  </div>
-</div>
 
 <div id="rev-wrap-div" class="rev-wrap">
   <a title="Close" class="close-rev" onclick="closeDiv()">X</a>
@@ -111,7 +121,7 @@
       <br>
       to write a review</h1>
   </div>
-    <a type="button" href="{% url 'login' %}" class="btn btn-success" style="margin-top: 25px;" type="submit">Sign In</a>
+    <a type="button" href="{% url 'login' %}" class="btn btn-success" style="margin-top:25px;" type="submit">Sign In</a>
   </div>
 
 <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
