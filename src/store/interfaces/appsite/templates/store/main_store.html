@@ -30,7 +30,9 @@
                 <span class="fa fa-star {% if item.average_review.avg > 2 %} checked {% endif %}"></span>
                 <span class="fa fa-star {% if item.average_review.avg > 3 %} checked {% endif %}"></span>
                 <span class="fa fa-star {% if item.average_review.avg > 4 %} checked {% endif %}"></span>
-                <p class="price-txt">{{ item.average_review.count | stringformat:".0f" }} reviews</p>
+                <p class="price-txt">{{ item.average_review.count | stringformat:".0f" }}
+                {% if item.average_review.count == 1 %} review
+                {% else %} reviews {% endif %}</p>
   </div>
       <form class="add-to-cart" id="form-item{{item.id}}" method="POST" action="{% url 'add_item' item_id=item.id %}">
         {% csrf_token %}
@@ -42,7 +44,7 @@
 
 
 
-
+<div style="width:100%;">
 <div class="pagination-div">
 {% if all_items.has_other_pages %}
   <ul class="pagination">
@@ -65,6 +67,7 @@
     {% endif %}
   </ul>
 {% endif %}
+</div>
 </div>
 
 
