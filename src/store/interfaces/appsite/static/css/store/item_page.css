@@ -18,6 +18,7 @@ body,html{
   border: solid 1px black;
   position: fixed;
   background-color: white;
+  font-family: 'Roboto', sans-serif;
 }
 
 
@@ -40,6 +41,7 @@ body,html{
 .wrapper{
   margin-top: 150px;
   display: flex;
+  font-family: 'Roboto', sans-serif;
 }
 
 .img-cont{
@@ -116,6 +118,10 @@ body,html{
   background-color: #FF4848;
 }
 
+.checked{
+  font-size: 15px;
+  color: #FABB51;
+}
 
 .rev{
   display: inline;
@@ -197,6 +203,7 @@ hr{
   border-radius: 10px;
   display: none;
   background-color: white;
+  font-family: 'Roboto', sans-serif;
   opacity: 1;
 }
 

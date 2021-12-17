@@ -18,16 +18,18 @@
   </div>
   <div class="item-section">
     <div class="item-infos">
-      <h1 style="text-align:center;font-size: 45px;">{{ item.name.title }}</h1>
+      <h1 style="text-align:center;font-size: 45px;">{{ item.name }}</h1>
       <p class="description">{{ item.description }}</p>
     </div>
       <br>
-      <span class="rev">
-        {% with i|center:avg_rating_data.rating as rating_range %}
-        {% for i in rating_range %}⭐{% endfor %}
-        {% endwith %}
-      </span><h5 style="opacity:0.5;" class="rev">{{ avg_rating_data.counter }} reviews</h5>
-      <br>
+      <span class="rev" style="display:inline;">
+                <span class="fa fa-star {% if item.average_review.avg > 0 %} checked {% endif %}"></span>
+                <span class="fa fa-star {% if item.average_review.avg > 1 %} checked {% endif %}"></span>
+                <span class="fa fa-star {% if item.average_review.avg > 2 %} checked {% endif %}"></span>
+                <span class="fa fa-star {% if item.average_review.avg > 3 %} checked {% endif %}"></span>
+                <span class="fa fa-star {% if item.average_review.avg > 4 %} checked {% endif %}"></span>
+                <p class="price-txt" style="display:inline;">{{ item.average_review.count | stringformat:".0f" }} reviews</p>
+      </span>
       <form method="POST" id="form" action="{% url 'add_item' item_id=item.id %}">
       {% csrf_token %}
       <button type="button" id="minus" class="plus-minus btn btn-danger" onclick="decrementValue()">-</button>
@@ -39,7 +41,7 @@
 </div>
 <hr>
 <div style="margin-top: 50px;min-height: 200px;">
-  <h1 style="text-align:center;"> Reviews </h1>
+  <h1 style="text-align:center;font-family:'Roboto',sans-serif;"> Reviews </h1>
 
   {% for review in reviews %}
   {% with x|center:review.rating as range %}
@@ -47,7 +49,7 @@
     <h5 class="username rev">{{ review.username.username }}</h5>
   <span class="rev">
     {% for x in range %}
-    ⭐
+    <span class="fa fa-star checked"></span>
     {% endfor %}</span>
   <p class="review-txt" name="review_id">{{ review.review }}</p>
   </div>
