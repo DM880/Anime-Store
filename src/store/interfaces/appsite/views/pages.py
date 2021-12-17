@@ -90,7 +90,7 @@ def sign_out(request):
 
 def main_store(request):
     obj_items = Item.objects.all()
-    
+
     page = request.GET.get('page', 1)
 
     all_items = pagination(page, obj_items)
@@ -306,7 +306,7 @@ def create_checkout_session(request):
 
             subtotal = int(round(cart.tot_price, 2) * 100)
 
-            # ?session_id={CHECKOUT_SESSION_ID} means the redirect will have the session ID set as a query param
+            # ?session_id={CHECKOUT_SESSION_ID} redirect will have the session ID set as a query param
             checkout_session = stripe.checkout.Session.create(
                 success_url=domain_url + 'payment/success?session_id={CHECKOUT_SESSION_ID}',
                 cancel_url=domain_url + 'payment/cancelled/',
