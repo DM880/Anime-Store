@@ -177,3 +177,27 @@ body,html{
   background-color: #D92332;
 }
 
+
+/*Footer*/
+
+.footer{
+  height: 130px;
+  width: 100%;
+  position: absolute;
+  background-color: #D92332;
+  margin-top:20px;
+  text-align: center;
+  font-family: 'Roboto', sans-serif;
+}
+
+.footer-img{
+  height:150px;
+  position: absolute;
+  left: 50px;
+  z-index:3;
+}
+
+.footer p{
+  margin-top:50px;
+  font-weight: bold;
+}

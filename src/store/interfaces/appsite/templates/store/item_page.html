@@ -6,12 +6,16 @@
 {% block css %}<link rel="stylesheet" href="{% static 'css/store/item_page.css' %}">{% endblock %}
 {% block content %}
 
+<!--Added to cart div-->
+
 <div id="change-div">
 <div class="added" id="added"><div class="img-cart"><img src="/media/{{item.first_image.image}}"></div>
   <div class="details" style="float:right;"><h5 id="q-add" style="margin-top:20px;margin-left:50px;"></h5><h5 style="margin-left:25px;">{{ item.name }}</h5>
   </div>
 </div>
-</div>
+
+
+<!--Item div-->
 
 <div class="wrapper">
   <div class="img-cont">
@@ -32,7 +36,9 @@
                 <span class="fa fa-star {% if item.average_review.avg > 2 %} checked {% endif %}"></span>
                 <span class="fa fa-star {% if item.average_review.avg > 3 %} checked {% endif %}"></span>
                 <span class="fa fa-star {% if item.average_review.avg > 4 %} checked {% endif %}"></span>
-                <p style="display:inline;">{{ item.average_review.count | stringformat:".0f" }} reviews</p>
+                <p style="display:inline;">{{ item.average_review.count | stringformat:".0f" }}
+                {% if item.average_review.count == 1 %} review
+                {% else %} reviews {% endif %}</p>
       </span>
       <form method="POST" id="form" action="{% url 'add_item' item_id=item.id %}">
       {% csrf_token %}
@@ -47,7 +53,10 @@
 </div>
 
 <hr>
-<div style="margin-top: 50px;min-height: 200px;">
+
+<!--Reviews section-->
+
+<div style="margin-top:50px;min-height: 200px;">
   <h1 style="text-align:center;font-family:'Roboto',sans-serif;"> Reviews </h1>
 
   {% for review in reviews %}
@@ -65,8 +74,8 @@
   {% endfor %}
 
   {% if more_reviews %}<a style="margin-left:150px;" href="{% url 'all_reviews' item_id=item.id %}">More reviews...</a>{% endif %}
-
 </div>
+
 <div style="width:100%">
   <div style="margin:auto;">
 <button style="margin:60px auto -50px 45%;" class="btn btn-outline-success"
@@ -78,6 +87,8 @@
 
 <hr style="margin-bottom: 50px;">
 
+<!--Reccomendation section-->
+
  <div class="reccomendations row">
    <h3 style="text-align:center;margin-bottom:50px;opacity:0.5;">Related Products</h3>
    {% for item in reccomendations %}
@@ -87,6 +98,10 @@
      </div>
      {% endfor %}
  </div>
+
+ </div>
+
+ <!--Post review div-->
 
 <div id="rev-wrap-div" class="rev-wrap">
   <a title="Close" class="close-rev" onclick="closeDiv()">X</a>
@@ -114,6 +129,8 @@
   </form>
 </div>
 
+<!--Sign in to post review div-->
+
 <div style="text-align:center;margin-left: 10%;" id="log-wrap-div" class="rev-wrap">
   <a title="Close" class="close-rev" onclick="closeLogDiv()">X</a>
   <div style="text-align:center;">
@@ -123,6 +140,10 @@
   </div>
     <a type="button" href="{% url 'login' %}" class="btn btn-success" style="margin-top:25px;" type="submit">Sign In</a>
   </div>
+
+<!--//////////////-->
+
+{% include 'footer.html' %}
 
 <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 <script src="{% static 'js/store/item_page.js' %}"></script>

@@ -8,9 +8,8 @@ body,html{
 /*Added to Cart div*/
 .added{
   visibility: hidden;
-  height: 100px;
+  height: 90px;
   width: 200px;
-  border-radius: 5px;
   top: 80px;
   right: 5px;
   display: flex;
@@ -23,16 +22,15 @@ body,html{
 
 
 .img-cart{
-  height: 75px;
-  width: 75px;
-  margin-top: 13px;
+  height: 90px;
+  width: 90px;
   overflow: hidden;
 }
 
 .img-cart img{
-  border-radius: 5px;
-  height: 75px;
-  width: 75px;
+  height: 90px;
+  width: 90px;
+  object-fit: fill;
 }
 
 
@@ -43,6 +41,8 @@ body,html{
   display: flex;
   font-family: 'Roboto', sans-serif;
 }
+
+/*Item Img*/
 
 .img-cont{
   float: 1;
@@ -58,6 +58,8 @@ body,html{
   max-height: 400px;
   object-fit: fill;
 }
+
+/*///////////*/
 
 .item-section{
   margin-top:  -50px;
@@ -80,6 +82,9 @@ body,html{
   font-size: 20px;
 }
 
+
+/*Add To Cart Button*/
+
 .quantity{
   margin-left: 10px;
   margin-right: 10px;
@@ -90,6 +95,7 @@ body,html{
   border: solid 1px black;
   text-align: center;
 }
+
 
 .add{
   border-radius: 10px;
@@ -110,15 +116,7 @@ body,html{
   background-color: #FF4848;
 }
 
-.checked{
-  font-size: 15px;
-  color: #FFC107;
-}
-
-.rev{
-  display: inline;
-  margin-right:10px;
-}
+/*///////////////*/
 
 .price-txt{
   display: inline-block;
@@ -132,8 +130,20 @@ hr{
   text-align: center;
 }
 
-/* Review Section */
+/*Stars Rating*/
 
+.checked{
+  font-size: 15px;
+  color: #FFC107;
+}
+
+.rev{
+  display: inline;
+  margin-right:10px;
+}
+
+
+/* Review Section */
 
 .user-rev{
   margin-left: 5%;
@@ -248,7 +258,7 @@ hr{
   border-bottom-right-radius: 5px;
 }
 
-/*Rating*/
+/*Rating Review Div*/
 
 .rating {
   border: none;

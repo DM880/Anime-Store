@@ -75,6 +75,7 @@ body{
 
 .price-txt{
   display: inline-block;
+  font-size:15px;
 }
 
 .item-title{
@@ -92,8 +93,7 @@ body{
 .pagination-div{
   margin-left: 45%;
   width: 100%;
-  margin-top: 180px;
-  bottom: 0;
+  margin-top: 90px;
 }
 
 .page-n, .current{
@@ -115,3 +115,5 @@ body{
   width: 30px;
   height: 30px;
 }
+
+
