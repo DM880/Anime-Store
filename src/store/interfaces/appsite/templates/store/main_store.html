@@ -36,7 +36,7 @@
   </div>
       <form class="add-to-cart" id="form-item{{item.id}}" method="POST" action="{% url 'add_item' item_id=item.id %}">
         {% csrf_token %}
-      <button class="add cart-btn btn btn-success" id="add" data-id="{{item.id}}" type="submit" title="Add to Cart">+</button>
+      <button class="add cart-btn" id="add" data-id="{{item.id}}" type="submit" title="Add to Cart"><span>+</span></button>
       </form>
     </div>
 {% endfor %}

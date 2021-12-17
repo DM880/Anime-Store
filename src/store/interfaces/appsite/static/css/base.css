@@ -38,7 +38,7 @@ body,html{
   right: 0;
   font-size: 30px;
   padding: 20px;
-  color: #F6F6F6;
+  color: #F4FFFD;
   transition: color 0.3s ease-in;
 }
 
@@ -47,7 +47,7 @@ body,html{
   right: 60px;
   font-size: 30px;
   padding: 20px;
-  color: #F6F6F6;
+  color: #F4FFFD;
   transition: color 0.3s ease-in;
   cursor: pointer;
 }
@@ -57,7 +57,7 @@ body,html{
   right: 120px;
   font-size: 30px;
   padding: 20px;
-  color: #F6F6F6;
+  color: #F4FFFD;
   transition: color 0.3s ease-in;
   cursor: pointer;
 }
@@ -71,7 +71,7 @@ body,html{
 
 .dropbtn {
   background-color: #222831;
-  color: white;
+  color: #F4FFFD;
   padding: 16px;
   font-size: 23px;
   border: none;
@@ -184,7 +184,7 @@ body,html{
   height: 130px;
   width: 100%;
   position: absolute;
-  background-color: #D92332;
+  background-color: #F22929;
   margin-top:20px;
   text-align: center;
   font-family: 'Roboto', sans-serif;
@@ -200,4 +200,5 @@ body,html{
 .footer p{
   margin-top:50px;
   font-weight: bold;
+  color: white;
 }
