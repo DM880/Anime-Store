@@ -34,7 +34,7 @@ class Item(models.Model):
         count = ItemReview.objects.filter(item=self.id).count()
         avg=0
         if review["average"] is not None:
-            avg=float(review["average"])
+            avg=round(float(review["average"]))
         data = {
             'avg':avg,
             'count':count,
