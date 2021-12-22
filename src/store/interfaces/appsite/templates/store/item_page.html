@@ -42,10 +42,10 @@
       </span>
       <form method="POST" id="form" action="{% url 'add_item' item_id=item.id %}">
       {% csrf_token %}
-      <button type="button" id="minus" class="plus-minus btn btn-danger" onclick="decrementValue()">-</button>
+      <button type="button" id="minus" class="minus plus-minus" onclick="decrementValue()">-</button>
       <input id="quantity" class="quantity"  value="1" name="quantity" readonly></input>
-      <button type="button" id="plus" class="plus-minus btn btn-danger" onclick="incrementValue()">+</button>
-      <button class="add btn btn-success" type="submit">Add to Cart</button>
+      <button type="button" id="plus" class="plus plus-minus" onclick="incrementValue()">+</button>
+      <button class="add" type="submit">Add to Cart</button>
       </form>
     </div>
     </div>
@@ -78,7 +78,7 @@
 
 <div style="width:100%">
   <div style="margin:auto;">
-<button style="margin:60px auto -50px 45%;" class="btn btn-outline-success"
+<button class="write-review"
  {% if user.is_authenticated %} onclick="openDiv()"
  {% else %} onclick="openLogDiv()"
  {% endif %}>Write Review</button>
