@@ -16,8 +16,9 @@ body{
   right: 5px;
   padding-right: 10px;
   display: flex;
-  z-index:99;
-  border: solid 1px grey;
+  z-index:98;
+  border: solid 1px #FABB51;
+  border-radius: 5px;
   position: fixed;
   background-color: #FFFCDC;
   font-family: 'Roboto',sans-serif;

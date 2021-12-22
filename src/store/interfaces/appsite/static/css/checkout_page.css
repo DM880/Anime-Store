@@ -12,8 +12,8 @@
   position: absolute;
   color: #fff;
   font-size: 55px;
-  top: 55px;
-  left: 55px;
+  top: 45px;
+  left: 50px;
   transform: translate(-50%, -50%);
 }
 
@@ -30,21 +30,6 @@
   padding: 2.5px;
   background-clip: content-box;
   animation: spin 5s linear infinite;
-}
-
-.success {
-  background-color: #4BB543;
-  border: 2.5px dashed #4BB543;
-}
-
-.error {
-  background-color: #CA0B00;
-  border: 2.5px dashed #CA0B00;
-}
-
-.warning {
-  background-color: #F0D500;
-  border: 2.5px dashed #F0D500;
 }
 
 .info{

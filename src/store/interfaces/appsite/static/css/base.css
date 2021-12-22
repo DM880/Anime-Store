@@ -167,7 +167,7 @@ body,html{
   top: 70px;
   right: 80px;
   position: fixed;
-  z-index:97;
+  z-index:99;
   display:none;
   opacity: 0;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
