@@ -86,34 +86,50 @@ body,html{
 /*Add To Cart Button*/
 
 .quantity{
-  margin-left: 10px;
-  margin-right: 10px;
   margin-top: 32px;
   height: 35px;
-  width: 35px;
-  border-radius: 10px;
-  border: solid 1px black;
+  width: 40px;
+  border: solid 1px grey;
   text-align: center;
 }
 
 
 .add{
-  border-radius: 10px;
+  background-color: #7db700;
+  border-radius: 0;
+  border-color:#7db700;
+  transition: all 0.5s ease;
+  color:white;
+  font-size: 20px;
+  font-family:'Roboto',sans-serif;
+  border-style: solid;
   height: 40px;
   width: 120px;
   margin-right: 50px;
   margin-left: 20px;
 }
 
+.add:hover{
+  background-color: white;
+  color: #7db700;
+}
+
 .plus-minus{
   text-align: center;
-  height: 30px;
-  width: 30px;
-  border-radius: 50%;
-  text-align: center;
-  margin-bottom:5px;
-  padding: 0px;
-  background-color: #FF4848;
+  height: 35px;
+  width: 35px;
+  background-color: white;
+  border: solid 1px grey;
+  font-size: 18px;
+  transition: all 0.3s ease;
+}
+
+.minus:hover{
+  color: #F22929;
+}
+
+.plus:hover{
+  color: #7db700;
 }
 
 /*///////////////*/
@@ -178,6 +194,23 @@ hr{
   opacity: 50%;
   margin-left: 5%;
   padding: 10px;
+}
+
+.write-review{
+  margin:60px auto -50px 45%;
+  background-color: white;
+  border-radius: 0;
+  border-color:#F22929;
+  transition: all 0.5s ease;
+  color:#F22929;
+  font-size: 20px;
+  border:solid;
+  height: 60px;
+}
+
+.write-review:hover{
+  background-color: #F22929;
+  color:white;
 }
 
 /*Reccomendations*/
