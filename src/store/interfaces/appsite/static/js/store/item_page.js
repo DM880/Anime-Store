@@ -21,13 +21,14 @@ function incrementValue()
 function addedCart() {
   if (document.getElementById("added") != null) {
     setTimeout(function() {
-      document.getElementById('added').style.visibility = 'visible';
-    }, 500);
+      document.getElementById('added').style.opacity = 1;
+    },);
     setTimeout(function(){
-      document.getElementById('added').style.visibility = 'hidden';
+      document.getElementById('added').style.opacity = 0;
     }, 2000);
   }
 }
+
 
 // For posting review
 

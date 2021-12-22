@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}Anime Slash-{{ item.name.title }}{% endblock %}
+{% block title %}Anime Slash-{{ item.name }}{% endblock %}
 
 {% block css %}<link rel="stylesheet" href="{% static 'css/store/item_page.css' %}">{% endblock %}
 {% block content %}
@@ -10,7 +10,7 @@
 
 <div id="change-div">
 <div class="added" id="added"><div class="img-cart"><img src="/media/{{item.first_image.image}}"></div>
-  <div class="details" style="float:right;"><h5 id="q-add" style="margin-top:20px;margin-left:50px;"></h5><h5 style="margin-left:25px;">{{ item.name }}</h5>
+  <div class="details" style="float:right;"><h5 id="q-add" style="margin-top:20px;margin-left:50px;"></h5><h5 style="margin-left:15px;">{{ item.name }}</h5>
   </div>
 </div>
 

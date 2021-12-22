@@ -9,31 +9,34 @@ body{
 
 /*Added to Cart div*/
 .added{
-  visibility: hidden;
+  opacity: 0;
   height: 100px;
-  width: 200px;
-  border-radius: 5px;
-  top: 80px;
+  width: auto;
+  top: 70px;
   right: 5px;
+  padding-right: 10px;
   display: flex;
   z-index:99;
-  border: solid 1px black;
+  border: solid 1px grey;
   position: fixed;
-  background-color: white;
+  background-color: #FFFCDC;
   font-family: 'Roboto',sans-serif;
+  transition: opacity 0.5s;
 }
+
 
 .img-cart{
   height: 75px;
   width: 75px;
   margin-top: 13px;
-  overflow: hidden;
+  margin-left: 5px;
 }
 
 .img-cart img{
-  border-radius: 5px;
+  border-radius: 50%;
   height: 75px;
   width: 75px;
+  object-fit: fill;
 }
 
 
