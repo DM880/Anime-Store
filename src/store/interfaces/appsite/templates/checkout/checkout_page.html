@@ -9,7 +9,22 @@
 
 {% block css %}<link rel="stylesheet" href="{% static 'css/checkout_page.css' %}">{% endblock %}
 
+
 {% block content %}
+
+<!--Made by hiizeus https://codepen.io/hiizeus/pen/xxOJLVg-->
+<div id="loading" class="page-wrapper">
+  <div class="loading-wrapper">
+    <div class="info circle"></div>
+    <div class="loadingimage">
+      <img src="https://emoji.gg/assets/emoji/5568_nekololidance.gif" alt="Loading">
+    </div>
+  </div>
+</div>
+
+<!--//////////////-->
+
+<div id="body" style="display:none;">
 
 <div class="wrapper">
 
@@ -77,6 +92,7 @@
     <button class="btn btn-success" style="margin-top:20px;margin-left:30px;" id="submitBtn" title="Checkout">Checkout</button>
 </div>
 
+</div>
 
 <script src="https://js.stripe.com/v3/"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
