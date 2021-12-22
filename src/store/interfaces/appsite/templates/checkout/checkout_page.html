@@ -16,15 +16,15 @@
 <table class="spacing-table">
   <tr style="border-bottom: 1px solid #000;">
     <th>
-      <h5>Item Details</h5>
+      <h5 style="font-weight:bold;">Item Details</h5>
     </th>
     <th>
     </th>
     <th>
-      <h5>Price</h5>
+      <h5 style="font-weight:bold;">Price</h5>
     </th>
     <th>
-      <h5 style="margin-left:10px;">Quantity</h5>
+      <h5 style="margin-left:15px;font-weight:bold;">Quantity</h5>
     </th>
     <th>
     </th>
@@ -40,7 +40,7 @@
     <td><div class="itm-name"><p>{{ item.item.name }}</p>
     </td>
     <td>
-      <div class="price-div"><p>${{ item.total_price }}</p></div>
+      <div style="color:#F22929;" class="price-div"><p>${{ item.total_price }}</p></div>
     </td>
     <td>
       <div class="quantity-cont">
@@ -52,7 +52,7 @@
     </div>
     </td>
     <td>
-       <div class="btn-update"><button type="submit" class="btn btn-outline-success" title="Update Quantity" style="margin-left:100px;">UPDATE</div>
+       <div class="btn-update"><button type="submit" class="update-btn" title="Update Quantity" style="margin-left:100px;">UPDATE</div>
   </form>
     </td>
      <td>
@@ -69,7 +69,7 @@
 
 </div>
 
-<div class="tot" style="float:right; margin:20px 100px 50px auto;"><p>Subtotal ${{ subtotal }}</p>
+<div class="tot" style="float:right; margin:20px 100px 50px auto;font-family: 'Roboto',sans-serif;"><p>Subtotal ${{ subtotal }}</p>
   <br>
        <p>Delivery $4.99</p>
   <hr>

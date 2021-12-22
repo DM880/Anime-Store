@@ -2,10 +2,10 @@
 function addedCart(item_id) {
   if (document.getElementById("added"+item_id) != null) {
     setTimeout(function() {
-      document.getElementById('added'+item_id).style.visibility = 'visible';
-    }, 500);
+      document.getElementById('added'+item_id).style.opacity = 1;
+    },);
     setTimeout(function(){
-      document.getElementById('added'+item_id).style.visibility = 'hidden';
+      document.getElementById('added'+item_id).style.opacity = 0;
     }, 2000);
   }
 }
