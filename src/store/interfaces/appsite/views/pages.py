@@ -117,11 +117,9 @@ def item_page(request, item_id):
 
     if reviews_count >= 5:
         more_reviews = True
-        for y in range(5):
-            shown_reviews.append(reviews[y])
+        shown_reviews = [reviews[y] for y in range(5)]
     else:
-        for i in reviews:
-            shown_reviews.append(i)
+        shown_reviews = [i for i in reviews]
 
     context = {
         'item':item,
