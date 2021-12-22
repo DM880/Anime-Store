@@ -1,3 +1,9 @@
+$(window).ready(function() {
+    $('#body').show();
+    $('#loading').hide();
+});
+
+
 function decrementValue(item_id)
 {
     var id = item_id

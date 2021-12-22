@@ -25,7 +25,7 @@ function addedCart() {
     },);
     setTimeout(function(){
       document.getElementById('added').style.opacity = 0;
-    }, 2000);
+    }, 1000);
   }
 }
 

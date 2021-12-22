@@ -1,13 +1,62 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block title %}Payment Successful{% endblock %}
 
 {% block content %}
 
-<section style="margin: 25% 25%;" class="section">
-<div class="container">
-  <p>Your payment was successful.</p>
+<img class="img-success one"  src="{% static 'img/checkout/payment_successful.gif' %}">
+<img class="img-success two" src="{% static 'img/checkout/payment_successful.gif' %}">
+<img class="img-success one mirror"  src="{% static 'img/checkout/payment_successful.gif' %}">
+<img class="img-success two mirror" src="{% static 'img/checkout/payment_successful.gif' %}">
+
+<div class="cont">
+ <i class="fas fa-check-circle success"></i>
+ <h1>PAYMENT SUCCESSFUL</h1>
+ <img class="t-up" src="{% static 'img/checkout/thumb_up_success.gif' %}">
 </div>
-</section>
+
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+
+.cont{
+  text-align:center;
+  margin-top: 230px;
+}
+
+.cont h1{
+  font-size: 80px;
+  font-family: 'Bebas Neue', cursive;
+  z-index: 99;
+}
+
+.success{
+  color: green;
+  font-size: 70px;
+  z-index: 99;
+}
+
+.img-success{
+  position:absolute;
+  z-index: -1;
+  bottom:0;
+}
+
+.two{
+  right: 0;
+}
+
+.mirror{
+  transform: scaleY(-1);
+  top:80px;
+}
+
+.t-up{
+  height: 300px;
+  width: 300px;
+}
+
+</style>
 
 {% endblock %}

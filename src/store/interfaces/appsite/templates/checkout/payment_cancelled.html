@@ -1,13 +1,38 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block title %}Payment Cancelled {% endblock %}
 
 {% block content %}
 
-<section style="margin: 25% 25%;" class="section">
-<div class="container">
-  <p>Your payment was cancelled.</p>
+<div class="cont">
+ <i class="fa fa-times-circle failed" aria-hidden="true"></i>
+  <h1>PAYMENT FAILED</h1>
 </div>
-</section>
+<div style="width:100%;">
+  <img style="margin:auto;display:block;z-index:-1;" src="{% static 'img/checkout/payment_failed.gif' %}">
+</div>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+
+.cont{
+  text-align:center;
+  margin-top: 230px;
+}
+
+.cont h1{
+  font-size: 80px;
+  font-family: 'Bebas Neue', cursive;
+  z-index: 99;
+}
+
+.failed{
+  color: red;
+  font-size: 70px;
+  z-index: 99;
+}
+
+</style>
 
 {% endblock %}
