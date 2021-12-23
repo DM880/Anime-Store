@@ -1,8 +1,7 @@
 @import url(//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
 
-body,html{
+body{
   background-color: #FFFFFF;
-  min-height: 100%;
 }
 
 /*Added to Cart div*/
@@ -49,19 +48,67 @@ body,html{
 
 /*Item Img*/
 
+/*For zoom*/
+
+.zoom-cont{
+  overflow: hidden;
+  cursor: zoom-in;
+  position:relative;
+}
+
+.zoom-img{
+  overflow: hidden;
+}
+
+/*////////*/
+
+#main-img{
+  transition: transform 0.5s ease-out;
+}
+
 .img-cont{
+  overflow: hidden;
   float: 1;
-  margin-left: 100px;
-  max-height: 400px;
+  margin-left: 50px;
+  height: 400px;
   width: 600px;
   justify-content: center;
-  margin-top: 100px;
+  margin-top: 80px;
 }
 
 .img-cont img{
   width: 100%;
-  max-height: 400px;
+  height: auto;
   object-fit: fill;
+}
+
+.other-imgs{
+  margin: auto;
+  margin-top: 50px;
+  width: auto;
+  height: 60px;
+  display: flex;
+
+}
+.other-imgs div{
+  margin-right: 15px;
+}
+
+.other-imgs img{
+  display: inline-block;
+  height: 60px;
+  width: 60px;
+  object-fit: fill;
+  cursor: pointer;
+}
+
+.other-imgs div:last-child{
+  margin-right: 0;
+}
+
+.other-imgs img:hover{
+  opacity: 0.5;
+  border: solid;
 }
 
 /*///////////*/
@@ -317,7 +364,7 @@ hr{
 
 .rating > label {
   color: #ddd;
- float: right;
+  float: right;
 }
 
 .rating > input:checked ~ label, /* show gold star when clicked */

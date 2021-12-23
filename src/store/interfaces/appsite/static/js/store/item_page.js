@@ -1,3 +1,46 @@
+// Main Img Zoom
+
+$(".main-img-cont")
+  // tile mouse actions
+  .on("mouseover", function() {
+    $(this)
+      .children("#main-img")
+      .css({ transform: "scale(" + $(this).attr("data-scale") + ")" })
+      .addClass("zoom-cont");
+  })
+  .on("mouseout", function() {
+    $(this)
+      .children("#main-img")
+      .css({ transform: "scale(1)" })
+      .removeClass("zoom-cont")
+      .removeClass("zoom-img");
+  })
+  .on("mousemove", function(e) {
+    $(this)
+      .children("#main-img")
+      .css({
+        "transform-origin":
+          ((e.pageX - $(this).offset().left) / $(this).width()) * 100 +
+          "% " +
+          ((e.pageY - $(this).offset().top) / $(this).height()) * 100 +
+          "%"
+      })
+      .addClass("zoom-img")
+  });
+
+
+// Images
+
+function changeImg(img_id){
+  var original = document.getElementById('main-img').src;
+  var temp = document.getElementById('oth-img-'+img_id).src;
+  document.getElementById('oth-img-'+img_id).src = original;
+  document.getElementById('main-img').src = temp;
+}
+
+
+// Quantity Buttons
+
 function decrementValue()
 {
     var value = parseInt(document.getElementById('quantity').value);
@@ -17,6 +60,8 @@ function incrementValue()
     document.getElementById('quantity').value = value;
     }
 }
+
+// Added To Cart Div
 
 function addedCart() {
   if (document.getElementById("added") != null) {
