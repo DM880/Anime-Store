@@ -11,7 +11,7 @@ import stripe
 
 
 from store.data.user.models import CustomUser as User
-from store.data.item.models import Item, ItemReview
+from store.data.item.models import Item, ItemImage, ItemReview
 from store.data.cart.models import Cart, EntryCart
 
 
@@ -121,12 +121,16 @@ def item_page(request, item_id):
     else:
         shown_reviews = [i for i in reviews]
 
+    all_images = ItemImage.objects.filter(item=item_id)
+    images = [image for i, image in enumerate(all_images) if i is not 0]
+
     context = {
         'item':item,
         'reviews':shown_reviews,
         'more_reviews': more_reviews,
         'avg_rating_data':avg_rating_data,
-        'reccomendations':reccomendations
+        'reccomendations':reccomendations,
+        'images': images,
     }
 
     return render(request, 'store/item_page.html', context)

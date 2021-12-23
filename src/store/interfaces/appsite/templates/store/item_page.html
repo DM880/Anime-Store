@@ -13,14 +13,26 @@
   <div class="details" style="float:right;"><h5 id="q-add" style="margin-top:20px;margin-left:50px;"></h5><h5 style="margin-left:15px;">{{ item.name }}</h5>
   </div>
 </div>
+</div>
 
 
 <!--Item div-->
 
 <div class="wrapper">
   <div class="img-cont">
-    <img src="/media/{{item.first_image.image}}">
+    <div class="main-img-cont" data-scale="1.6">
+    <img id="main-img" src="/media/{{item.first_image.image}}">
+    </div>
+    <div class="other-imgs">
+
+      {% for image in images %}
+      <div><img id="oth-img-{{image.id}}" onclick="changeImg({{image.id}})" src="/media/{{image.image}}"></div>
+    {% endfor %}
+
+    </div>
   </div>
+
+
   <div class="item-section">
     <div class="item-infos">
       <h1>{{ item.name }}</h1>
@@ -99,7 +111,6 @@
      {% endfor %}
  </div>
 
- </div>
 
  <!--Post review div-->
 
