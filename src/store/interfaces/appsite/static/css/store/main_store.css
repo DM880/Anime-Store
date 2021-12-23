@@ -1,9 +1,6 @@
 body{
     background-color: #F6F6F6;
     z-index: 3;
-    margin: 0;
-    padding: 0;
-    height: 100%;
     overflow-x: hidden;
 }
 
@@ -164,3 +161,13 @@ body{
   height: 20px;
 }
 
+/*Footer*/
+
+footer{
+  position:absolute;
+  bottom:0;
+  width: 100%;
+  margin-top:50px;
+  height: 130px;
+  text-align: center;
+}

@@ -70,8 +70,9 @@ body{
   overflow: hidden;
   float: 1;
   margin-left: 50px;
-  height: 400px;
-  width: 600px;
+  height: auto;
+  max-height: 600px;
+  width: 800px;
   justify-content: center;
   margin-top: 80px;
 }
@@ -83,7 +84,6 @@ body{
 }
 
 .other-imgs{
-  margin: auto;
   margin-top: 50px;
   width: auto;
   height: 60px;
@@ -375,3 +375,14 @@ hr{
 .rating > input:checked ~ label:hover,
 .rating > label:hover ~ input:checked ~ label, /* lighten current selection */
 .rating > input:checked ~ label:hover ~ label { color: #FFED85;  }
+
+
+/*Footer*/
+
+footer{
+  position:sticky;
+  width: 100%;
+  margin-top:50px;
+  height: 130px;
+  text-align: center;
+}

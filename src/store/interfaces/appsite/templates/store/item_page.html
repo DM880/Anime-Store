@@ -24,11 +24,9 @@
     <img id="main-img" src="/media/{{item.first_image.image}}">
     </div>
     <div class="other-imgs">
-
       {% for image in images %}
       <div><img id="oth-img-{{image.id}}" onclick="changeImg({{image.id}})" src="/media/{{image.image}}"></div>
     {% endfor %}
-
     </div>
   </div>
 
