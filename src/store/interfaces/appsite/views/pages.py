@@ -122,7 +122,7 @@ def item_page(request, item_id):
         shown_reviews = [i for i in reviews]
 
     all_images = ItemImage.objects.filter(item=item_id)
-    images = [image for i, image in enumerate(all_images) if i is not 0]
+    images = [image for i, image in enumerate(all_images) if i != 0]
 
     context = {
         'item':item,
