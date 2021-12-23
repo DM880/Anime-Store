@@ -200,6 +200,14 @@ body{
 
 /*Footer*/
 
+footer{
+  position:sticky;
+  width: 100%;
+  margin-top:50px;
+  height: 130px;
+  text-align: center;
+}
+
 .footer{
   position: sticky;
   height: 130px;
