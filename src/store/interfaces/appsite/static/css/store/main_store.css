@@ -144,6 +144,7 @@ body{
   color: black;
   margin-right: 15px;
   border-color:#F22929;
+  font-weight: 600;
 }
 
 .current{
@@ -159,15 +160,4 @@ body{
 .pagination button{
   width: 20px;
   height: 20px;
-}
-
-/*Footer*/
-
-footer{
-  position:absolute;
-  bottom:0;
-  width: 100%;
-  margin-top:50px;
-  height: 130px;
-  text-align: center;
 }

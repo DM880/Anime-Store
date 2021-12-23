@@ -286,6 +286,12 @@ hr{
   height: 80%;
 }
 
+.rec-cont img:hover{
+  opacity:0.5;
+  border: solid 2px red;
+  border-bottom: none;
+}
+
 
 /*Review Div */
 
@@ -375,14 +381,3 @@ hr{
 .rating > input:checked ~ label:hover,
 .rating > label:hover ~ input:checked ~ label, /* lighten current selection */
 .rating > input:checked ~ label:hover ~ label { color: #FFED85;  }
-
-
-/*Footer*/
-
-footer{
-  position:sticky;
-  width: 100%;
-  margin-top:50px;
-  height: 130px;
-  text-align: center;
-}
