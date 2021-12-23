@@ -93,9 +93,10 @@ def main_store(request):
     page = request.GET.get('page', 1)
     page_range = 4
 
-    tot_pages = int(obj_items.count()/page_range)
-
     all_items = pagination(page, obj_items, page_range)
+
+    #get last page number
+    tot_pages = int(obj_items.count()/page_range)
 
     return render(request, "store/main_store.html", {'all_items':all_items, 'tot_pages':tot_pages})
 
