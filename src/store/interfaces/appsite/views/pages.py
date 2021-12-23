@@ -90,12 +90,14 @@ def sign_out(request):
 
 def main_store(request):
     obj_items = Item.objects.all()
-
     page = request.GET.get('page', 1)
+    page_range = 4
 
-    all_items = pagination(page, obj_items)
+    tot_pages = int(obj_items.count()/page_range)
 
-    return render(request, "store/main_store.html", {'all_items':all_items})
+    all_items = pagination(page, obj_items, page_range)
+
+    return render(request, "store/main_store.html", {'all_items':all_items, 'tot_pages':tot_pages})
 
 
 def item_page(request, item_id):
@@ -183,7 +185,6 @@ class AllReviews(generic_views.TemplateView):
        item = self.kwargs['item_id']
        context['reviews'] = ItemReview.objects.filter(item=item)
        return context
-
 
 
 #Cart

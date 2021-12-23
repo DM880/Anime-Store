@@ -48,9 +48,8 @@
 {% if all_items.has_other_pages %}
   <ul class="pagination">
     {% if all_items.has_previous %}
-      <li><a class="page-n btn btn-outline-danger" href="?page={{ all_items.previous_page_number }}">&laquo;</a></li>
-    {% else %}
-      <li class="page-n disabled btn btn-outline-danger"><span>&laquo;</span></li>
+    <li><a title="First" class="page-n btn btn-outline-danger" href="?page=1">&laquo;</a></li>
+      <li><a title="Previous" class="page-n btn btn-outline-danger" href="?page={{ all_items.previous_page_number }}">&lt;</a></li>
     {% endif %}
     {% for i in all_items.paginator.page_range %}
       {% if all_items.number == i %}
@@ -60,9 +59,8 @@
       {% endif %}
     {% endfor %}
     {% if all_items.has_next %}
-      <li><a class="page-n btn btn-outline-danger" href="?page={{ all_items.next_page_number }}">&raquo;</a></li>
-    {% else %}
-      <li class="page-n disabled btn btn-outline-danger"><span>&raquo;</span></li>
+      <li><a title="Next" class="page-n btn btn-outline-danger" href="?page={{ all_items.next_page_number }}">&gt;</a></li>
+      <li><a title="Last" class="page-n btn btn-outline-danger" href="?page={{ tot_pages }}">&raquo;</a></li>
     {% endif %}
   </ul>
 {% endif %}

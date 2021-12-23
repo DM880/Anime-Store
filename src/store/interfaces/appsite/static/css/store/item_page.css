@@ -286,6 +286,12 @@ hr{
   height: 80%;
 }
 
+.rec-cont img:hover{
+  opacity:0.5;
+  border: solid 2px red;
+  border-bottom: none;
+}
+
 
 /*Review Div */
 

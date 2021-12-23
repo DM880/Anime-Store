@@ -23,8 +23,8 @@ def rating_avg(reviews):
     return data_rating
 
 
-def pagination(page, obj_items):
-    paginator = Paginator(obj_items, 8)
+def pagination(page, obj_items, page_range):
+    paginator = Paginator(obj_items, page_range)
 
     try:
         all_items = paginator.page(page)
