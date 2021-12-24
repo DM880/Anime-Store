@@ -150,13 +150,18 @@ def search_item(request):
     obj_items = item_queries.search_and_sort(items_category, searched_item, sorting_element)
 
     page = request.GET.get('page', 1)
+    page_range = 4
 
-    all_items = pagination(page, obj_items)
+    tot_pages = int(obj_items.count()/page_range)
+
+    all_items = pagination(page, obj_items, page_range)
 
     context = {
         'all_items':all_items,
         'searched_item':searched_item,
-        'items_category':items_category
+        'items_category':items_category,
+        'tot_pages': tot_pages
+
     }
 
     return render(request, 'store/search_page.html', context)
