@@ -48,19 +48,28 @@
 <div class="pagination-div">
 {% if all_items.has_other_pages %}
   <ul class="pagination">
+    <!--First-->
     {% if all_items.has_previous %}
     <li><a title="First" class="page-n btn btn-outline-danger" href="?page=1">&laquo;</a></li>
-      <li><a title="Previous" class="page-n btn btn-outline-danger" href="?page={{ all_items.previous_page_number }}">&lt;</a></li>
     {% endif %}
+    <!--...-->
+    {% if all_items.number|add:'-2' > 1 %}
+    <li><a class="page-n btn btn-outline-danger" href="?page={{ all_items.number|add:'-3' }}">&hellip;</a></li>
+    {% endif %}
+    <!--Pages N-->
     {% for i in all_items.paginator.page_range %}
       {% if all_items.number == i %}
         <li class="active current btn btn-outline-danger"><span>{{ i }}</span></li>
-      {% else %}
+         {% elif i > all_items.number|add:'-3' and i < all_items.number|add:'3' %}
         <li><a class="page-n btn btn-outline-danger" href="?page={{ i }}">{{ i }}</a></li>
       {% endif %}
     {% endfor %}
+    <!--...-->
+    {% if all_items.paginator.num_pages|add:'1' > all_items.number|add:'3' %}
+    <li><a class="page-n btn btn-outline-danger" href="?page={{ all_items.number|add:'3' }}">&hellip;</a></li>
+    {% endif %}
+    <!--Last-->
     {% if all_items.has_next %}
-      <li><a title="Next" class="page-n btn btn-outline-danger" href="?page={{ all_items.next_page_number }}">&gt;</a></li>
       <li><a title="Last" class="page-n btn btn-outline-danger" href="?page={{ tot_pages }}">&raquo;</a></li>
     {% endif %}
   </ul>
