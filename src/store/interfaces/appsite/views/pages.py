@@ -5,8 +5,11 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
+
+
 import json
 import random
+import math
 import stripe
 
 
@@ -91,12 +94,12 @@ def sign_out(request):
 def main_store(request):
     obj_items = Item.objects.all()
     page = request.GET.get('page', 1)
-    page_range = 4
+    page_range = 8
 
     all_items = pagination(page, obj_items, page_range)
 
     #get last page number
-    tot_pages = int(obj_items.count()/page_range)
+    tot_pages = int(math.ceil(obj_items.count()/page_range))
 
     return render(request, "store/main_store.html", {'all_items':all_items, 'tot_pages':tot_pages})
 
@@ -159,9 +162,9 @@ def search_item(request):
     obj_items = item_queries.search_and_sort(items_category, searched_item, sorting_element)
 
     page = request.GET.get('page', 1)
-    page_range = 4
+    page_range = 8
 
-    tot_pages = int(obj_items.count()/page_range)
+    tot_pages = int(math.ceil(obj_items.count()/page_range))
 
     all_items = pagination(page, obj_items, page_range)
 

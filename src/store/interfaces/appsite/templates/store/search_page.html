@@ -15,7 +15,7 @@
 {% for item in all_items %}
 
 <div class="added" id="added{{item.id}}"><div class="img-cart"><img src="/media/{{item.first_image.image}}"></div>
-  <div class="details" style="float:right;"><h5 style="margin-top:20px;margin-left:50px;">1</h5><h5 style="margin-left:15px;">{{ item.name }}</h5>
+  <div class="details" style="float:right;"><h5 style="margin-top:20px;margin-left:50px;">1</h5><h5 style="margin-left:15px;">{{ item.name|truncatechars:10 }}</h5>
   </div>
 </div>
 
@@ -24,7 +24,7 @@
       <a href="{% url 'item_page' item_id=item.id %}"><img class="item-img" src="/media/{{item.first_image.image}}"></a>
       </div>
       <h1 class="item-title">{{ item.name|truncatechars:20 }}</h1>
-      <p class="price-txt" style="font-size:15px;">$</p><p class="price-txt" style="font-size:20px;vertical-align: top;">{{ item.price }}</p>
+      <p class="price-txt" style="font-size:15px;">$</p><p class="price-txt" style="font-size:20px;vertical-align:top;">{{ item.price }}</p>
        <br>
       <div style="margin-left:10px;text-align:left;">
                 <span class="fa fa-star {% if item.average_review.avg > 0 %} checked {% endif %}"></span>
@@ -32,7 +32,10 @@
                 <span class="fa fa-star {% if item.average_review.avg > 2 %} checked {% endif %}"></span>
                 <span class="fa fa-star {% if item.average_review.avg > 3 %} checked {% endif %}"></span>
                 <span class="fa fa-star {% if item.average_review.avg > 4 %} checked {% endif %}"></span>
-                <p class="price-txt">{{ item.average_review.count | stringformat:".0f" }} reviews</p>
+                <p style="display:inline-block;font-size:15px;">
+                {{ item.average_review.count | stringformat:".0f" }}
+                {% if item.average_review.count == 1 %} review
+                {% else %} reviews {% endif %}</p>
   </div>
       <form class="add-to-cart" id="form-item{{item.id}}" method="POST" action="{% url 'add_item' item_id=item.id %}">
         {% csrf_token %}
