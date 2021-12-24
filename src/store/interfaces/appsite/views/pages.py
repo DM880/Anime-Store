@@ -110,10 +110,17 @@ def item_page(request, item_id):
 
     reccomendations = []
     shown_reviews = []
+    temp = 0
+    # Item.objects.all().get(id=item_id).index()
 
     for x in range(5):
         n = random.randint(0,tot_items_count-1)
+
+        while n == temp:
+            n = random.randint(0,tot_items_count-1)
+
         reccomendations.append(all_items[n])
+        temp = n
 
     reviews_count = reviews.count()
     more_reviews = False
