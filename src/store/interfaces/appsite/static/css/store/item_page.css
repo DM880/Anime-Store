@@ -108,7 +108,7 @@ body{
 
 .other-imgs img:hover{
   opacity: 0.5;
-  border: solid;
+  border: solid red;
 }
 
 /*///////////*/

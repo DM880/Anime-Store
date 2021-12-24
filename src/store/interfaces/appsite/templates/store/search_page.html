@@ -42,13 +42,13 @@
 {% endfor %}
 </div>
 
+<div style="width:100%;">
 <div class="pagination-div">
 {% if all_items.has_other_pages %}
   <ul class="pagination">
     {% if all_items.has_previous %}
-      <li><a class="page-n btn btn-outline-danger" href="?{% param_replace page=all_items.previous_page_number %}">&laquo;</a></li>
-    {% else %}
-      <li class="page-n disabled btn btn-outline-danger"><span>&laquo;</span></li>
+    <li><a title="First" class="page-n btn btn-outline-danger" href="?{% param_replace page=1 %}">&laquo;</a></li>
+      <li><a class="page-n btn btn-outline-danger" href="?{% param_replace page=all_items.previous_page_number %}">&lt;</a></li>
     {% endif %}
     {% for i in all_items.paginator.page_range %}
       {% if all_items.number == i %}
@@ -58,12 +58,12 @@
       {% endif %}
     {% endfor %}
     {% if all_items.has_next %}
-      <li><a class="page-n btn btn-outline-danger" href="?{% param_replace page=all_items.next_page_number %}">&raquo;</a></li>
-    {% else %}
-      <li class="page-n disabled btn btn-outline-danger"><span>&raquo;</span></li>
+      <li><a class="page-n btn btn-outline-danger" href="?{% param_replace page=all_items.next_page_number %}">&gt;</a></li>
+      <li><a title="Last" class="page-n btn btn-outline-danger" href="?{% param_replace page=tot_pages %}">&raquo;</a></li>
     {% endif %}
   </ul>
 {% endif %}
+</div>
 </div>
 
 {% include 'footer.html' %}
