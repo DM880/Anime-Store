@@ -104,23 +104,26 @@ def main_store(request):
 def item_page(request, item_id):
     item = Item.objects.get(id=item_id)
     reviews = ItemReview.objects.filter(item=item_id)
+    all_images = ItemImage.objects.filter(item=item_id)
     avg_rating_data = rating_avg(reviews)
     all_items = Item.objects.all()
     tot_items_count = Item.objects.all().count()
 
     reccomendations = []
     shown_reviews = []
-    temp = 0
-    # Item.objects.all().get(id=item_id).index()
+    current_item_index = int('0'+item_id)-1
+    previous_n = []
 
-    for x in range(5):
-        n = random.randint(0,tot_items_count-1)
-
-        while n == temp:
+    if tot_items_count > 5:
+        for x in range(5):
             n = random.randint(0,tot_items_count-1)
 
-        reccomendations.append(all_items[n])
-        temp = n
+            #exclude current item and previous n
+            while n in previous_n or n == current_item_index:
+                n = random.randint(0,tot_items_count-1)
+
+            reccomendations.append(all_items[n])
+            previous_n.append(n)
 
     reviews_count = reviews.count()
     more_reviews = False
@@ -131,7 +134,6 @@ def item_page(request, item_id):
     else:
         shown_reviews = [i for i in reviews]
 
-    all_images = ItemImage.objects.filter(item=item_id)
     images = [image for i, image in enumerate(all_images) if i != 0]
 
     context = {
