@@ -1,7 +1,7 @@
 body,html{
   margin: 0;
   padding: 0;
-  /*overflow-y:auto;*/
+  overflow-y:auto;
 }
 
 body{
@@ -140,26 +140,42 @@ body{
 /*Search Bar*/
 
 .search-input-div{
-  height: 50px;
-  width: 100px;
-  top: 80px;
-  right: 100px;
+  height: auto;
+  width: auto;
+  top: 90px;
+  right: 68px;
   position: fixed;
   z-index:99;
   visibility: hidden;
 }
 
-.search-input-div input[type="submit"] {
-    height: 30px;
-    width: 60px;
-    background: green;
-    color: white;
-    border: 0;
-    top:80px;
-    right: 10px;
-    -webkit-appearance: none;
-    position: fixed;
-    z-index:99;
+.search-item-input{
+  height: 30px;
+  width: 200px;
+  right: 70px;
+  border:solid #7db700;
+  outline: none;
+}
+
+.search-input-div input[type="submit"]{
+  text-align:center;
+  height: 30px;
+  width: 70px;
+  background: #7db700;
+  color: white;
+  border: 0;
+  top: 90px;
+  right: 10px;
+  -webkit-appearance: none;
+  position: fixed;
+  z-index:99;
+  border:solid #7db700;
+}
+
+.search-input-div input[type="submit"]:hover{
+  color: #7db700;
+  border:solid #7db700;
+  background-color: white;
 }
 
 /*User Menu*/

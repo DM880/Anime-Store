@@ -13,7 +13,7 @@ import math
 import stripe
 
 
-from store.data.user.models import CustomUser as User
+from store.data.user.models import CustomUser as User, AccountDetail
 from store.data.item.models import Item, ItemImage, ItemReview
 from store.data.cart.models import Cart, EntryCart
 
@@ -87,6 +87,15 @@ def sign_up(request):
 def sign_out(request):
     logout(request)
     return redirect('main_store')
+
+
+# Account
+
+@login_required
+def user_details(request):
+    user = User.objects.get(email=request.user.email)
+    shipping_details = AccountDetail.objects.get(user=user)
+    return render(request, 'account/user_details.html', {'user':user, 'shipping_details':shipping_details})
 
 
 #Store

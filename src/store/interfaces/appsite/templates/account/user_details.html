@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ user.username }} Account - Anime Slash{% endblock %}
+
+{% block css %}<link rel="stylesheet" href="{% static 'css/account/user_details.css' %}">{% endblock %}
+
+{% block content %}
+
+<div class="wrapper">
+  <h1 class="acc-t">ACCOUNT</h1>
+  <div class="info-div">
+    <div style="margin-top:50px;" class="row">
+  <div class="username-div col">
+    <i class="fas fa-user-circle"></i>
+    <h3>Username:<span>{{user.username}}<span></h3>
+  </div>
+  <div class="email-div col">
+    <i class="fas fa-at"></i>
+    <h3>Email:<span>{{user.email}}</span></h3>
+  </div>
+    </div>
+      <div class="row">
+  <div class="f-name-div col">
+    <i class="far fa-hand-point-right"></i>
+    <h5>First Name:<span>{{user.first_name}}</span></h5>
+  </div>
+  <div class="l-name-div col">
+    <i class="far fa-hand-peace"></i>
+    <h5>Last Name:<span>{{user.last_name}}</span></h5>
+  </div>
+   </div>
+  <div class="account-detail-div">
+    <h2 class="ship-">Shipping Details</h2>
+  </div>
+  <div style="text-align:center;width:50%;margin-bottom:70px;" class="phone-n-div col">
+    <i class="fas fa-phone-square-alt"></i>
+    <h5>Phone Number:<span style="font-weight:bold;">{{ shipping_details.phone_number }}</span></h5>
+    </div>
+    <div class="row">
+  <div class="shipp-div col">
+    <i class="fas fa-house-user"></i>
+    <h5>Address:<span>{{ shipping_details.shipping_address }}
+  </div>
+  <div class="s-city-div col">
+    <i class="far fa-building"></i>
+    <h5>City:<span>{{ shipping_details.city }}
+  </div>
+    </div>
+      <div class="row">
+  <div class="state-div col">
+    <i class="fas fa-city"></i>
+    <h5>Country:<span>{{ shipping_details.state }}
+  </div>
+  <div class="zip-div col">
+    <i class="fas fa-map-marker-alt"></i>
+    <h5>Zip Code:<span>{{ shipping_details.zip_code }}
+  </div>
+      </div>
+</div>
+</div>
+
+{% include 'footer.html' %}
+
+{% endblock %}
