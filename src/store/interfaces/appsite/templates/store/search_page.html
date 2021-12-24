@@ -14,10 +14,12 @@
 
 {% for item in all_items %}
 
+<!--Added to cart div-->
 <div class="added" id="added{{item.id}}"><div class="img-cart"><img src="/media/{{item.first_image.image}}"></div>
   <div class="details" style="float:right;"><h5 style="margin-top:20px;margin-left:50px;">1</h5><h5 style="margin-left:15px;">{{ item.name|truncatechars:10 }}</h5>
   </div>
 </div>
+<!--/////////////-->
 
     <div class="item-cont col-lg-3 col-md-4 col-sm-6 col-xs-12">
       <div class="img-cont">

@@ -1,0 +1,100 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+
+.wrapper{
+  margin-top: 150px;
+  height: 100%;
+  width: 70%;
+  font-family: 'Roboto',sans-serif;
+}
+
+.acc-t{
+  text-align:center;
+  margin-top:10px;
+  font-weight: 40px;
+  font-weight:bold;
+  color:#FF2626;
+  font-family: 'Bebas Neue', cursive;
+  font-size: 100px;
+}
+
+/* User Icons */
+
+.fas,.far{
+  font-size: 30px;
+  margin-right: 15px;
+}
+
+.fa-hand-point-right{
+  color:#FF5F7E;
+}
+
+.fa-user-circle{
+  color:#84DFFF;
+}
+
+.fa-at{
+  color:#F0BB62;
+}
+
+.fa-hand-peace{
+  color:#8236CB;
+}
+
+/* Account Details Icons */
+
+.fa-phone-square-alt{
+  color: #6ECB63;
+}
+
+.fa-house-user{
+  color: #FFB319;
+}
+
+.fa-building{
+  color: #3DB2FF ;
+}
+
+.fa-city{
+  color: #787A91;
+}
+
+.fa-map-marker-alt{
+  color: #5C7AEA;
+}
+
+/* ///////// */
+
+.info-div{
+  margin:5%;
+  border-radius: 15px;
+  border: solid 1px grey;
+}
+
+.row{
+  height: 100px;
+  width: 100%;
+  margin-bottom: 50px;
+}
+
+.col{
+  display:flex;
+  width: 50%;
+  margin-left: 50px;
+  margin-top: 25px;
+}
+
+.col span{
+  font-weight: bold;
+}
+
+.account-detail-div h2{
+  text-align:center;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Bebas Neue', cursive;
+  text-align:center;
+  margin-top:70px;
+  color:#FF2442;
+  margin-bottom:70px;
+  font-size: 50px;
+}
