@@ -329,10 +329,21 @@ def create_checkout_session(request):
         try:
             if request.user.is_authenticated:
                 user = User.objects.get(email=request.user.email)
+                user_detail = AccountDetail.objects.get(user=user)
                 cart = Cart.objects.get(user=user)
+                email = user.email
+                # data = {
+                #     'name': f'{user.first_name} {user.last_name}',
+                #     'address': user_detail.shipping_address,
+                #     'city': user_detail.city,
+                #     'zip': user_detail.zip_code,
+                #     'state': user_detail.state,
+                # }
+
             else:
-                guest=True
                 cart = Cart.objects.get(session_key=request.session.session_key)
+                email = None
+                data = None
 
             subtotal = int(round(cart.tot_price, 2) * 100)
 
@@ -340,6 +351,7 @@ def create_checkout_session(request):
             checkout_session = stripe.checkout.Session.create(
                 success_url=domain_url + 'payment/success?session_id={CHECKOUT_SESSION_ID}',
                 cancel_url=domain_url + 'payment/cancelled/',
+                customer_email = email,
                 payment_method_types=['card'],
                 mode='payment',
                 shipping_address_collection={
@@ -371,6 +383,31 @@ def create_checkout_session(request):
             return JsonResponse({'sessionId': context})
         except Exception as e:
             return JsonResponse({'error': str(e)})
+
+@csrf_exempt
+def stripe_webhook(request):
+    stripe.api_key = settings.STRIPE_SECRET_KEY
+    endpoint_secret = settings.STRIPE_ENDPOINT_SECRET
+    payload = request.body
+    sig_header = request.META["HTTP_STRIPE_SIGNATURE"]
+    event = None
+
+    try:
+        event = stripe.Webhook.construct_event(
+          payload, sig_header, endpoint_secret
+        )
+    except ValueError as e:
+        # Invalid payload
+        return HttpResponse(status=400)
+    except stripe.error.SignatureVerificationError as e:
+        # Invalid signature
+        return HttpResponse(status=400)
+
+    # Handle the checkout.session.completed event
+    if event["type"] == "checkout.session.completed":
+        print("Payment was successful.")
+
+    return HttpResponse(status=200)
 
 
 class PaymentSuccessful(generic_views.TemplateView):
