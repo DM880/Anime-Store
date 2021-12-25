@@ -70,7 +70,7 @@ function addedCart() {
     },);
     setTimeout(function(){
       document.getElementById('added').style.opacity = 0;
-    }, 1000);
+    }, 2000);
   }
 }
 
