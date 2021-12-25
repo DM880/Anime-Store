@@ -14,7 +14,7 @@ urlpatterns = [
     path('login/', pages.sign_in, name="login"),
     path('logout/', pages.sign_out, name="logout"),
 
-    # Account
+    #Account
     path('account/user_details/', pages.user_details, name="user_details"),
 
     #Store

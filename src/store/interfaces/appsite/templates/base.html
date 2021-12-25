@@ -20,7 +20,10 @@
 </head>
 <body>
 
+<!--Items in cart bubble-->
 <!--<button id="entry-cart-n" class="cart-n">0</button>-->
+
+<!--Nav-->
 
 <div id="nav" class="nav">
     <a href="{% url 'landing_page' %}"><img class="logo" src="{% static 'img/landing_page/logo.png' %}"></a>
@@ -31,6 +34,8 @@
     {% else %}
     <a href="{% url 'login' %}"><i title="Account" class="fas fa-user"></i></a>
     {% endif %}
+
+<!--Categories menu-->
 
   <div id="dropdown" class="dropdown">
   <button class="dropbtn">☰</button>
@@ -48,12 +53,16 @@
 
 </div>
 
+<!--Search div-->
+
 <div class="search-input-div" id="search_bar">
   <form action="{% url 'search_item' %}" method="GET">
      {% if items_category %}<input type="hidden" name="items_category" value='{{ items_category }}'>{% endif %}
     <input name="search-item" class="search-item-input"></input><input type="submit" value="Search"/>
     </form>
     </div>
+
+<!--Account menu, only if user logged in-->
 
 <div id="user-div" class="user-div">
     <a class="user-a" href="{% url 'user_details' %}">Account</a>
@@ -62,6 +71,7 @@
     <a class="user-a" href="{% url 'logout' %}">Log Out</a>
 </div>
 
+<!--////////////////-->
 
 {% block content %}
 

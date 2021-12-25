@@ -29,7 +29,7 @@ $(".main-img-cont")
   });
 
 
-// Images
+// Change images src
 
 function changeImg(img_id){
   var original = document.getElementById('main-img').src;
@@ -100,7 +100,7 @@ function closeLogDiv(){
   document.getElementById('change-div').style.opacity = '1';
 }
 
-/////////
+// Add items to cart without refreshing page
 
 var btn = $('.add');
 btn.on('click', function(e){

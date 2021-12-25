@@ -11,10 +11,12 @@
 
 {% for item in all_items %}
 
+<!--Added to cart div-->
 <div class="added" id="added{{item.id}}"><div class="img-cart"><img src="/media/{{item.first_image.image}}"></div>
   <div class="details" style="float:right;"><h5 style="margin-top:20px;margin-left:50px;">1</h5><h5 style="margin-left:15px;">{{ item.name|truncatechars:10 }}</h5>
   </div>
 </div>
+<!--////////-->
 
     <div class="item-cont col-lg-3 col-md-4 col-sm-6 col-xs-12">
       <div class="img-cont">
@@ -23,6 +25,7 @@
       <h1 class="item-title">{{ item.name|truncatechars:20 }}</h1>
       <p class="price-txt" style="font-size:15px;">$</p><p class="price-txt" style="font-size:20px;vertical-align:top;">{{ item.price }}</p>
        <br>
+       <!--Rating stars-->
       <div style="margin-left:10px;text-align:left;">
                 <span class="fa fa-star {% if item.average_review.avg > 0 %} checked {% endif %}"></span>
                 <span class="fa fa-star {% if item.average_review.avg > 1 %} checked {% endif %}"></span>
@@ -34,6 +37,7 @@
                 {% if item.average_review.count == 1 %} review
                 {% else %} reviews {% endif %}</p>
   </div>
+  <!--//////////-->
       <form class="add-to-cart" id="form-item{{item.id}}" method="POST" action="{% url 'add_item' item_id=item.id %}">
         {% csrf_token %}
       <button class="add cart-btn" id="add" data-id="{{item.id}}" type="submit" title="Add to Cart"><span>+</span></button>

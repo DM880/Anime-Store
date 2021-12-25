@@ -38,4 +38,6 @@ user_div =  document.getElementById('user-div');
 user_div.onmouseover = keepMenu;
 user_div.onmouseleave = hideUserMenu;
 
+/////////////
+
  $("#sort")[0].selectedIndex = 0;
