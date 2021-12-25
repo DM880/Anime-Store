@@ -89,7 +89,7 @@ def sign_out(request):
     return redirect('main_store')
 
 
-# Account
+#Account
 
 @login_required
 def user_details(request):
@@ -118,12 +118,12 @@ def item_page(request, item_id):
     reviews = ItemReview.objects.filter(item=item_id)
     all_images = ItemImage.objects.filter(item=item_id)
     avg_rating_data = rating_avg(reviews)
-    all_items = Item.objects.all()
+    all_items = Item.objects.all().order_by('id')
     tot_items_count = Item.objects.all().count()
 
     reccomendations = []
     shown_reviews = []
-    current_item_index = int('0'+item_id)-1
+    current_item_index = int('0'+item_id)
     previous_n = []
 
     if tot_items_count > 5:

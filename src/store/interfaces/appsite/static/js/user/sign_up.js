@@ -1,3 +1,5 @@
+// Check min requirements password
+
 var check_password = function() {
 
   password1 = document.getElementById('password1');

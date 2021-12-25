@@ -28,6 +28,7 @@
       <h1 class="item-title">{{ item.name|truncatechars:20 }}</h1>
       <p class="price-txt" style="font-size:15px;">$</p><p class="price-txt" style="font-size:20px;vertical-align:top;">{{ item.price }}</p>
        <br>
+       <!--Rating stars-->
       <div style="margin-left:10px;text-align:left;">
                 <span class="fa fa-star {% if item.average_review.avg > 0 %} checked {% endif %}"></span>
                 <span class="fa fa-star {% if item.average_review.avg > 1 %} checked {% endif %}"></span>
@@ -39,6 +40,7 @@
                 {% if item.average_review.count == 1 %} review
                 {% else %} reviews {% endif %}</p>
   </div>
+  <!--////////////-->
       <form class="add-to-cart" id="form-item{{item.id}}" method="POST" action="{% url 'add_item' item_id=item.id %}">
         {% csrf_token %}
       <button class="add cart-btn" id="add" data-id="{{item.id}}" type="submit" title="Add to Cart"><span>+</span></button>

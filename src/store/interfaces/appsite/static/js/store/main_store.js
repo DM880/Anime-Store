@@ -1,3 +1,4 @@
+// Added to cart div
 
 function addedCart(item_id) {
   if (document.getElementById("added"+item_id) != null) {
@@ -10,7 +11,7 @@ function addedCart(item_id) {
   }
 }
 
-
+// Add items to cart without refreshing page
 
 var btn = $('.add');
 btn.on('click', function(e){
