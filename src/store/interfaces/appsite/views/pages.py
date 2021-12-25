@@ -117,28 +117,28 @@ def item_page(request, item_id):
     item = Item.objects.get(id=item_id)
     reviews = ItemReview.objects.filter(item=item_id)
     all_images = ItemImage.objects.filter(item=item_id)
-    avg_rating_data = rating_avg(reviews)
-    all_items = Item.objects.all().order_by('id')
+    all_items = Item.objects.all()
     tot_items_count = Item.objects.all().count()
+
+    avg_rating_data = rating_avg(reviews)
+    current_item_index = (*all_items,).index(item)
+    reviews_count = reviews.count()
+    more_reviews = False
 
     reccomendations = []
     shown_reviews = []
-    current_item_index = int('0'+item_id)
-    previous_n = []
+    previous_n = [current_item_index,]
 
     if tot_items_count > 5:
         for x in range(5):
             n = random.randint(0,tot_items_count-1)
 
             #exclude current item and previous n
-            while n in previous_n or n == current_item_index:
+            while n in previous_n:
                 n = random.randint(0,tot_items_count-1)
 
             reccomendations.append(all_items[n])
             previous_n.append(n)
-
-    reviews_count = reviews.count()
-    more_reviews = False
 
     if reviews_count >= 5:
         more_reviews = True
