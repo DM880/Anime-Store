@@ -35,6 +35,7 @@ urlpatterns = [
 
     #Stripe Checkout
     path('config/', pages.stripe_config , name="stripe_config"),
+    path("webhook/", pages.stripe_webhook, name="stripe_webhook"),
     path('create-checkout-session/', pages.create_checkout_session, name="create_checkout_session"),
     path('payment/success/', pages.PaymentSuccessful.as_view(), name="payment_successful"),
     path('payment/cancelled/', pages.PaymentCancelled.as_view(), name="payment_cancelled"),
