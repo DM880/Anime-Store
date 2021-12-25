@@ -103,7 +103,7 @@
    {% for item in reccomendations %}
    <div class="rec-cont col">
      <a href="{% url 'item_page' item_id=item.id %}"><img src="/media/{{ item.first_image.image }}"></a>
-     <p>{{ item.name }}</p>
+     <p>{{ item.name|truncatechars:50 }}</p>
      </div>
      {% endfor %}
  </div>
