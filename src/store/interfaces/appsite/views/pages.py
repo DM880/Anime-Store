@@ -331,6 +331,7 @@ def create_checkout_session(request):
                 user = User.objects.get(email=request.user.email)
                 cart = Cart.objects.get(user=user)
             else:
+                guest=True
                 cart = Cart.objects.get(session_key=request.session.session_key)
 
             subtotal = int(round(cart.tot_price, 2) * 100)
@@ -341,6 +342,9 @@ def create_checkout_session(request):
                 cancel_url=domain_url + 'payment/cancelled/',
                 payment_method_types=['card'],
                 mode='payment',
+                shipping_address_collection={
+                    'allowed_countries': ['US','CA'],
+                },
                 shipping_options=[
                     {
                         'shipping_rate_data':{

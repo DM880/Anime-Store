@@ -7,7 +7,7 @@ function addedCart(item_id) {
     },);
     setTimeout(function(){
       document.getElementById('added'+item_id).style.opacity = 0;
-    }, 1000);
+    }, 2000);
   }
 }
 
