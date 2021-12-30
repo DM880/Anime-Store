@@ -21,9 +21,6 @@
 </head>
 <body>
 
-<!--Items in cart bubble-->
-<!--<button id="entry-cart-n" class="cart-n">0</button>-->
-
 <!--Nav-->
 
 <div id="nav" class="nav">
@@ -54,6 +51,45 @@
 
 </div>
 
+<!--Phone nav-->
+
+<div class="navph">
+    <i onclick="navMenu()" class="fas fa-ellipsis-v"></i>
+     <a href="{% url 'landing_page' %}"><img class="logo" src="{% static 'img/landing_page/logo.png' %}"></a>
+<div id="p-menu" class="side-slide-menu">
+  <div class="menu-dp-nav">
+      <div>
+      <div id="dropdownph" class="dropdownph">
+      <h5>Categories</h5><button class="dropbtnph">☰</button>
+      <div id="drop-menuph" class="dropdown-contentph">
+    <a href="{% url 'search_item' %}?items_category=ANIME">Anime</a>
+     <a href="{% url 'search_item' %}?items_category=MANGA">Manga</a>
+     <a href="{% url 'search_item' %}?items_category=ACTION_FIGURE">Action Figure</a>
+     <a href="{% url 'search_item' %}?items_category=GAMING">Gaming</a>
+     <a href="{% url 'search_item' %}?items_category=APPAREL">Apparel</a>
+     <a href="{% url 'search_item' %}?items_category=OTHER">Other</a>
+     <a href="{% url 'main_store' %}">All</a>
+  </div>
+      </div>
+      </div>
+    <hr>
+    <div>
+      <a href="{% url 'login' %}"><h5>Account</h5><i title="Account" class="fas fa-user ph" id="user-menu"></i></a>
+      </div>
+    <hr>
+    <div>
+      <h5 onclick="searchDiv()" >Search</h5>
+    <i onclick="searchDiv()" title="Search" class="fas fa-search ph"></i>
+    </div>
+    <hr>
+    <div>
+      <a href="{% url 'checkout_page' %}"><h5>Cart</h5><i title="Your Cart" class="fas fa-shopping-cart ph"></i></a>
+      </div>
+  </div>
+</div>
+</div>
+
+
 <!--Search div-->
 
 <div class="search-input-div" id="search_bar">
@@ -67,8 +103,8 @@
 
 <div id="user-div" class="user-div">
     <a class="user-a" href="{% url 'user_details' %}">Account</a>
-    <a class="user-a" href="">My Orders</a>
-    <a class="user-a" href="">Settings</a>
+    <!--<a class="user-a" href="">My Orders</a>-->
+    <!--<a class="user-a" href="">Settings</a>-->
     <a class="user-a" href="{% url 'logout' %}">Log Out</a>
 </div>
 

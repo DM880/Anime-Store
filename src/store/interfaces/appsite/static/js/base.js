@@ -37,3 +37,15 @@ user_div =  document.getElementById('user-div');
 
 user_div.onmouseover = keepMenu;
 user_div.onmouseleave = hideUserMenu;
+
+
+// Open Phone nav menu
+
+function navMenu(){
+  if(document.getElementById('p-menu').style.visibility == "visible"){
+    document.getElementById('p-menu').style.visibility = "hidden";
+  }
+  else{
+    document.getElementById('p-menu').style.visibility = "visible";
+  }
+}
