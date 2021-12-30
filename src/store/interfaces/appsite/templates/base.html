@@ -25,10 +25,10 @@
 
 <div id="nav" class="nav">
     <a href="{% url 'landing_page' %}"><img class="logo" src="{% static 'img/landing_page/logo.png' %}"></a>
-    <a href="{% url 'checkout_page' %}"><i title="Your Cart" class="fas fa-shopping-cart"></i></a>
-    <i onclick="searchDiv()" title="Search" class="fas fa-search"></i>
+    <a href="{% url 'checkout_page' %}"><i title="Your Cart" class="fas fa-shopping-cart fa-nav"></i></a>
+    <i onclick="searchDiv()" title="Search" class="fas fa-search fa-nav"></i>
     {% if user.is_authenticated %}
-    <i title="Account" class="fas fa-user" id="user-menu"></i>
+    <i title="Account" class="fas fa-user fa-nav" id="user-menu"></i>
     {% else %}
     <a href="{% url 'login' %}"><i title="Account" class="fas fa-user"></i></a>
     {% endif %}
