@@ -23,7 +23,7 @@
       <h5 style="color:red">●Invalid Login details</h5>
       {% endif %}
     </form>
-  <div class="rst"><a class="reset" href="">Reset Password</a></div>
+  <div class="rst"><a class="reset" href="{% url 'password_reset' %}">Reset Password</a></div>
   <hr>
   <div class="signup"><a href="{% url 'sign_up' %}"><button class="btn btn-success">Create New Account</button></a></div>
     </div>

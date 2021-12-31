@@ -5,12 +5,22 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
+from django.core.mail import send_mail, BadHeaderError
+from django.contrib.auth.forms import PasswordResetForm
+from django.db.models.query_utils import Q
+from django.utils.http import urlsafe_base64_encode
+from django.contrib.auth.tokens import default_token_generator
+from django.utils.encoding import force_bytes
+from django.contrib import messages
 
 
 import json
 import random
 import math
 import stripe
+import sendgrid
+from sendgrid import SendGridAPIClient
+from sendgrid.helpers.mail import *
 
 
 from store.data.user.models import CustomUser as User, AccountDetail
@@ -87,6 +97,46 @@ def sign_up(request):
 def sign_out(request):
     logout(request)
     return redirect('main_store')
+
+
+def password_reset(request):
+	if request.method == "POST":
+		password_reset_form = PasswordResetForm(request.POST)
+		if password_reset_form.is_valid():
+			data = password_reset_form.cleaned_data['email']
+			associated_users = User.objects.filter(Q(email=data))
+			if associated_users.exists():
+				for user in associated_users:
+					subject = "Password Reset Requested"
+					email_template_name = "password_reset/password_reset_email.txt"
+					c = {
+					"email":user.email,
+					'domain':request.META['HTTP_HOST'],
+					'site_name': 'Anime Slash',
+					"uid": urlsafe_base64_encode(force_bytes(user.pk)),
+					'token': default_token_generator.make_token(user),
+					'protocol': 'http',
+					}
+					email = render_to_string(email_template_name, c)
+					message= Mail(
+					    from_email=settings.EMAIL_HOST,
+					    to_emails=user.email,
+					    subject=subject,
+					    html_content=email
+					    )
+
+					try:
+					    sg = SendGridAPIClient(os.environ.get('SENDGRID_API_KEY'))
+					    response = sg.send(message)
+					    print(response)
+					except Exception as e:
+					    print(e)
+
+					messages.success(request, 'A message with reset password instructions has been sent to your inbox.')
+					return redirect ("LandingPage")
+			messages.error(request, 'An invalid email has been entered.')
+	password_reset_form = PasswordResetForm()
+	return render(request, "password_reset/password_reset.html", context={"password_reset_form":password_reset_form})
 
 
 #Account
