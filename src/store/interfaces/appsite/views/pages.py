@@ -7,6 +7,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
 from django.core.mail import send_mail, BadHeaderError
 from django.contrib.auth.forms import PasswordResetForm
+from django.template.loader import render_to_string
 from django.db.models.query_utils import Q
 from django.utils.http import urlsafe_base64_encode
 from django.contrib.auth.tokens import default_token_generator
@@ -14,6 +15,7 @@ from django.utils.encoding import force_bytes
 from django.contrib import messages
 
 
+import os
 import json
 import random
 import math
@@ -129,11 +131,14 @@ def password_reset(request):
 					    sg = SendGridAPIClient(os.environ.get('SENDGRID_API_KEY'))
 					    response = sg.send(message)
 					    print(response)
+					    print(response.status_code)
+                        # print(response.body)
+                        # print(response.headers)
 					except Exception as e:
 					    print(e)
 
 					messages.success(request, 'A message with reset password instructions has been sent to your inbox.')
-					return redirect ("LandingPage")
+					return redirect ("main_store")
 			messages.error(request, 'An invalid email has been entered.')
 	password_reset_form = PasswordResetForm()
 	return render(request, "password_reset/password_reset.html", context={"password_reset_form":password_reset_form})
