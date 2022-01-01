@@ -407,18 +407,9 @@ def create_checkout_session(request):
                 user_detail = AccountDetail.objects.get(user=user)
                 cart = Cart.objects.get(user=user)
                 email = user.email
-                # data = {
-                #     'name': f'{user.first_name} {user.last_name}',
-                #     'address': user_detail.shipping_address,
-                #     'city': user_detail.city,
-                #     'zip': user_detail.zip_code,
-                #     'state': user_detail.state,
-                # }
-
             else:
                 cart = Cart.objects.get(session_key=request.session.session_key)
                 email = None
-                data = None
 
             subtotal = int(round(cart.tot_price, 2) * 100)
 
@@ -479,6 +470,7 @@ def stripe_webhook(request):
 
     # Handle the checkout.session.completed event
     if event["type"] == "checkout.session.completed":
+
         print("Payment was successful.")
 
     return HttpResponse(status=200)

@@ -22,6 +22,16 @@ class Cart(models.Model):
     def __str__(self):
         return f"user={self.user}/price={self.tot_price}/id={self.user_id}"
 
+    # Not final
+    # @property
+    # def clean_cart(self):
+    #     if self.purchased:
+    #         entries = EntryCart.objects.filter(cart=self.cart)
+    #         OrderHistory.objects.create(cart=self.cart, items=[entry.item.id for entry in entries] , tot_count=self.tot_count, tot_price=self.tot_price, purchased=self.updated)
+    #         self.tot_count = 0
+    #         self.tot_price = 0
+    #         self.purchased = False
+
 
 class EntryCart(models.Model):
     cart = models.ForeignKey(Cart, on_delete=models.CASCADE, blank=True, null=True)
@@ -30,3 +40,11 @@ class EntryCart(models.Model):
 
     def total_price(self):
         return self.item.price * self.quantity
+
+
+class HistoryOrder(models.Model):
+    cart = models.ForeignKey(Cart, on_delete=models.CASCADE, blank=True, null=True)
+    items = models.TextField(max_length=50)
+    tot_count = models.IntegerField(default=0)
+    tot_price = models.DecimalField(default=0, decimal_places=2, max_digits=10)
+    purchased = models.DateTimeField(auto_now=True)
