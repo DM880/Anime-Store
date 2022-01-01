@@ -132,16 +132,14 @@ def password_reset(request):
 					    response = sg.send(message)
 					    print(response)
 					    print(response.status_code)
-                        # print(response.body)
-                        # print(response.headers)
 					except Exception as e:
 					    print(e)
 
 					messages.success(request, 'A message with reset password instructions has been sent to your inbox.')
-					return redirect ("main_store")
+					return redirect("main_store")
 			messages.error(request, 'An invalid email has been entered.')
 	password_reset_form = PasswordResetForm()
-	return render(request, "password_reset/password_reset.html", context={"password_reset_form":password_reset_form})
+	return render(request, "password_reset/password_reset.html", {"password_reset_form":password_reset_form})
 
 
 #Account
