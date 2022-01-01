@@ -34,11 +34,3 @@ def update_quantity(entry, quantity, cart):
     update_cart(cart, item, quantity)
 
     return
-
-
-
-
-
-
-
-

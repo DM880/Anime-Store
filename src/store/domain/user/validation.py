@@ -13,4 +13,3 @@ def sign_up_validation(username, email, password1, password2):
         return "Passwords don't match"
 
     return True
-

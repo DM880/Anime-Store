@@ -7,6 +7,9 @@ from django.conf.urls.static import static
 from .views import pages
 
 
+handler404 = "pages.page_not_found"
+
+
 urlpatterns = [
     path("", pages.LandingPage.as_view(), name="landing_page"),
     # User

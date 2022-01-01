@@ -55,7 +55,7 @@ def get_cart(user, session_key):
         try:
             cart = Cart.objects.get(user=user)
         except Cart.DoesNotExist:
-            cart=Cart.objects.create(user=user)
+            cart = Cart.objects.create(user=user)
     else:
         cart = Cart.objects.get_or_create(session_key=session_key)[0]
 

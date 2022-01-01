@@ -42,25 +42,30 @@ class LandingPage(generic_views.TemplateView):
     template_name = "landing_page.html"
 
 
-#User
+def error_404(request, exception):
+    return render(request, "error_404.html", status=404)
+
+
+# User
+
 
 def sign_in(request):
 
     if request.user.is_authenticated:
-        return redirect('main_store')
+        return redirect("main_store")
 
     if request.method == "POST":
 
-        email = request.POST.get('email')
-        password = request.POST.get('password')
+        email = request.POST.get("email")
+        password = request.POST.get("password")
         user = authenticate(email=email, password=password)
 
         if user:
             if user.is_active:
                 login(request, user)
-                return redirect('main_store')
+                return redirect("main_store")
         else:
-            return render(request, "user/sign_in.html", {'error':True})
+            return render(request, "user/sign_in.html", {"error": True})
     else:
         return render(request, "user/sign_in.html")
 
@@ -69,28 +74,28 @@ def sign_up(request):
 
     if request.method == "POST":
 
-        username = request.POST.get('username')
-        email = request.POST.get('email')
-        password1 = request.POST.get('password1')
-        password2 = request.POST.get('password2')
+        username = request.POST.get("username")
+        email = request.POST.get("email")
+        password1 = request.POST.get("password1")
+        password2 = request.POST.get("password2")
         valid = validation.sign_up_validation(username, email, password1, password2)
 
         if valid == True:
 
             data_user = {
-                'first_name':request.POST.get('fname'),
-                'last_name':request.POST.get('lname'),
-                'username':request.POST.get('username'),
-                'date_of_birth':request.POST.get('birth'),
-                'email':request.POST.get('email'),
-                'password':request.POST.get('password1'),
-                }
+                "first_name": request.POST.get("fname"),
+                "last_name": request.POST.get("lname"),
+                "username": request.POST.get("username"),
+                "date_of_birth": request.POST.get("birth"),
+                "email": request.POST.get("email"),
+                "password": request.POST.get("password1"),
+            }
 
             User.objects.create_user(**data_user)
 
-            return redirect('login')
+            return redirect("login")
         else:
-            return render(request, "user/sign_up.html", {'valid':valid})
+            return render(request, "user/sign_up.html", {"valid": valid})
 
     return render(request, "user/sign_up.html")
 
@@ -98,74 +103,89 @@ def sign_up(request):
 @login_required
 def sign_out(request):
     logout(request)
-    return redirect('main_store')
+    return redirect("main_store")
 
 
 def password_reset(request):
-	if request.method == "POST":
-		password_reset_form = PasswordResetForm(request.POST)
-		if password_reset_form.is_valid():
-			data = password_reset_form.cleaned_data['email']
-			associated_users = User.objects.filter(Q(email=data))
-			if associated_users.exists():
-				for user in associated_users:
-					subject = "Password Reset Requested"
-					email_template_name = "password_reset/password_reset_email.txt"
-					c = {
-					"email":user.email,
-					'domain':request.META['HTTP_HOST'],
-					'site_name': 'Anime Slash',
-					"uid": urlsafe_base64_encode(force_bytes(user.pk)),
-					'token': default_token_generator.make_token(user),
-					'protocol': 'http',
-					}
-					email = render_to_string(email_template_name, c)
-					message= Mail(
-					    from_email=settings.EMAIL_HOST,
-					    to_emails=user.email,
-					    subject=subject,
-					    html_content=email
-					    )
+    if request.method == "POST":
+        password_reset_form = PasswordResetForm(request.POST)
+        if password_reset_form.is_valid():
+            data = password_reset_form.cleaned_data["email"]
+            associated_users = User.objects.filter(Q(email=data))
+            if associated_users.exists():
+                for user in associated_users:
+                    subject = "Password Reset Requested"
+                    email_template_name = "password_reset/password_reset_email.txt"
+                    c = {
+                        "email": user.email,
+                        "domain": request.META["HTTP_HOST"],
+                        "site_name": "Anime Slash",
+                        "uid": urlsafe_base64_encode(force_bytes(user.pk)),
+                        "token": default_token_generator.make_token(user),
+                        "protocol": "http",
+                    }
+                    email = render_to_string(email_template_name, c)
+                    message = Mail(
+                        from_email=settings.EMAIL_HOST,
+                        to_emails=user.email,
+                        subject=subject,
+                        html_content=email,
+                    )
 
-					try:
-					    sg = SendGridAPIClient(os.environ.get('SENDGRID_API_KEY'))
-					    response = sg.send(message)
-					    print(response)
-					    print(response.status_code)
-                        # print(response.body)
-                        # print(response.headers)
-					except Exception as e:
-					    print(e)
+                    try:
+                        sg = SendGridAPIClient(os.environ.get("SENDGRID_API_KEY"))
+                        response = sg.send(message)
+                        print(response)
+                        print(response.status_code)
+                    except Exception as e:
+                        print(e)
 
-					messages.success(request, 'A message with reset password instructions has been sent to your inbox.')
-					return redirect ("main_store")
-			messages.error(request, 'An invalid email has been entered.')
-	password_reset_form = PasswordResetForm()
-	return render(request, "password_reset/password_reset.html", context={"password_reset_form":password_reset_form})
+                    messages.success(
+                        request,
+                        "A message with reset password instructions has been sent to your inbox.",
+                    )
+                    return redirect("main_store")
+            messages.error(request, "An invalid email has been entered.")
+    password_reset_form = PasswordResetForm()
+    return render(
+        request,
+        "password_reset/password_reset.html",
+        {"password_reset_form": password_reset_form},
+    )
 
 
-#Account
+# Account
+
 
 @login_required
 def user_details(request):
     user = User.objects.get(email=request.user.email)
     shipping_details = AccountDetail.objects.get(user=user)
-    return render(request, 'account/user_details.html', {'user':user, 'shipping_details':shipping_details})
+    return render(
+        request,
+        "account/user_details.html",
+        {"user": user, "shipping_details": shipping_details},
+    )
 
 
-#Store
+# Store
+
 
 def main_store(request):
     obj_items = Item.objects.all()
-    page = request.GET.get('page', 1)
+    page = request.GET.get("page", 1)
     page_range = 4
 
     all_items = pagination(page, obj_items, page_range)
 
-    #get last page number
-    tot_pages = int(math.ceil(obj_items.count()/page_range))
+    # get last page number
+    tot_pages = int(math.ceil(obj_items.count() / page_range))
 
-    return render(request, "store/main_store.html", {'all_items':all_items, 'tot_pages':tot_pages})
+    return render(
+        request,
+        "store/main_store.html",
+        {"all_items": all_items, "tot_pages": tot_pages},
+    )
 
 
 def item_page(request, item_id):
@@ -182,15 +202,17 @@ def item_page(request, item_id):
 
     reccomendations = []
     shown_reviews = []
-    previous_n = [current_item_index,]
+    previous_n = [
+        current_item_index,
+    ]
 
     if tot_items_count > 5:
         for x in range(5):
-            n = random.randint(0,tot_items_count-1)
+            n = random.randint(0, tot_items_count - 1)
 
-            #exclude current item and previous n
+            # exclude current item and previous n
             while n in previous_n:
-                n = random.randint(0,tot_items_count-1)
+                n = random.randint(0, tot_items_count - 1)
 
             reccomendations.append(all_items[n])
             previous_n.append(n)
@@ -204,77 +226,80 @@ def item_page(request, item_id):
     images = [image for i, image in enumerate(all_images) if i != 0]
 
     context = {
-        'item':item,
-        'reviews':shown_reviews,
-        'more_reviews': more_reviews,
-        'avg_rating_data':avg_rating_data,
-        'reccomendations':reccomendations,
-        'images': images,
+        "item": item,
+        "reviews": shown_reviews,
+        "more_reviews": more_reviews,
+        "avg_rating_data": avg_rating_data,
+        "reccomendations": reccomendations,
+        "images": images,
     }
 
-    return render(request, 'store/item_page.html', context)
+    return render(request, "store/item_page.html", context)
 
 
 def search_item(request):
-    items_category = request.GET.get('items_category')
-    searched_item = request.GET.get('search-item')
-    sorting_element = request.GET.get('sorting_by')
+    items_category = request.GET.get("items_category")
+    searched_item = request.GET.get("search-item")
+    sorting_element = request.GET.get("sorting_by")
 
     if sorting_element is None:
         sorting_element = "price"
 
-    obj_items = item_queries.search_and_sort(items_category, searched_item, sorting_element)
+    obj_items = item_queries.search_and_sort(
+        items_category, searched_item, sorting_element
+    )
 
-    page = request.GET.get('page', 1)
+    page = request.GET.get("page", 1)
     page_range = 4
 
-    tot_pages = int(math.ceil(obj_items.count()/page_range))
+    tot_pages = int(math.ceil(obj_items.count() / page_range))
 
     all_items = pagination(page, obj_items, page_range)
 
     context = {
-        'all_items':all_items,
-        'searched_item':searched_item,
-        'items_category':items_category,
-        'tot_pages': tot_pages
+        "all_items": all_items,
+        "searched_item": searched_item,
+        "items_category": items_category,
+        "tot_pages": tot_pages,
     }
 
-    return render(request, 'store/search_page.html', context)
+    return render(request, "store/search_page.html", context)
 
 
 def post_review(request, item_id):
 
     if request.method == "POST":
         data = {
-            'username': User.objects.get(email=request.user.email),
-            'item': Item.objects.get(id=item_id),
-            'title': request.POST.get('title-rev-input'),
-            'review': request.POST.get('txt-rev-description'),
-            'rating': request.POST.get('rating')
+            "username": User.objects.get(email=request.user.email),
+            "item": Item.objects.get(id=item_id),
+            "title": request.POST.get("title-rev-input"),
+            "review": request.POST.get("txt-rev-description"),
+            "rating": request.POST.get("rating"),
         }
 
         ItemReview.objects.create(**data)
 
-        return redirect(reverse('item_page', args=(item_id,)))
+        return redirect(reverse("item_page", args=(item_id,)))
 
 
 class AllReviews(generic_views.TemplateView):
     template_name = "store/all_reviews.html"
 
     def get_context_data(self, **kwargs):
-       context = super(AllReviews, self).get_context_data(**kwargs)
-       item = self.kwargs['item_id']
-       context['reviews'] = ItemReview.objects.filter(item=item)
-       return context
+        context = super(AllReviews, self).get_context_data(**kwargs)
+        item = self.kwargs["item_id"]
+        context["reviews"] = ItemReview.objects.filter(item=item)
+        return context
 
 
-#Cart
+# Cart
+
 
 def add_item_cart(request, item_id):
-    quantity = request.POST.get('quantity')
+    quantity = request.POST.get("quantity")
     user = request.user
 
-    #For guest users
+    # For guest users
     session_key = get_session_key(request)
 
     if quantity is None:
@@ -284,16 +309,13 @@ def add_item_cart(request, item_id):
 
     cart_queries.add_item(user, item_id, quantity, session_key)
 
-    data = {
-        "valid":True,
-        "quantity":quantity
-    }
+    data = {"valid": True, "quantity": quantity}
 
-    return JsonResponse(data, status = 200)
+    return JsonResponse(data, status=200)
 
 
 def remove_item_cart(request, item_id):
-    quantity = request.POST.get('quantity')
+    quantity = request.POST.get("quantity")
     user = request.user
 
     session_key = get_session_key(request)
@@ -306,10 +328,11 @@ def remove_item_cart(request, item_id):
     cart_queries.remove_item(user, item_id, quantity, session_key)
 
     # redirect to same page,if not found redirect to 'main_store'
-    return redirect(request.META.get('HTTP_REFERER', 'main_store'))
+    return redirect(request.META.get("HTTP_REFERER", "main_store"))
 
 
-#Checkout
+# Checkout
+
 
 def checkout_page(request):
 
@@ -325,12 +348,7 @@ def checkout_page(request):
     subtotal = cart.tot_price
     total = 4.99 + float(subtotal)
 
-    context = {
-        'cart':cart,
-        'items':items,
-        'subtotal':subtotal,
-        'total':total
-    }
+    context = {"cart": cart, "items": items, "subtotal": subtotal, "total": total}
 
     return render(request, "checkout/checkout_page.html", context)
 
@@ -342,14 +360,14 @@ def checkout_remove_entry(request, entry):
     else:
         cart = Cart.objects.get(session_key=request.session.session_key)
 
-    checkout.remove_entry(entry,cart)
+    checkout.remove_entry(entry, cart)
 
     data = {
-        'valid':True,
-        'url':reverse('checkout_page'),
+        "valid": True,
+        "url": reverse("checkout_page"),
     }
 
-    return JsonResponse(data, status = 200)
+    return JsonResponse(data, status=200)
 
 
 def checkout_update_quantity(request, entry):
@@ -359,25 +377,27 @@ def checkout_update_quantity(request, entry):
     else:
         cart = Cart.objects.get(session_key=request.session.session_key)
 
-    quantity = int(request.POST.get('quantity'))
+    quantity = int(request.POST.get("quantity"))
 
     checkout.update_quantity(entry, quantity, cart)
 
-    return redirect(request.META.get('HTTP_REFERER', 'main_store'))
+    return redirect(request.META.get("HTTP_REFERER", "main_store"))
 
 
 # Stripe Checkout
 
+
 @csrf_exempt
 def stripe_config(request):
-    if request.method == 'GET':
-        stripe_config = {'publicKey': settings.STRIPE_PUBLISHABLE_KEY}
+    if request.method == "GET":
+        stripe_config = {"publicKey": settings.STRIPE_PUBLISHABLE_KEY}
         return JsonResponse(stripe_config, safe=False)
+
 
 @csrf_exempt
 def create_checkout_session(request):
 
-    if request.method == 'GET':
+    if request.method == "GET":
         domain_url = settings.DOMAIN_URL
         stripe.api_key = settings.STRIPE_SECRET_KEY
 
@@ -404,40 +424,41 @@ def create_checkout_session(request):
 
             # ?session_id={CHECKOUT_SESSION_ID} redirect will have the session ID set as a query param
             checkout_session = stripe.checkout.Session.create(
-                success_url=domain_url + 'payment/success?session_id={CHECKOUT_SESSION_ID}',
-                cancel_url=domain_url + 'payment/cancelled/',
-                customer_email = email,
-                payment_method_types=['card'],
-                mode='payment',
+                success_url=domain_url
+                + "payment/success?session_id={CHECKOUT_SESSION_ID}",
+                cancel_url=domain_url + "payment/cancelled/",
+                customer_email=email,
+                payment_method_types=["card"],
+                mode="payment",
                 shipping_address_collection={
-                    'allowed_countries': ['US','CA'],
+                    "allowed_countries": ["US", "CA"],
                 },
                 shipping_options=[
                     {
-                        'shipping_rate_data':{
-                            'type': 'fixed_amount',
-                            'fixed_amount': {
-                            'amount': 499,
-                            'currency': 'usd',
-                      },
-                      'display_name':'Shipping',
-                     }
+                        "shipping_rate_data": {
+                            "type": "fixed_amount",
+                            "fixed_amount": {
+                                "amount": 499,
+                                "currency": "usd",
+                            },
+                            "display_name": "Shipping",
+                        }
                     },
-                  ],
-
+                ],
                 line_items=[
                     {
-                        'name': "Cart",
-                        'quantity': 1,
-                        'currency': 'usd',
-                        'amount': f"{subtotal}",
+                        "name": "Cart",
+                        "quantity": 1,
+                        "currency": "usd",
+                        "amount": f"{subtotal}",
                     }
-                ]
+                ],
             )
             context = checkout_session.id
-            return JsonResponse({'sessionId': context})
+            return JsonResponse({"sessionId": context})
         except Exception as e:
-            return JsonResponse({'error': str(e)})
+            return JsonResponse({"error": str(e)})
+
 
 @csrf_exempt
 def stripe_webhook(request):
@@ -448,9 +469,7 @@ def stripe_webhook(request):
     event = None
 
     try:
-        event = stripe.Webhook.construct_event(
-          payload, sig_header, endpoint_secret
-        )
+        event = stripe.Webhook.construct_event(payload, sig_header, endpoint_secret)
     except ValueError as e:
         # Invalid payload
         return HttpResponse(status=400)
@@ -466,8 +485,8 @@ def stripe_webhook(request):
 
 
 class PaymentSuccessful(generic_views.TemplateView):
-    template_name = 'checkout/payment_successful.html'
+    template_name = "checkout/payment_successful.html"
 
 
 class PaymentCancelled(generic_views.TemplateView):
-    template_name = 'checkout/payment_cancelled.html'
+    template_name = "checkout/payment_cancelled.html"

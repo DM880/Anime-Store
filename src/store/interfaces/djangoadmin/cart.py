@@ -10,9 +10,7 @@ class EntryCartInLine(admin.TabularInline):
 
 class CartAdmin(admin.ModelAdmin):
 
-    inlines = [
-            EntryCartInLine
-        ]
+    inlines = [EntryCartInLine]
 
 
 admin.site.register(Cart, CartAdmin)

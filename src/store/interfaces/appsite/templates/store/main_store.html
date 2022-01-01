@@ -6,7 +6,22 @@
 {% block css %}<link rel="stylesheet" href="{% static 'css/store/main_store.css' %}">{% endblock %}
 
 {% block content %}
+
+<!--If password reset successful-->
+{% if messages %}
+    {% for message in messages %}
+      <div id="p-reset-ms" style="display:none;" class="alert alert-{{ message.tags }}">{{ message }}</div>
+      <script>
+        password_reset_message = document.getElementById('p-reset-ms').innerText;
+        alert(password_reset_message);
+      </script>
+    {% endfor %}
+{% endif %}
+
+<!--/////////////////////-->
+
 {% include 'sort_by.html' %}
+
 <div class="row">
 
 {% for item in all_items %}
@@ -88,7 +103,9 @@
 </div>
 </div>
 
+
 {% include 'footer.html' %}
+
 
 <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 <script src="{% static 'js/store/main_store.js' %}"></script>
