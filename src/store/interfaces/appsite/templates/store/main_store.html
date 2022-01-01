@@ -10,10 +10,10 @@
 <!--If password reset successful-->
 {% if messages %}
     {% for message in messages %}
-      <div id="ms" style="display:none;" class="alert alert-{{ message.tags }}">{{ message }}</div>
+      <div id="p-reset-ms" style="display:none;" class="alert alert-{{ message.tags }}">{{ message }}</div>
       <script>
-        ms = document.getElementById('ms').innerText;
-        alert(ms);
+        password_reset_message = document.getElementById('p-reset-ms').innerText;
+        alert(password_reset_message);
       </script>
     {% endfor %}
 {% endif %}

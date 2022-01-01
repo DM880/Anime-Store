@@ -14,7 +14,10 @@ class Cart(models.Model):
     purchased = models.BooleanField(default=False)
 
     class Meta:
-        unique_together = ('user', 'session_key',)
+        unique_together = (
+            "user",
+            "session_key",
+        )
 
     def __str__(self):
         return f"user={self.user}/price={self.tot_price}/id={self.user_id}"

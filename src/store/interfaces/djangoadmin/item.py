@@ -14,9 +14,9 @@ class ReviewInLine(admin.StackedInline):
 class ItemAdmin(admin.ModelAdmin):
 
     inlines = [
-            ItemImageInLine,
-            ReviewInLine,
-        ]
+        ItemImageInLine,
+        ReviewInLine,
+    ]
 
 
 admin.site.register(Item, ItemAdmin)

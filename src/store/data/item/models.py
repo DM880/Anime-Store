@@ -13,7 +13,7 @@ CATEGORY_CHOICES = (
     (APP := "APPAREL", "apparel"),
     (GAM := "GAMING", "gaming"),
     (OTH := "OTHER", "other"),
-    )
+)
 
 
 class Item(models.Model):
@@ -30,21 +30,25 @@ class Item(models.Model):
         return self.image.first()
 
     def average_review(self):
-        review = ItemReview.objects.filter(item=self.id).aggregate(average=Avg('rating'))
+        review = ItemReview.objects.filter(item=self.id).aggregate(
+            average=Avg("rating")
+        )
         count = ItemReview.objects.filter(item=self.id).count()
-        avg=0
+        avg = 0
         if review["average"] is not None:
-            avg=round(float(review["average"]))
+            avg = round(float(review["average"]))
         data = {
-            'avg':avg,
-            'count':count,
+            "avg": avg,
+            "count": count,
         }
         return data
 
 
 class ItemImage(models.Model):
-    item = models.ForeignKey(Item, on_delete=models.CASCADE, related_name='image')
-    image = models.ImageField(upload_to="item/",)
+    item = models.ForeignKey(Item, on_delete=models.CASCADE, related_name="image")
+    image = models.ImageField(
+        upload_to="item/",
+    )
 
 
 class ItemReview(models.Model):
@@ -52,11 +56,11 @@ class ItemReview(models.Model):
     username = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
     title = models.CharField(max_length=20, blank=True)
     review = models.TextField(max_length=500, blank=True)
-    rating = models.IntegerField(choices=[(i, i) for i in range(1, 5+1)], blank=True)
-    posted = models.DateTimeField(blank=True, null=True,default=datetime.datetime.now)
+    rating = models.IntegerField(choices=[(i, i) for i in range(1, 5 + 1)], blank=True)
+    posted = models.DateTimeField(blank=True, null=True, default=datetime.datetime.now)
 
     class Meta:
-        ordering = ('-posted',)
+        ordering = ("-posted",)
 
     def __str__(self):
         return self.title

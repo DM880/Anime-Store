@@ -7,12 +7,14 @@ from store.data.user.models import CustomUser
 class UserCreationForm(forms.ModelForm):
     username = forms.CharField(label="Username", max_length=20)
     email = forms.EmailField(label="Email", max_length=200)
-    password1 = forms.CharField(label='Password', widget=forms.PasswordInput)
-    password2 = forms.CharField(label='Password confirmation', widget=forms.PasswordInput)
+    password1 = forms.CharField(label="Password", widget=forms.PasswordInput)
+    password2 = forms.CharField(
+        label="Password confirmation", widget=forms.PasswordInput
+    )
 
     class Meta:
         model = CustomUser
-        fields = '__all__'
+        fields = "__all__"
 
     def clean_password2(self):
         password1 = self.cleaned_data.get("password1")
