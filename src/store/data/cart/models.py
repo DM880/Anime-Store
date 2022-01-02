@@ -22,16 +22,6 @@ class Cart(models.Model):
     def __str__(self):
         return f"user={self.user}/price={self.tot_price}/id={self.user_id}"
 
-    # Not final
-    # @property
-    # def clean_cart(self):
-    #     if self.purchased:
-    #         entries = EntryCart.objects.filter(cart=self.cart)
-    #         OrderHistory.objects.create(cart=self.cart, items=[entry.item.id for entry in entries] , tot_count=self.tot_count, tot_price=self.tot_price, purchased=self.updated)
-    #         self.tot_count = 0
-    #         self.tot_price = 0
-    #         self.purchased = False
-
 
 class EntryCart(models.Model):
     cart = models.ForeignKey(Cart, on_delete=models.CASCADE, blank=True, null=True)

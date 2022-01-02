@@ -67,9 +67,7 @@ urlpatterns = [
         pages.create_checkout_session,
         name="create_checkout_session",
     ),
-    path(
-        "payment/success/", pages.PaymentSuccessful.as_view(), name="payment_successful"
-    ),
+    path("payment/success/", pages.payment_successful, name="payment_successful"),
     path(
         "payment/cancelled/", pages.PaymentCancelled.as_view(), name="payment_cancelled"
     ),
