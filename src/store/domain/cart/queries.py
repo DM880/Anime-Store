@@ -50,23 +50,6 @@ def remove_item(user, item_id, quantity, session_key):
             temp_quantity -= 1
 
 
-def clean_cart(cart):
-    if cart.purchased:
-        entries = EntryCart.objects.filter(cart=cart)
-        HistoryOrder.objects.create(
-            cart=cart,
-            items=[entry.item.id for entry in entries],
-            tot_count=cart.tot_count,
-            tot_price=cart.tot_price,
-            purchased=cart.updated,
-        )
-        cart.tot_count = 0
-        cart.tot_price = 0
-        cart.purchased = False
-        cart.save()
-        entries.delete()
-
-
 def get_cart(user, session_key):
     if user.is_authenticated:
         try:
