@@ -476,8 +476,16 @@ def stripe_webhook(request):
     return HttpResponse(status=200)
 
 
-class PaymentSuccessful(generic_views.TemplateView):
-    template_name = "checkout/payment_successful.html"
+def payment_successful(request):
+    if request.user.is_authenticated:
+        user = User.objects.get(email=request.user.email)
+        cart = Cart.objects.get(user=user)
+        checkout.clean_cart(cart)
+    else:
+        cart = Cart.objects.get(session_key=request.session.session_key)
+        cart.delete()
+
+    return render(request, "checkout/payment_successful.html")
 
 
 class PaymentCancelled(generic_views.TemplateView):

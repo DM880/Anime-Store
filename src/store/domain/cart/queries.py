@@ -1,6 +1,6 @@
 from store.data.user.models import CustomUser as User
 from store.data.item.models import Item
-from store.data.cart.models import Cart, EntryCart
+from store.data.cart.models import Cart, EntryCart, HistoryOrder
 
 
 def update_cart(cart, item, quantity):
