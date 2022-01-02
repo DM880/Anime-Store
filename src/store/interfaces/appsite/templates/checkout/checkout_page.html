@@ -89,6 +89,7 @@
 </div>
 
 <!--Tot amount-->
+{% if items %}
 
 <div class="tot" style="float:right; margin:20px 100px 50px auto;font-family: 'Roboto',sans-serif;"><p>Subtotal ${{ subtotal }}</p>
   <br>
@@ -97,6 +98,13 @@
   <h5>Total<span style="font-size:12px;">(include GST)</span> ${{ total|floatformat:2 }}</h5>
     <button class="btn btn-success" style="margin-top:20px;margin-left:30px;" id="submitBtn" title="Checkout">Checkout</button>
 </div>
+
+
+{% else %}
+
+<h1 style="text-align:center;">Your cart is empty</h1>
+
+{% endif %}
 
 <!--/////////-->
 
