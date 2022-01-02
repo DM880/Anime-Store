@@ -417,7 +417,9 @@ def create_checkout_session(request):
             # ?session_id={CHECKOUT_SESSION_ID} redirect will have the session ID set as a query param
             checkout_session = stripe.checkout.Session.create(
                 success_url=domain_url
-                + "payment/success/"+payment_session_key+"/?session_id={CHECKOUT_SESSION_ID}",
+                + "payment/success/"
+                + payment_session_key
+                + "/?session_id={CHECKOUT_SESSION_ID}",
                 cancel_url=domain_url + "payment/cancelled/",
                 customer_email=email,
                 payment_method_types=["card"],
@@ -490,7 +492,6 @@ def payment_successful(request, payment_session_key):
             cart.delete()
 
     return render(request, "checkout/payment_successful.html")
-
 
 
 class PaymentCancelled(generic_views.TemplateView):
