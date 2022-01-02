@@ -411,12 +411,13 @@ def create_checkout_session(request):
                 cart = Cart.objects.get(session_key=request.session.session_key)
                 email = None
 
+            success = 'True'
             subtotal = int(round(cart.tot_price, 2) * 100)
 
             # ?session_id={CHECKOUT_SESSION_ID} redirect will have the session ID set as a query param
             checkout_session = stripe.checkout.Session.create(
                 success_url=domain_url
-                + "payment/success?session_id={CHECKOUT_SESSION_ID}",
+                + "payment/success/"+success+"/?session_id={CHECKOUT_SESSION_ID}",
                 cancel_url=domain_url + "payment/cancelled/",
                 customer_email=email,
                 payment_method_types=["card"],
@@ -445,6 +446,7 @@ def create_checkout_session(request):
                     }
                 ],
             )
+
             context = checkout_session.id
             return JsonResponse({"sessionId": context})
         except Exception as e:
@@ -476,14 +478,16 @@ def stripe_webhook(request):
     return HttpResponse(status=200)
 
 
-def payment_successful(request):
-    if request.user.is_authenticated:
-        user = User.objects.get(email=request.user.email)
-        cart = Cart.objects.get(user=user)
-        checkout.clean_cart(cart)
-    else:
-        cart = Cart.objects.get(session_key=request.session.session_key)
-        cart.delete()
+def payment_successful(request, success):
+
+    if success == 'True':
+        if request.user.is_authenticated:
+            user = User.objects.get(email=request.user.email)
+            cart = Cart.objects.get(user=user)
+            checkout.clean_cart(cart)
+        else:
+            cart = Cart.objects.get(session_key=request.session.session_key)
+            cart.delete()
 
     return render(request, "checkout/payment_successful.html")
 
