@@ -168,6 +168,30 @@ def user_details(request):
     )
 
 
+@login_required
+def my_orders(request):
+
+    return render(request, "account/my_orders.html")
+
+
+@login_required
+def my_reviews(request):
+
+    return render(request, "account/my_reviews.html")
+
+
+@login_required
+def edit_account(request):
+
+    return render(request, "account/edit_account.html")
+
+
+@login_required
+def delete_account(request):
+
+    return render(request, "account/delete_account.html")
+
+
 # Store
 
 
