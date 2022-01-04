@@ -27,7 +27,7 @@ from sendgrid.helpers.mail import *
 
 from store.data.user.models import CustomUser as User, AccountDetail
 from store.data.item.models import Item, ItemImage, ItemReview
-from store.data.cart.models import Cart, EntryCart
+from store.data.cart.models import Cart, EntryCart, HistoryOrder
 
 
 from store.domain.user import validation
@@ -171,17 +171,36 @@ def user_details(request):
 @login_required
 def my_orders(request):
 
+    user = User.objects.get(email=request.user.email)
+    cart = Cart.objects.get(user=user)
+    completed_orders = HistoryOrder.objects.filter(cart=cart)
+
+    ids = []
+
+
     return render(request, "account/my_orders.html")
 
 
 @login_required
 def my_reviews(request):
 
+    user = User.objects.get(email=request.user.email)
+    reviews = ItemReview.objects.filter(user=user)
+
+    if request.method == 'POST':
+        review = request.POST.get('review')
+        change = request.POST.get('change')
+        pass
+
+
     return render(request, "account/my_reviews.html")
 
 
 @login_required
 def edit_account(request):
+
+    if request.method == "POST":
+        pass
 
     return render(request, "account/edit_account.html")
 
