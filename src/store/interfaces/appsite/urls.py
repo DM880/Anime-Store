@@ -38,6 +38,10 @@ urlpatterns = [
     ),
     # Account
     path("account/user_details/", pages.user_details, name="user_details"),
+    path("account/my_orders/", pages.my_orders, name="my_orders"),
+    path("account/my_reviews/", pages.my_reviews, name="my_reviews"),
+    path("account/edit_account/", pages.edit_account, name="edit_account"),
+    path("account/delete_account/", pages.delete_account, name="delete_account"),
     # Store
     path("store/", pages.main_store, name="main_store"),
     path("search/", pages.search_item, name="search_item"),
