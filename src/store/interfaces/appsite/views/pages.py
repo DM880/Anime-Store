@@ -174,11 +174,10 @@ def my_orders(request):
     user = User.objects.get(email=request.user.email)
     cart = Cart.objects.get(user=user)
     completed_orders = HistoryOrder.objects.filter(cart=cart)
+    all_items = Items.objects.all()
 
-    ids = []
 
-
-    return render(request, "account/my_orders.html")
+    return render(request, "account/my_orders.html", {'completed_orders':completed_orders})
 
 
 @login_required
@@ -199,10 +198,15 @@ def my_reviews(request):
 @login_required
 def edit_account(request):
 
+    user = User.objects.get(email=request.user.email)
+
     if request.method == "POST":
+
+
+        update_user = User.objects.update_or_create()
         pass
 
-    return render(request, "account/edit_account.html")
+    return render(request, "account/edit_account.html", {'user':user})
 
 
 @login_required
