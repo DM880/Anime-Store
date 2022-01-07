@@ -34,7 +34,7 @@ class EntryCart(models.Model):
 
 class HistoryOrder(models.Model):
     cart = models.ForeignKey(Cart, on_delete=models.CASCADE, blank=True, null=True)
-    items = models.TextField(max_length=50)
+    items = models.CharField(max_length=50)
     tot_count = models.IntegerField(default=0)
     tot_price = models.DecimalField(default=0, decimal_places=2, max_digits=10)
     purchased = models.DateTimeField(auto_now=True)

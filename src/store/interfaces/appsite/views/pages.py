@@ -13,6 +13,8 @@ from django.utils.http import urlsafe_base64_encode
 from django.contrib.auth.tokens import default_token_generator
 from django.utils.encoding import force_bytes
 from django.contrib import messages
+from ast import literal_eval
+import ast
 
 
 import os
@@ -174,10 +176,28 @@ def my_orders(request):
     user = User.objects.get(email=request.user.email)
     cart = Cart.objects.get(user=user)
     completed_orders = HistoryOrder.objects.filter(cart=cart)
-    all_items = Items.objects.all()
+    all_items = Item.objects.all()
 
+    ids = [order.items for order in completed_orders]
 
-    return render(request, "account/my_orders.html", {'completed_orders':completed_orders})
+    to = map(int, filter(str.isdigit, ids))
+
+    new = [i for i in to if ids.isdigit()]
+
+    # d = [int(i) for i in new]
+    print(to)
+
+    item_list = []
+
+    for item in all_items:
+        if item.id in ids:
+            item_list.append(item)
+
+    return render(
+        request,
+        "account/my_orders.html",
+        {"completed_orders": completed_orders, "item_list": item_list},
+    )
 
 
 @login_required
@@ -186,11 +206,10 @@ def my_reviews(request):
     user = User.objects.get(email=request.user.email)
     reviews = ItemReview.objects.filter(user=user)
 
-    if request.method == 'POST':
-        review = request.POST.get('review')
-        change = request.POST.get('change')
+    if request.method == "POST":
+        review = request.POST.get("review")
+        change = request.POST.get("change")
         pass
-
 
     return render(request, "account/my_reviews.html")
 
@@ -202,11 +221,10 @@ def edit_account(request):
 
     if request.method == "POST":
 
-
         update_user = User.objects.update_or_create()
         pass
 
-    return render(request, "account/edit_account.html", {'user':user})
+    return render(request, "account/edit_account.html", {"user": user})
 
 
 @login_required
@@ -533,6 +551,8 @@ def payment_successful(request, payment_session_key):
         if request.user.is_authenticated:
             user = User.objects.get(email=request.user.email)
             cart = Cart.objects.get(user=user)
+            cart.purchased = True
+            cart.save()
             checkout.clean_cart(cart)
         else:
             cart = Cart.objects.get(session_key=request.session.session_key)
