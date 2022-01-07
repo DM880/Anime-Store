@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load indexing %}
 
 {% block title %}My Orders{% endblock %}
 
@@ -8,22 +9,42 @@
 {% block content %}
 
 <div class="orders-wrapper">
-
     {% for order in completed_orders %}
 
   <div class="order">
-    <h2>{{ order.id }} </h2>
-    <h4>{{ order.purchased }}</h4>
+    <h2>Order id: {{ order.id }} </h2>
+    <br>
+    <h4>Time of purchase: {{ order.purchased }}</h4>
+    <br>
 
-    {% for item in item_list %}
-
+    {% comment %}
+    {% for key, item in items_list.items %}
+    {% if key == order.id %}
     <div class="items-wrap">
-      <div class="item-details"><h3>{{ item.name }}</h3><p>{{ item.price }}</p><img src="/media/{{item.first_image.image}}">
+      <div class="item-details"><h3>{{key}}{{ item }}</h3><p>{{ item.items.price }}</p><img style="width:100px;height:100px;" src="/media/{{item.first_image.image}}">
       </div>
     </div>
+    <br>
+    {% endif %}
     {% endfor %}
-    <h3>Tot price</h3>
+     {% endcomment %}
+
+     {% with items_ids|index:0 as order %}
+      {% for item in all_items %}
+    {% if item.id == order %}
+    <div class="items-wrap">
+      <div class="item-details"><h3>{{ item.name }}</h3><p>{{ item.items.price }}</p><img style="width:100px;height:100px;" src="/media/{{item.first_image.image}}">
+      </div>
+    </div>
+    <br>
+    {% endif %}
+    {% endfor %}
+    {% endwith %}
+
+    <h3>Tot price:</h3>
+    <br>
     <h4>{{ order.tot_price }}</h4>
+    <br>
   </div>
   <hr>
   {% endfor %}

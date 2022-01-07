@@ -13,8 +13,7 @@ from django.utils.http import urlsafe_base64_encode
 from django.contrib.auth.tokens import default_token_generator
 from django.utils.encoding import force_bytes
 from django.contrib import messages
-from ast import literal_eval
-import ast
+from collections import defaultdict
 
 
 import os
@@ -178,25 +177,48 @@ def my_orders(request):
     completed_orders = HistoryOrder.objects.filter(cart=cart)
     all_items = Item.objects.all()
 
-    ids = [order.items for order in completed_orders]
+    temp_items_ids = []
+    order_count = []
+    tot_completed_orders = completed_orders.count()
+    order_ids = []
+    items_list = defaultdict(list)
+    n = 0
 
-    to = map(int, filter(str.isdigit, ids))
+    for order in completed_orders:
+        temp_items_ids += [((((''+order.items).replace('[','')).replace(']','')).split(','))]
+        order_count += [int(order.tot_count)]
+        order_ids.append(order.id)
+        items_list[order.id].append({
+            'order_id':order.id,
+        })
+        n+=1
 
-    new = [i for i in to if ids.isdigit()]
+    items_ids = []
+    n = 0
 
-    # d = [int(i) for i in new]
-    print(to)
+    #convert items ids from str to int and get items
+    for i in range(tot_completed_orders):
+        for x in range(order_count[i]):
+            items_ids += [int(temp_items_ids[i][x])]
+            items_list[order_ids[i]].append({
+                'items' : [(Item.objects.get(id=items_ids[n]))],
+                })
+            n+=1
 
-    item_list = []
+    print(items_list)
 
-    for item in all_items:
-        if item.id in ids:
-            item_list.append(item)
+    context = {
+        'completed_orders': completed_orders,
+        'items_list':dict(items_list),
+        'items_ids':items_ids,
+        'all_items':all_items
+    }
+
 
     return render(
         request,
         "account/my_orders.html",
-        {"completed_orders": completed_orders, "item_list": item_list},
+        context
     )
 
 
