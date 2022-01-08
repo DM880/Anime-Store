@@ -1,6 +1,6 @@
 from store.data.user.models import CustomUser as User
 from store.data.item.models import Item
-from store.data.cart.models import Cart, EntryCart, HistoryOrder
+from store.data.cart.models import Cart, EntryCart, HistoryOrder, HistoryEntryCart
 
 
 def update_cart(cart, item, quantity):
@@ -39,13 +39,17 @@ def update_quantity(entry, quantity, cart):
 def clean_cart(cart):
     if cart.purchased:
         entries = EntryCart.objects.filter(cart=cart)
-        HistoryOrder.objects.create(
+        history_order = HistoryOrder.objects.create(
             cart=cart,
             items=[entry.item.id for entry in entries],
             tot_count=cart.tot_count,
             tot_price=cart.tot_price,
             purchased=cart.updated,
         )
+
+        for entry in entries:
+            HistoryEntryCart.objects.create(cart=cart,history_cart=history_order,item=entry.item,quantity=entry.quantity)
+
         cart.tot_count = 0
         cart.tot_price = 0
         cart.purchased = False

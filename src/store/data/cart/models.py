@@ -38,3 +38,12 @@ class HistoryOrder(models.Model):
     tot_count = models.IntegerField(default=0)
     tot_price = models.DecimalField(default=0, decimal_places=2, max_digits=10)
     purchased = models.DateTimeField(auto_now=True)
+
+
+class HistoryEntryCart(models.Model):
+    cart = models.ForeignKey(Cart, on_delete=models.CASCADE, blank=True, null=True)
+    history_cart = models.ForeignKey(HistoryOrder, on_delete=models.CASCADE)
+    item = models.ForeignKey(Item, on_delete=models.CASCADE)
+    quantity = models.PositiveIntegerField(default=0)
+
+
