@@ -60,15 +60,7 @@
 </div>
 </div>
 
-
-  <div class="other-sections">
-      <ul>
-        <a href="{% url 'my_orders' %}"><li>My Orders</li></a>
-        <a href=""><li>My Reviews</li></a>
-        <a href=""><li>Edit Account</li></a>
-        <a href=""><li>Delete Account</li></a>
-      </ul>
-  </div>
+{% include 'other_sections.html' %}
 
 {% include 'footer.html' %}
 

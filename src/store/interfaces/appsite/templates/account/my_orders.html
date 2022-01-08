@@ -14,26 +14,47 @@
     <br>
     <h4>Time of purchase: {{ order.purchased }}</h4>
     <br>
+      <table>
+      <tr>
+     <th>
+    </th>
+      <th>
+      <h5 style="font-weight:bold;">Name</h5>
+    </th>
+      <th>
+      <h5 style="font-weight:bold;">Quantity</h5>
+    </th>
+      <th>
+      <h5 style="font-weight:bold;margin-left:-80px;">Price</h5>
+    </th>
+       </tr>
 
     {% for entry in history_entries %}
     {% if entry.history_cart.id == order.id %}
 
     <div class="items-wrap">
-      <div class="item-details"><h3>{{ entry.item.name }}</h3><p>${{ entry.item.price }}</p>
-      <p>{{ entry.quantity }}</p>
-      <img style="width:100px;height:100px;" src="/media/{{entry.item.first_image.image}}">
+      <div class="item-details">
+        <tr>
+          <td><img style="width:100px;height:100px;border-radius:50%;object-fit:contain;" src="/media/{{entry.item.first_image.image}}"></td>
+          <td><h3 class="name">{{ entry.item.name|truncatechars:30 }}</h3></td>
+          <td><p style="margin-left:40px;">{{ entry.quantity }}</p></td>
+          <td><p style="margin-left:-80px;">${{ entry.item.price }}</p></td>
+        </tr>
       </div>
     </div>
     <br>
     {% endif %}
     {% endfor %}
-    <h3>Tot price:</h3>
-    <br>
-    <h4>{{ order.tot_price }}</h4>
+    </table>
+    <h3 style="font-size:25px;margin-top:70px;">Tot price: <span style="color:red;">${{ order.tot_price }}</span</h3>
     <br>
   </div>
   <hr>
   {% endfor %}
 </div>
+
+{% include 'other_sections.html' %}
+
+{% include 'footer.html' %}
 
 {% endblock %}
