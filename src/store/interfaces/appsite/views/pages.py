@@ -206,12 +206,27 @@ def my_reviews(request):
     user = User.objects.get(email=request.user.email)
     reviews = ItemReview.objects.filter(username=user)
 
-    if request.method == "POST":
-        review = request.POST.get("review")
-        change = request.POST.get("change")
-        pass
-
     return render(request, "account/my_reviews.html", {"reviews": reviews})
+
+
+@login_required
+def edit_review(request, item_id, review_id):
+
+    if request.method == "POST":
+        user = User.objects.get(email=request.user.email)
+        old_review = ItemReview.objects.get(username=user, item=item_id, id=review_id)
+
+        title = request.POST.get("title-rev-input"+review_id)
+        review = request.POST.get("txt-rev-description"+review_id)
+        rating = request.POST.get("rating"+review_id)
+
+        old_review.title = title
+        old_review.review = review
+        old_review.rating = rating
+
+        old_review.save()
+
+        return redirect(request.META.get("HTTP_REFERER", "main_store"))
 
 
 @login_required

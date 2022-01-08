@@ -1,0 +1,181 @@
+/*Stars Rating*/
+
+.checked{
+  font-size: 15px;
+  color: #FFC107;
+}
+
+.rev{
+  display: inline;
+  margin-right:10px;
+}
+
+
+/* Review Section */
+
+.user-rev{
+  margin-left: 5%;
+  margin-top: 50px;
+  min-height: 50px;
+  height: auto;
+  width: 80%;
+  border-radius: 10px;
+  font-family: 'Roboto', sans-serif;
+  font-size: 1.2em;
+  overflow: auto;
+  white-space: normal;
+  word-wrap: break-word;
+}
+
+.username{
+  padding: 10px;
+  font-family:'Roboto', sans-serif;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.review-txt{
+  margin-top: 10px;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.date{
+  text-align: left;
+  font-family:'Roboto', sans-serif;
+  opacity: 50%;
+  margin-left: 5%;
+  padding: 10px;
+}
+
+.write-review{
+  margin:60px auto -50px 45%;
+  background-color: white;
+  border-radius: 0;
+  border-color:#F22929;
+  transition: all 0.5s ease;
+  color:#F22929;
+  font-size: 20px;
+  border:solid;
+  height: 60px;
+}
+
+.write-review:hover{
+  background-color: #F22929;
+  color:white;
+}
+
+/*Reccomendations*/
+
+.reccomendations{
+  width: 100%;
+  height: 20%;
+  text-align: center;
+  margin: 0;
+}
+
+.rec-cont{
+  height: 100%;
+}
+
+.rec-cont img{
+  max-width: 80%;
+  height: 150px;
+}
+
+.rec-cont img:hover{
+  opacity:0.5;
+  border: solid 2px red;
+  border-bottom: none;
+}
+
+
+/*Review Div */
+
+.rev-wrap{
+  position: fixed;
+  left: 30%;
+  top: 25%;
+  padding: 50px;
+  border: solid 1px grey;
+  border-radius: 10px;
+  display: none;
+  background-color: white;
+  font-family: 'Roboto', sans-serif;
+  opacity: 1;
+  z-index: 99;
+}
+
+.close-rev{
+  position: absolute;
+  right: 10px;
+  top: 0;
+  cursor: pointer;
+  text-decoration: none;
+  font-weight: bold;
+  color: #F90716;
+  font-size: 18px;
+}
+
+.close-rev:hover{
+  color: #CD1818;
+}
+
+.review-div{
+  height: 200px;
+  width: 500px;
+}
+
+.title-rev{
+  width: 100%;
+  height: 50px;
+}
+
+.title-rev input{
+  width: 100%;
+  height: 40px;
+  border: solid 1px grey;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+
+.review-txt-div{
+  width: 100%;
+}
+
+.review-txt-div textarea{
+  width: 100%;
+  height: 150px;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+/*Rating Review Div*/
+
+.rating {
+  border: none;
+  float: left;
+}
+
+.rating > input { display: none; }
+.rating > label:before {
+  margin: 5px;
+  font-size: 1.25em;
+  font-family: FontAwesome;
+  display: inline-block;
+  content: "\f005";
+}
+
+.rating > label {
+  color: #ddd;
+  float: right;
+}
+
+.rating > input:checked ~ label, /* show gold star when clicked */
+.rating:not(:checked) > label:hover, /* hover current star */
+.rating:not(:checked) > label:hover ~ label { color: #FFD700;  } /* hover previous stars in list */
+
+.rating > input:checked + label:hover, /* hover current star when changing rating */
+.rating > input:checked ~ label:hover,
+.rating > label:hover ~ input:checked ~ label, /* lighten current selection */
+.rating > input:checked ~ label:hover ~ label { color: #FFED85;  }
