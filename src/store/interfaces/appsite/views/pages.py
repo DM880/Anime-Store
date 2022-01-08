@@ -211,7 +211,7 @@ def my_reviews(request):
         change = request.POST.get("change")
         pass
 
-    return render(request, "account/my_reviews.html", {'reviews':reviews})
+    return render(request, "account/my_reviews.html", {"reviews": reviews})
 
 
 @login_required
