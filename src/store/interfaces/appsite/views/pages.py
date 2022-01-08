@@ -181,18 +181,16 @@ def my_orders(request):
     tot_completed_orders = completed_orders.count()
 
     for order in completed_orders:
-        history_entries += HistoryEntryCart.objects.filter(cart=cart,history_cart=order)
+        history_entries += HistoryEntryCart.objects.filter(
+            cart=cart, history_cart=order
+        )
 
     context = {
-        'completed_orders':completed_orders,
-        'history_entries':history_entries,
+        "completed_orders": completed_orders,
+        "history_entries": history_entries,
     }
 
-    return render(
-        request,
-        "account/my_orders.html",
-        context
-    )
+    return render(request, "account/my_orders.html", context)
 
 
 @login_required
