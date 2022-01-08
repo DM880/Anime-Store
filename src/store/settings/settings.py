@@ -47,17 +47,17 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "mathfilters",
+    "crispy_forms",
+    "django_ajax",
     # Data
     "store.data.cart",
     "store.data.item",
     "store.data.user.apps.CustomUserConfig",
-    # Domain
     # Interface
     "store.interfaces",
     "store.interfaces.appsite.apps.AppsiteConfig",
     "store.interfaces.djangoadmin",
-    "crispy_forms",
-    "django_ajax",
 ]
 
 MIDDLEWARE = [
