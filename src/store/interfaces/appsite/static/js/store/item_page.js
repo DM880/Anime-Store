@@ -79,6 +79,7 @@ function addedCart() {
 
 // If logged in
 function openDiv(){
+
   document.getElementById('rev-wrap-div').style.display = 'block';
   document.getElementById('change-div').style.opacity = '0.5';
 }

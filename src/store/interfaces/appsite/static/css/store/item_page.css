@@ -309,6 +309,7 @@ hr{
   background-color: white;
   font-family: 'Roboto', sans-serif;
   opacity: 1;
+  z-index: 99;
 }
 
 .close-rev{

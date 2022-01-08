@@ -48,7 +48,12 @@ def clean_cart(cart):
         )
 
         for entry in entries:
-            HistoryEntryCart.objects.create(cart=cart,history_cart=history_order,item=entry.item,quantity=entry.quantity)
+            HistoryEntryCart.objects.create(
+                cart=cart,
+                history_cart=history_order,
+                item=entry.item,
+                quantity=entry.quantity,
+            )
 
         cart.tot_count = 0
         cart.tot_price = 0

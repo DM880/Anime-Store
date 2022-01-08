@@ -161,7 +161,10 @@ def password_reset(request):
 @login_required
 def user_details(request):
     user = User.objects.get(email=request.user.email)
-    shipping_details = AccountDetail.objects.get(user=user)
+    try:
+        shipping_details = AccountDetail.objects.get(user=user)
+    except AccountDetail.DoesNotExist:
+        shipping_details = None
     return render(
         request,
         "account/user_details.html",
@@ -173,7 +176,11 @@ def user_details(request):
 def my_orders(request):
 
     user = User.objects.get(email=request.user.email)
-    cart = Cart.objects.get(user=user)
+    try:
+        cart = Cart.objects.get(user=user)
+    except Cart.DoesNotExist:
+        cart = None
+
     completed_orders = HistoryOrder.objects.filter(cart=cart)
     all_items = Item.objects.all()
 
@@ -181,32 +188,47 @@ def my_orders(request):
     tot_completed_orders = completed_orders.count()
 
     for order in completed_orders:
-        history_entries += HistoryEntryCart.objects.filter(cart=cart,history_cart=order)
+        history_entries += HistoryEntryCart.objects.filter(
+            cart=cart, history_cart=order
+        )
 
     context = {
-        'completed_orders':completed_orders,
-        'history_entries':history_entries,
+        "completed_orders": completed_orders,
+        "history_entries": history_entries,
     }
 
-    return render(
-        request,
-        "account/my_orders.html",
-        context
-    )
+    return render(request, "account/my_orders.html", context)
 
 
 @login_required
 def my_reviews(request):
 
     user = User.objects.get(email=request.user.email)
-    reviews = ItemReview.objects.filter(user=user)
+    reviews = ItemReview.objects.filter(username=user)
+
+    return render(request, "account/my_reviews.html", {"reviews": reviews})
+
+
+@login_required
+def edit_review(request, item_id, review_id):
 
     if request.method == "POST":
-        review = request.POST.get("review")
-        change = request.POST.get("change")
-        pass
+        user = User.objects.get(email=request.user.email)
+        old_review = ItemReview.objects.get(username=user, item=item_id, id=review_id)
 
-    return render(request, "account/my_reviews.html")
+        title = request.POST.get("title-rev-input" + review_id)
+        review = request.POST.get("txt-rev-description" + review_id)
+        rating = request.POST.get("rating" + review_id)
+
+        old_review.title = title
+        old_review.review = review
+        old_review.rating = rating
+
+        old_review.save()
+
+        return redirect(request.META.get("HTTP_REFERER", "user_details"))
+    else:
+        return render(request, "account/user_details.html")
 
 
 @login_required

@@ -45,5 +45,3 @@ class HistoryEntryCart(models.Model):
     history_cart = models.ForeignKey(HistoryOrder, on_delete=models.CASCADE)
     item = models.ForeignKey(Item, on_delete=models.CASCADE)
     quantity = models.PositiveIntegerField(default=0)
-
-
