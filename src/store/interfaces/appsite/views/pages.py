@@ -161,7 +161,10 @@ def password_reset(request):
 @login_required
 def user_details(request):
     user = User.objects.get(email=request.user.email)
-    shipping_details = AccountDetail.objects.get(user=user)
+    try:
+        shipping_details = AccountDetail.objects.get(user=user)
+    except AccountDetail.DoesNotExist:
+        shipping_details = None
     return render(
         request,
         "account/user_details.html",
@@ -173,7 +176,11 @@ def user_details(request):
 def my_orders(request):
 
     user = User.objects.get(email=request.user.email)
-    cart = Cart.objects.get(user=user)
+    try:
+        cart = Cart.objects.get(user=user)
+    except Cart.DoesNotExist:
+        cart = None
+
     completed_orders = HistoryOrder.objects.filter(cart=cart)
     all_items = Item.objects.all()
 
@@ -197,14 +204,14 @@ def my_orders(request):
 def my_reviews(request):
 
     user = User.objects.get(email=request.user.email)
-    reviews = ItemReview.objects.filter(user=user)
+    reviews = ItemReview.objects.filter(username=user)
 
     if request.method == "POST":
         review = request.POST.get("review")
         change = request.POST.get("change")
         pass
 
-    return render(request, "account/my_reviews.html")
+    return render(request, "account/my_reviews.html", {'reviews':reviews})
 
 
 @login_required

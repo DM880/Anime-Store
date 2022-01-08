@@ -7,7 +7,7 @@
 
 {% block content %}
 
-<div class="orders-wrapper">
+<div class="orders-wrapper" style="min-height:70vh;">
     {% for order in completed_orders %}
   <div class="order">
     <h2>Order id: {{ order.id }} </h2>
@@ -35,7 +35,11 @@
     <div class="items-wrap">
       <div class="item-details">
         <tr>
-          <td><a href="{% url 'item_page' item_id=entry.item.id %}"><img style="width:100px;height:100px;border-radius:50%;object-fit:contain;" src="/media/{{entry.item.first_image.image}}"></a></td>
+          <td>
+            <a href="{% url 'item_page' item_id=entry.item.id %}">
+              <img style="width:100px;height:100px;border-radius:50%;object-fit:contain;" src="/media/{{entry.item.first_image.image}}">
+              </a>
+              </td>
           <td><h3 class="name">{{ entry.item.name|truncatechars:30 }}</h3></td>
           <td><p style="margin-left:40px;">{{ entry.quantity }}</p></td>
           <td><p style="margin-left:-80px;">${{ entry.item.price }}</p></td>

@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}My Reviews{% endblock %}
+
+{% block css %}<link rel="stylesheet" href="{% static 'css/store/item_page.css' %}">{% endblock %}
+
+{% block content %}
+<div style="margin-top:150px;min-height:70vh;">
+  {% for review in reviews %}
+  {% with x|center:review.rating as range %}
+  <div class="user-rev">
+   <a style="text-decoration:none;color:black;" href="{% url 'item_page' item_id=review.item.id %}">
+       <h5 class="username rev" title="{{ review.item }}">{{ review.item|truncatechars:30 }}</h5>
+       </a>
+  <span class="rev">
+    {% for x in range %}
+    <span class="fa fa-star checked"></span>
+    {% endfor %}</span>
+  <p class="review-txt" name="review_id">{{ review.review }}</p>
+  </div>
+  <p class="date">{{ review.posted }}</p>
+  {% endwith %}
+  {% endfor %}
+</div>
+
+{% include 'other_sections.html' %}
+
+{% include 'footer.html' %}
+
+{% endblock %}
