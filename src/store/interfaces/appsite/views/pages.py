@@ -216,9 +216,9 @@ def edit_review(request, item_id, review_id):
         user = User.objects.get(email=request.user.email)
         old_review = ItemReview.objects.get(username=user, item=item_id, id=review_id)
 
-        title = request.POST.get("title-rev-input"+review_id)
-        review = request.POST.get("txt-rev-description"+review_id)
-        rating = request.POST.get("rating"+review_id)
+        title = request.POST.get("title-rev-input" + review_id)
+        review = request.POST.get("txt-rev-description" + review_id)
+        rating = request.POST.get("rating" + review_id)
 
         old_review.title = title
         old_review.review = review
@@ -226,7 +226,9 @@ def edit_review(request, item_id, review_id):
 
         old_review.save()
 
-        return redirect(request.META.get("HTTP_REFERER", "main_store"))
+        return redirect(request.META.get("HTTP_REFERER", "user_details"))
+    else:
+        return render(request, "account/user_details.html")
 
 
 @login_required
