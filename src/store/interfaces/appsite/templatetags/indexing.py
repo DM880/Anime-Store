@@ -6,7 +6,13 @@ register = template.Library()
 def hash(dictionary, key):
     return dictionary.get(key)
 
-@register.filter
-def index(list_ids, key):
-    key = int(key)
-    return list_ids[key]
+@register.simple_tag
+def index(index_count, order_count):
+
+    index_count = int(index_count)
+
+    counter = int(order_count[index_count])
+    print(counter)
+
+    return counter
+

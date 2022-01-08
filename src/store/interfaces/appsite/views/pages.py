@@ -180,19 +180,13 @@ def my_orders(request):
     temp_items_ids = []
     order_count = []
     tot_completed_orders = completed_orders.count()
-    order_ids = []
-    items_list = defaultdict(list)
-    n = 0
+
 
     for order in completed_orders:
         temp_items_ids += [((((''+order.items).replace('[','')).replace(']','')).split(','))]
         order_count += [int(order.tot_count)]
-        order_ids.append(order.id)
-        items_list[order.id].append({
-            'order_id':order.id,
-        })
-        n+=1
 
+    items_list = []
     items_ids = []
     n = 0
 
@@ -200,20 +194,23 @@ def my_orders(request):
     for i in range(tot_completed_orders):
         for x in range(order_count[i]):
             items_ids += [int(temp_items_ids[i][x])]
-            items_list[order_ids[i]].append({
-                'items' : [(Item.objects.get(id=items_ids[n]))],
-                })
+            items_list.append((Item.objects.get(id=items_ids[n])))
             n+=1
 
-    print(items_list)
+    #vars for loops in template
+    index_count = 0
+    start_index = 0
+    count = order_count[0]
 
     context = {
         'completed_orders': completed_orders,
-        'items_list':dict(items_list),
-        'items_ids':items_ids,
-        'all_items':all_items
+        'all_items':all_items,
+        'order_count': order_count,
+        'items_list':items_list,
+        'start_index':start_index,
+        'count':count,
+        'index_count':index_count,
     }
-
 
     return render(
         request,
