@@ -1,0 +1,33 @@
+
+  <div class="other-sections">
+      <ul>
+        <a href="{% url 'my_orders' %}"><li>My Orders</li></a>
+        <a href=""><li>My Reviews</li></a>
+        <a href=""><li>Edit Account</li></a>
+        <a href=""><li>Delete Account</li></a>
+      </ul>
+  </div>
+
+  <style>
+.other-sections{
+  position:fixed;
+  right:50px;
+  top:280px;
+  border: solid grey;
+  padding-right: 40px;
+}
+
+.other-sections a{
+  text-decoration: none;
+  color: black;
+}
+
+.other-sections a:hover{
+  color: red;
+}
+
+.other-sections li{
+  line-height: 80px;
+  list-style-type: none;
+}
+  </style>
