@@ -28,7 +28,7 @@ from sendgrid.helpers.mail import *
 
 from store.data.user.models import CustomUser as User, AccountDetail
 from store.data.item.models import Item, ItemImage, ItemReview
-from store.data.cart.models import Cart, EntryCart, HistoryOrder
+from store.data.cart.models import Cart, EntryCart, HistoryOrder, HistoryEntryCart
 
 
 from store.domain.user import validation
@@ -177,39 +177,15 @@ def my_orders(request):
     completed_orders = HistoryOrder.objects.filter(cart=cart)
     all_items = Item.objects.all()
 
-    temp_items_ids = []
-    order_count = []
+    history_entries = []
     tot_completed_orders = completed_orders.count()
 
-
     for order in completed_orders:
-        temp_items_ids += [((((''+order.items).replace('[','')).replace(']','')).split(','))]
-        order_count += [int(order.tot_count)]
-
-    items_list = []
-    items_ids = []
-    n = 0
-
-    #convert items ids from str to int and get items
-    for i in range(tot_completed_orders):
-        for x in range(order_count[i]):
-            items_ids += [int(temp_items_ids[i][x])]
-            items_list.append((Item.objects.get(id=items_ids[n])))
-            n+=1
-
-    #vars for loops in template
-    index_count = 0
-    start_index = 0
-    count = order_count[0]
+        history_entries += HistoryEntryCart.objects.filter(cart=cart,history_cart=order)
 
     context = {
-        'completed_orders': completed_orders,
-        'all_items':all_items,
-        'order_count': order_count,
-        'items_list':items_list,
-        'start_index':start_index,
-        'count':count,
-        'index_count':index_count,
+        'completed_orders':completed_orders,
+        'history_entries':history_entries,
     }
 
     return render(

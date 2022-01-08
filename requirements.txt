@@ -1,6 +1,5 @@
 ajax==3.0.0
 black==21.12b0
-django-mathfilters==1.0.0
 Django==3.2
 python-decouple==3.5
 sendgrid==6.8.2
