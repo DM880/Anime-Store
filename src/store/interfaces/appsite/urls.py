@@ -45,6 +45,7 @@ urlpatterns = [
         pages.edit_review,
         name="edit_review",
     ),
+    path("account/my_reviews/<review_id>/", pages.delete_review, name="delete_review"),
     path("account/edit_account/", pages.edit_account, name="edit_account"),
     path("account/delete_account/", pages.delete_account, name="delete_account"),
     # Store

@@ -232,6 +232,17 @@ def edit_review(request, item_id, review_id):
 
 
 @login_required
+def delete_review(request, review_id):
+    if request.method == "POST":
+        review = ItemReview.objects.get(id=review_id)
+        review.delete()
+
+        return redirect(request.META.get("HTTP_REFERER", "user_details"))
+    else:
+        return render(request, "account/user_details.html")
+
+
+@login_required
 def edit_account(request):
 
     user = User.objects.get(email=request.user.email)

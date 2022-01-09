@@ -16,13 +16,13 @@
     {% csrf_token %}
   <div class="review-div">
     <div class="title-rev">
-      <input name="title-rev-input{{review.id}}" maxlength="15" type="text" placeholder="{{ review.title }}" required='True'>
+      <input name="title-rev-input{{review.id}}" maxlength="15" type="text" value="{{review.title}}" title="Title" required='True'>
       </input>
     </div>
     <div class="review-txt-div">
-      <textarea name="txt-rev-description{{review.id}}" maxlength="400" required='True'>{{ review.review }}</textarea>
+      <textarea name="txt-rev-description{{review.id}}" maxlength="400" title="Review" required='True'>{{ review.review }}</textarea>
     </div>
-     <fieldset class="" id="field-rating{{review.id}}">
+     <fieldset class="rating" id="field-rating{{review.id}}">
     <input type="radio" id="star5" name="rating{{review.id}}" value="5" required="True" /><label class="full" for="star5" title="5 stars"></label>
     <input type="radio" id="star4" name="rating{{review.id}}" value="4" required="True" /><label class="full" for="star4" title="4 stars"></label>
     <input type="radio" id="star3" name="rating{{review.id}}" value="3" required="True" /><label class="full" for="star3" title="3 stars"></label>
@@ -52,6 +52,19 @@
   <div style="display:flex;">
   <p class="date" syle="display:inline-block;">{{ review.posted }}</p>
   <a type="button" onclick="openDiv({{review.id}})" class="date" syle="display:inline-block;">Edit</a>
+
+   <form action="{% url 'delete_review' review_id=review.id %}" method="POST">
+     {% csrf_token %}
+     <a type="button" onclick="confirmDelete({{review.id}})"class="date" syle="display:inline-block;">Delete</a>
+     <div id="confirm-delete-{{review.id}}" style="display:none;">
+     <div class="dlt-rw">
+     <a title="Close" class="close-rev" onclick="closeConfirmDelete({{review.id}})">X</a>
+    <h3>Delete Review?</h3>
+    <br>
+    <button type="submit" class="btn btn-success">Confirm</button>
+    </div>
+     </div>
+   </form>
   </div>
   {% endwith %}
   {% endfor %}
@@ -67,15 +80,20 @@
 <script>
   function openDiv(review_id){
   document.getElementById('rev-wrap-div'+review_id).style.display = 'block';
-  var rating = document.getElementById('field-rating'+review_id);
-  rating.classList.add("rating");
 }
 
 function closeDiv(review_id){
   document.getElementById('rev-wrap-div'+review_id).style.display = 'none';
-  var rating = document.getElementById('field-rating'+review_id);
-  rating.classList.remove("rating");
 }
+
+function confirmDelete(review_id){
+  document.getElementById('confirm-delete-'+review_id).style.display = 'block';
+}
+
+function closeConfirmDelete(review_id){
+   document.getElementById('confirm-delete-'+review_id).style.display = 'none';
+}
+
 </script>
 
 {% endblock %}
