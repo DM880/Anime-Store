@@ -5,9 +5,34 @@
         <a href="{% url 'my_orders' %}"><li>My Orders</li></a>
         <a href="{% url 'my_reviews' %}"><li>My Reviews</li></a>
         <a href="{% url 'edit_account' %}"><li>Edit Account</li></a>
-        <a href="{% url 'delete_account' %}"><li>Delete Account</li></a>
+        <a type="button" onclick="openDeleteAccount()"><li>Delete Account</li></a>
       </ul>
   </div>
+
+   <form action="{% url 'delete_account' %}" method="POST">
+     {% csrf_token %}
+     <div id="confirm-delete" style="display:none;">
+     <div class="dlt-acc">
+     <a title="Close" class="close-acc" onclick="closeDeleteAccount()">X</a>
+    <h3>Do you want to permanently delete your account?</h3>
+    <br>
+    <button type="submit" class="btn btn-danger">Confirm</button>
+    </div>
+     </div>
+   </form>
+
+
+<script>
+  function openDeleteAccount(){
+  document.getElementById('confirm-delete').style.display = 'block';
+  document.getElementById('change-div').style.opacity = '0.5';
+}
+
+function closeDeleteAccount(){
+  document.getElementById('confirm-delete').style.display = 'none';
+  document.getElementById('change-div').style.opacity = '1';
+}
+</script>
 
   <style>
 .other-sections{
@@ -31,5 +56,31 @@
 .other-sections li{
   line-height: 80px;
   list-style-type: none;
+}
+
+.dlt-acc{
+  position: fixed;
+  text-align:center;
+  border: solid grey;
+  width: 400px;
+  left: 30%;
+  top: 25%;
+  padding: 50px;
+  background-color: white;
+}
+
+.close-acc{
+  position: absolute;
+  right: 10px;
+  top: 0;
+  cursor: pointer;
+  text-decoration: none;
+  font-weight: bold;
+  color: #F90716;
+  font-size: 18px;
+}
+
+.close-acc:hover{
+  color: #CD1818;
 }
   </style>

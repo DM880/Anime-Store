@@ -7,7 +7,7 @@
 
 {% block content %}
 
-<div class="wrapper">
+<div id="change-div" class="wrapper">
   <h1 class="acc-t">ACCOUNT</h1>
   <div class="info-div">
     <div style="margin-top:50px;" class="row">
@@ -40,21 +40,21 @@
     <div class="row">
   <div class="shipp-div col">
     <i class="fas fa-house-user"></i>
-    <h5>Address:<span>{{ shipping_details.shipping_address }}
+    <h5>Address:<span>{{ shipping_details.shipping_address }}</span>
   </div>
   <div class="s-city-div col">
     <i class="far fa-building"></i>
-    <h5>City:<span>{{ shipping_details.city }}
+    <h5>City:<span>{{ shipping_details.city }}</span>
   </div>
     </div>
       <div class="row">
   <div class="state-div col">
     <i class="fas fa-city"></i>
-    <h5>Country:<span>{{ shipping_details.state }}
+    <h5>Country:<span>{{ shipping_details.state }}</span>
   </div>
   <div class="zip-div col">
     <i class="fas fa-map-marker-alt"></i>
-    <h5>Zip Code:<span>{{ shipping_details.zip_code }}
+    <h5>Zip Code:<span>{{ shipping_details.zip_code }}</span>
   </div>
       </div>
 </div>

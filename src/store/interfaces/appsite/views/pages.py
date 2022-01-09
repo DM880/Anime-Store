@@ -246,19 +246,75 @@ def delete_review(request, review_id):
 def edit_account(request):
 
     user = User.objects.get(email=request.user.email)
+    shipping_details = AccountDetail.objects.get(user=user)
 
     if request.method == "POST":
 
-        update_user = User.objects.update_or_create()
-        pass
+        # User
+        username = request.POST.get("username")
+        email = request.POST.get("email")
+        first_name = request.POST.get("first-name")
+        last_name = request.POST.get("last-name")
+        # Account Detail
+        phone_number = request.POST.get("phone-number")
+        shipping_address = request.POST.get("address")
+        city = request.POST.get("city")
+        state = request.POST.get("state")
+        zip_code = request.POST.get("zip-code")
 
-    return render(request, "account/edit_account.html", {"user": user})
+        user = User.objects.get(email=request.user.email)
+        shipping_details = AccountDetail.objects.get(user=user)
+
+        user.username = username
+        user.email = email
+        user.first_name = first_name
+        user.last_name = last_name
+
+        shipping_details.phone_number = phone_number
+        shipping_details.shipping_address = shipping_address
+        shipping_details.city = city
+        shipping_details.state = state
+        shipping_details.zip_code = zip_code
+
+        user.save()
+        shipping_details.save()
+
+        return redirect("user_details")
+
+    return render(
+        request,
+        "account/edit_account.html",
+        {"user": user, "shipping_details": shipping_details},
+    )
 
 
 @login_required
 def delete_account(request):
 
-    return render(request, "account/delete_account.html")
+    if request.method == "POST":
+        user = User.objects.get(email=request.user.email)
+        try:
+            cart = Cart.objects.get(user=user)
+        except Cart.DoesNotExist:
+            cart = None
+
+        # replacement for item reviews posted from user
+        guest_user_deleted = User.objects.get(email="guest@guest.com")
+
+        item_reviews = ItemReview.objects.filter(username=user)
+
+        for review in item_reviews:
+            review.username = guest_user_deleted
+            review.save()
+
+        logout(request)
+
+        if cart:
+            cart.delete()
+
+        user.delete()
+
+        return redirect("main_store")
 
 
 # Store
