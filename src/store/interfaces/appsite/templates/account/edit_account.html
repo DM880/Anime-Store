@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Edit Account{% endblock %}
+
+{% block css %} <link rel="stylesheet" href="{% static 'css/account/edit_account.css' %}">{% endblock %}
+
+{% block content %}
+
+<div class="wrapper">
+  <div class="all-centered">
+    <h1 class="acc-t">EDIT ACCOUNT</h1>
+  <div class="info-div">
+    <div style="margin-top:50px;">
+      <form method="POST" action="{% url 'edit_account' %}">
+      {% csrf_token %}
+  <div class="username-div col">
+    <i class="fas fa-user-circle"></i>
+    <h5>Username:</h5><input name="username" value="{{user.username}}"></input>
+  </div>
+  <div class="email-div col">
+    <i class="fas fa-at"></i>
+    <h5>Email:</h5><input name="email" value="{{user.email}}"></input>
+  </div>
+    </div>
+  <div class="f-name-div col">
+    <i class="far fa-hand-point-right"></i>
+    <h5>First Name:</h5><input name="first-name" value="{{user.first_name}}"></input>
+  </div>
+  <br>
+  <div class="l-name-div col">
+    <i class="far fa-hand-peace"></i>
+    <h5>Last Name:</h5><input name="last-name" value="{{user.last_name}}"></input>
+  </div>
+   </div>
+  <div class="account-detail-div">
+    <h2>Shipping Details</h2>
+  </div>
+  <div class="phone-n-div col">
+    <i class="fas fa-phone-square-alt"></i>
+    <h5>Phone Number:<input name="phone-number" value="{{shipping_details.phone_number}}"></input></h5>
+    </div>
+
+  <div class="shipp-div col">
+    <i class="fas fa-house-user"></i>
+    <h5>Address:<input name="address" value="{{shipping_details.shipping_address}}"></input>
+  </div>
+  <div class="s-city-div col">
+    <i class="far fa-building"></i>
+    <h5>City:<input name="city" value="{{shipping_details.city}}"></input>
+  </div>
+  <div class="state-div col">
+    <i class="fas fa-city"></i>
+    <h5>Country:<input name="state" value="{{shipping_details.state}}"></input>
+  </div>
+  <div class="zip-div col">
+    <i class="fas fa-map-marker-alt"></i>
+    <h5>Zip Code:<input name="zip-code" value="{{shipping_details.zip_code}}"></input>
+  </div>
+<button style="margin-top: 50px;text-aign:center;margin-left:150px;" class="btn btn-success" type="submit">Submit Edits</button>
+    </form>
+</div>
+</div>
+
+{% include 'other_sections.html' %}
+
+{% include 'footer.html' %}
+
+{% endblock %}
