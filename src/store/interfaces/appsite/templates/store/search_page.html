@@ -21,15 +21,18 @@
 </div>
 <!--/////////////-->
 
-    <div class="item-cont col-lg-3 col-md-4 col-sm-6 col-xs-12">
+     <div class="item-cont col-lg-3 col-md-4 col-sm-6 col-xs-12">
       <div class="img-cont">
       <a href="{% url 'item_page' item_id=item.id %}"><img class="item-img" src="/media/{{item.first_image.image}}"></a>
       </div>
+      <div style="height:150px;">
       <h1 class="item-title">{{ item.name|truncatechars:20 }}</h1>
       <p class="price-txt" style="font-size:15px;">$</p><p class="price-txt" style="font-size:20px;vertical-align:top;">{{ item.price }}</p>
+      </div>
        <br>
        <!--Rating stars-->
-      <div style="margin-left:10px;text-align:left;">
+       <div style="position: relative;margin-top:30px">
+      <div style="margin-left:10px;text-align:left;position:absolute;bottom:0;">
                 <span class="fa fa-star {% if item.average_review.avg > 0 %} checked {% endif %}"></span>
                 <span class="fa fa-star {% if item.average_review.avg > 1 %} checked {% endif %}"></span>
                 <span class="fa fa-star {% if item.average_review.avg > 2 %} checked {% endif %}"></span>
@@ -40,12 +43,15 @@
                 {% if item.average_review.count == 1 %} review
                 {% else %} reviews {% endif %}</p>
   </div>
-  <!--////////////-->
+  <!--//////////-->
+  <div style="position:absolute;bottom:0;right:0;">
       <form class="add-to-cart" id="form-item{{item.id}}" method="POST" action="{% url 'add_item' item_id=item.id %}">
         {% csrf_token %}
       <button class="add cart-btn" id="add" data-id="{{item.id}}" type="submit" title="Add to Cart"><span>+</span></button>
       </form>
-    </div>
+      </div>
+      </div>
+      </div>
 {% endfor %}
 </div>
 
