@@ -41,11 +41,15 @@ urlpatterns = [
     path("account/my_orders/", pages.my_orders, name="my_orders"),
     path("account/my_reviews/", pages.my_reviews, name="my_reviews"),
     path(
-        "account/edit_review/<item_id>/<review_id>",
+        "account/my_reviews/edit_review/<item_id>/<review_id>",
         pages.edit_review,
         name="edit_review",
     ),
-    path("account/my_reviews/<review_id>/", pages.delete_review, name="delete_review"),
+    path(
+        "account/my_reviews/delete_review/<review_id>/",
+        pages.delete_review,
+        name="delete_review",
+    ),
     path("account/edit_account/", pages.edit_account, name="edit_account"),
     path("account/delete_account/", pages.delete_account, name="delete_account"),
     # Store
