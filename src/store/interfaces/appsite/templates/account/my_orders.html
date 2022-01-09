@@ -7,7 +7,7 @@
 
 {% block content %}
 
-<div class="orders-wrapper" style="min-height:70vh;">
+<div id="change-div" class="orders-wrapper" style="min-height:70vh;">
     {% for order in completed_orders %}
   <div class="order">
     <h2>Order id: {{ order.id }} </h2>

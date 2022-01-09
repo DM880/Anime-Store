@@ -291,7 +291,30 @@ def edit_account(request):
 @login_required
 def delete_account(request):
 
-    return render(request, "account/delete_account.html")
+    if request.method == "POST":
+        user = User.objects.get(email=request.user.email)
+        try:
+            cart = Cart.objects.get(user=user)
+        except Cart.DoesNotExist:
+            cart = None
+
+        # replacement for item reviews posted from user
+        guest_user_deleted = User.objects.get(email="guest@guest.com")
+
+        item_reviews = ItemReview.objects.filter(username=user)
+
+        for review in item_reviews:
+            review.username = guest_user_deleted
+            review.save()
+
+        logout(request)
+
+        if cart:
+            cart.delete()
+
+        user.delete()
+
+        return redirect("main_store")
 
 
 # Store
