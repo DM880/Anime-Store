@@ -17,7 +17,7 @@
   font-weight: normal;
 }
 
-hr{
+.orders-wrapper hr{
   margin-bottom: 50px;
   margin-top:50px;
   margin-left: 20%;
@@ -47,4 +47,42 @@ table{
 .spacing-table th {
   text-align: left;
   padding-bottom: 10px;
+}
+
+/*Phone layout*/
+
+@media (max-width:1080px){
+
+  .other-sections{
+    display: none;
+  }
+
+  .ph-menu{
+    display: block !important;
+  }
+}
+
+@media (max-width:650px){
+
+  .img-tab{
+    display:none;
+  }
+
+  table{
+    margin-left: 50px;
+    border-spacing: 5px;
+  }
+
+  td, th{
+    width:50%;
+  }
+
+}
+
+@media (max-width:440px){
+
+.q-tab{
+  visibility:hidden;
+}
+
 }
