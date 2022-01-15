@@ -18,19 +18,21 @@
 
 <!--Item div-->
 
-<div class="wrapper">
-  <div class="img-cont">
+<div class="wrapper row">
+  <div class="img-cont col">
     <div class="main-img-cont" data-scale="1.6">
     <img id="main-img" src="/media/{{item.first_image.image}}">
     </div>
+    {% if images %}
     <div class="other-imgs">
       {% for image in images %}
       <div><img id="oth-img-{{image.id}}" onclick="changeImg({{image.id}})" src="/media/{{image.image}}"></div>
     {% endfor %}
     </div>
+    {% endif %}
   </div>
 
-  <div class="item-section">
+  <div class="item-section col">
     <div class="item-infos">
       <h1>{{ item.name }}</h1>
       <p class="description">{{ item.description }}</p>
@@ -58,10 +60,11 @@
       </form>
     </div>
     </div>
+    <div class="col-1"></div>
       <br>
 </div>
 
-<hr>
+<hr class="hr-div">
 
 <!--Reviews section-->
 
@@ -94,7 +97,7 @@
  </div>
 </div>
 
-<hr style="margin-bottom: 50px;">
+<hr class="hr-div" style="margin-bottom: 50px;">
 
 <!--Reccomendation section-->
 

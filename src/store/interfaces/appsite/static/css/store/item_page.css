@@ -41,6 +41,7 @@ body{
 /*//////////////////////*/
 
 .wrapper{
+  width: 99%;
   margin-top: 150px;
   display: flex;
   font-family: 'Roboto', sans-serif;
@@ -73,8 +74,7 @@ body{
   height: auto;
   max-height: 500px;
   width: auto;
-  min-width: 400px;
-  min-height: 500;
+  min-width: 90%;
   max-width: 600px;
   justify-content: center;
 }
@@ -198,9 +198,9 @@ body{
   font-size:25px;
 }
 
-hr{
+.hr-div{
   width: 80%;
-  margin: 100px 10% auto 10%;
+  margin: 50px 10% auto 10%;
   text-align: center;
 }
 
@@ -385,3 +385,71 @@ hr{
 .rating > input:checked ~ label:hover,
 .rating > label:hover ~ input:checked ~ label, /* lighten current selection */
 .rating > input:checked ~ label:hover ~ label { color: #FFED85;  }
+
+
+/*Phone nav*/
+
+
+@media (max-width:1050px){
+  .col{
+    width: 50%;
+  }
+}
+
+
+
+@media (max-width:600px){
+
+  .wrapper{
+    display: block;
+    padding: 0;
+  }
+
+  .img-cont{
+    position:relative;
+    margin: auto;
+    min-width: 90%;
+  }
+
+  .main-img-cont{
+    min-height: 400px;
+    min-width: 90%;
+    margin: auto;
+  }
+
+  .item-section{
+    text-align: center;
+    width: auto;
+    margin: 5px;
+  }
+
+  .description{
+    text-align: center;
+  }
+
+  .plus-minus{
+    margin-bottom: 10px;
+  }
+
+  .add{
+    margin: auto;
+    margin-bottom: 0;
+  }
+
+  .ph-rev{
+    text-align:center;
+  }
+
+  .write-review{
+    width: 100px;
+    margin: 0 auto;
+    display: block;
+    font-size: 18px;
+    margin-top: 50px;
+  }
+
+  .reccomendations img{
+    object-fit:contain;
+  }
+
+}
