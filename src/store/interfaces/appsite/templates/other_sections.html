@@ -22,6 +22,15 @@
    </form>
 
 
+<!--Menu button for phone-->
+
+<button onclick="openMenuAcc()" class="ph-menu" title="Account Menu">
+<i class="fas fa-plus" id="nav-menu-ph"></i>
+</button>
+
+<!--//////////////-->
+
+
 <script>
   function openDeleteAccount(){
   document.getElementById('confirm-delete').style.display = 'block';
@@ -32,9 +41,24 @@ function closeDeleteAccount(){
   document.getElementById('confirm-delete').style.display = 'none';
   document.getElementById('change-div').style.opacity = '1';
 }
+
+function openMenuAcc(){
+  var ph_menu = document.getElementById('nav-menu-ph');
+  if(ph_menu.classList.contains('fa-plus')){
+    ph_menu.classList.add('fa-minus');
+    ph_menu.classList.remove('fa-plus');
+    document.getElementsByClassName('other-sections')[0].style.display = 'block';
+  }
+  else{
+    ph_menu.classList.add('fa-plus');
+    ph_menu.classList.remove('fa-minus');
+    document.getElementsByClassName('other-sections')[0].style.display = 'none';
+  }
+}
 </script>
 
   <style>
+
 .other-sections{
   position:fixed;
   right:50px;
@@ -83,4 +107,50 @@ function closeDeleteAccount(){
 .close-acc:hover{
   color: #CD1818;
 }
+
+.ph-menu{
+  display:none;
+}
+
+
+@media (max-width:730px){
+
+.other-sections{
+  display: none;
+}
+
+.ph-menu{
+  display: block;
+  border-radius: 50%;
+  background-color: #FF1700;
+  color: white;
+  border: none;
+  font-size: 30px;
+  width: 50px;
+  height: 50px;
+  position: fixed;
+  right: 45px;
+  bottom: 130px;
+}
+
+.ph-menu:hover{
+  background-color:#F05454;
+  color:white;
+}
+
+.dlt-acc{
+  left: 20px;
+  padding:10px;
+  width:auto;
+  font-size:12px;
+}
+}
+
+@media (max-width:400px){
+
+  #nav-menu-ph{
+    padding-left: 6px;
+  }
+}
+
   </style>

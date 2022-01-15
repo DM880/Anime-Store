@@ -98,3 +98,22 @@
   margin-bottom:70px;
   font-size: 50px;
 }
+
+/*Phone nav*/
+
+@media (max-width:730px){
+
+  .info-div{
+    border: none;
+  }
+
+  .phone-n-div{
+    margin-bottom: 0 !important;
+    text-align: left !important;
+  }
+
+  #nav-menu-ph{
+    padding-left: 5px;
+  }
+
+}
