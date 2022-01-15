@@ -39,6 +39,10 @@ user_div =  document.getElementById('user-div');
 user_div.onmouseover = keepMenu;
 user_div.onmouseleave = hideUserMenu;
 
+// User menu Phone nav
+
+var hover_user = document.getElementById('user-menu-ph');
+hover_user.onmouseover = showUserMenu;
 
 // Open Phone nav menu
 

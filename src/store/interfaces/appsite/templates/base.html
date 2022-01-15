@@ -81,8 +81,8 @@
 
     <div class="i-div">
       {% if user.is_authenticated %}
-      <a><h5>Account</h5></a>
-    <i title="Account" class="fas fa-user fa-nav" id="user-menu"></i>
+      <h5>Account</h5>
+    <i title="Account" class="fas fa-user fa-nav" id="user-menu-ph"></i>
     {% else %}
     <a href="{% url 'login' %}"><h5>Account</h5></a>
     <a href="{% url 'login' %}"><i title="Account" class="fas fa-user fa-nav"></i></a>
