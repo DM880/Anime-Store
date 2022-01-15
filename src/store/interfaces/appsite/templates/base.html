@@ -70,6 +70,54 @@
 
 <!--////////////////-->
 
+
+<!--Phone nav-->
+
+<div class="navph">
+    <i onclick="navMenu()" class="fas fa-ellipsis-v"></i>
+     <a href="{% url 'landing_page' %}"><img class="logo" src="{% static 'img/landing_page/logo.png' %}"></a>
+<div id="p-menu" class="side-slide-menu">
+  <div class="menu-dp-nav">
+
+    <div class="i-div">
+      {% if user.is_authenticated %}
+      <a><h5>Account</h5></a>
+    <i title="Account" class="fas fa-user fa-nav" id="user-menu"></i>
+    {% else %}
+    <a href="{% url 'login' %}"><h5>Account</h5></a>
+    <a href="{% url 'login' %}"><i title="Account" class="fas fa-user fa-nav"></i></a>
+    {% endif %}
+      </div>
+    <hr>
+    <div class="i-div">
+      <h5 onclick="searchDiv()">Search</h5>
+    <i onclick="searchDiv()" title="Search" class="fas fa-search ph"></i>
+    </div>
+    <hr>
+    <div class="i-div">
+      <a href="{% url 'checkout_page' %}"><h5>Cart</h5><i title="Your Cart" class="fas fa-shopping-cart ph"></i></a>
+      </div>
+    <hr>
+     <div class="i-div dropp">
+      <div id="dropdownph" class="dropdownph">
+      <h5>Categories</h5><button class="dropbtnph">☰</button>
+      <div id="drop-menuph" class="dropdown-contentph">
+    <a href="{% url 'search_item' %}?items_category=ANIME">Anime</a>
+     <a href="{% url 'search_item' %}?items_category=MANGA">Manga</a>
+     <a href="{% url 'search_item' %}?items_category=ACTION_FIGURE">Action Figure</a>
+     <a href="{% url 'search_item' %}?items_category=GAMING">Gaming</a>
+     <a href="{% url 'search_item' %}?items_category=APPAREL">Apparel</a>
+     <a href="{% url 'search_item' %}?items_category=OTHER">Other</a>
+     <a href="{% url 'main_store' %}">All</a>
+  </div>
+      </div>
+      </div>
+  </div>
+</div>
+</div>
+
+<!--///////////////-->
+
 {% block content %}
 
 {% endblock %}
