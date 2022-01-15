@@ -115,36 +115,45 @@ function openMenuAcc(){
 
 @media (max-width:730px){
 
-.other-sections{
-  display: none;
+  .other-sections{
+    display: none;
+  }
+
+  .ph-menu{
+    display: block;
+    border-radius: 50%;
+    align-items: center;
+    background-color: #FF1700;
+    color: white;
+    border: solid 1px white;
+    font-size: 30px;
+    width: 50px;
+    height: 50px;
+    position: fixed;
+    right: 45px;
+    bottom: 130px;
+    z-index: 99;
+  }
+
+
+  .ph-menu:hover{
+    background-color:#F05454;
+    color:white;
+  }
+
+  .dlt-acc{
+    left: 20px;
+    padding:10px;
+    width:auto;
+    font-size:12px;
+  }
 }
 
-.ph-menu{
-  display: block;
-  border-radius: 50%;
-  background-color: #FF1700;
-  color: white;
-  border: solid 1px white;
-  font-size: 30px;
-  width: 50px;
-  height: 50px;
-  position: fixed;
-  right: 45px;
-  bottom: 130px;
-  z-index: 99;
-}
+@media (max-width:400px){
 
-.ph-menu:hover{
-  background-color:#F05454;
-  color:white;
-}
-
-.dlt-acc{
-  left: 20px;
-  padding:10px;
-  width:auto;
-  font-size:12px;
-}
+  #nav-menu-ph{
+    padding-left: 6px;
+  }
 }
 
   </style>

@@ -31,7 +31,7 @@
 
 /* User Icons */
 
-.fas,.far{
+.wrapper .fas,.wrapper .far{
   font-size: 30px;
   margin-right: 15px;
   display:flex;
@@ -106,11 +106,16 @@
 
 
 
-@media (max-width:960px){
+@media (max-width:560px){
+
+  .acc-t{
+    margin-left: 30px;
+  }
 
   .all-centered{
     width:90%;
     padding: 0;
+    margin-left: -30px;
   }
 
   .wrapper input{
@@ -118,7 +123,7 @@
     margin-left: 0;
   }
 
-  .fas,.far{
+  .wrapper .fas,.wrapper .far{
     margin: 0;
     padding:0;
     display:block;
