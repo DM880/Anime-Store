@@ -101,4 +101,27 @@ body{
   width: 550px;
 }
 
-/*////////////////*/
+/*Phone Layout*/
+
+@media (max-width:530px){
+
+  .store-name{
+    margin-left: 5%;
+  }
+
+  .name{
+    font-size:70px;
+  }
+
+  .explore{
+    margin-left: 90px;
+  }
+
+  .image-container{
+    position:absolute;
+    z-index: -1;
+    right: -80px;
+  }
+
+
+}
