@@ -390,14 +390,6 @@ body{
 /*Phone nav*/
 
 
-@media (max-width:1050px){
-  .col{
-    width: 50%;
-  }
-}
-
-
-
 @media (max-width:600px){
 
   .wrapper{
