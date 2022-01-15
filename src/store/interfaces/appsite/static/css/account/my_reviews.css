@@ -199,9 +199,9 @@
 @media (max-width:790px){
 
   .rev-wrap{
-  top: 150px;
-  left: 20px;
-  padding: 30px;
+    top: 150px;
+    left: 20px;
+    padding: 30px;
   }
 
   .review-div{
@@ -214,9 +214,9 @@
 @media (max-width:600px){
 
   .rev-wrap{
-  top: 150px;
-  left: 5px;
-  padding: 20px;
+    top: 150px;
+    left: 5px;
+    padding: 20px;
   }
 
   .review-div{
@@ -228,6 +228,14 @@
     left:20px;
     padding:20px;
     width:200px;
+  }
+
+}
+
+@media (max-width:400px){
+
+  #nav-menu-ph{
+    padding-left: 6px;
   }
 
 }

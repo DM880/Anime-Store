@@ -3,17 +3,16 @@
 .wrapper{
   margin-top: 150px;
   height: 100%;
-  width: 80%;
+  width: 100%;
   font-family: 'Roboto',sans-serif;
-  width:100%;
 }
 
 .all-centered{
-    height: auto;
-  width:50%;
-    margin: auto;
-    padding: 10px;
-    position: relative;
+  height: auto;
+  width: 50%;
+  margin: auto;
+  padding: 10px;
+  position: relative;
 }
 
 .wrapper input{
@@ -102,4 +101,26 @@
   margin-bottom:70px;
   margin-left:50px;
   font-size: 50px;
+}
+
+
+
+
+@media (max-width:960px){
+
+  .all-centered{
+    width:90%;
+    padding: 0;
+  }
+
+  .wrapper input{
+    width: 80%;
+    margin-left: 0;
+  }
+
+  .fas,.far{
+    margin: 0;
+    padding:0;
+    display:block;
+  }
 }
