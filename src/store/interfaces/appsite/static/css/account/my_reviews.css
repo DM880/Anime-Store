@@ -194,3 +194,34 @@
 .rating > input:checked ~ label:hover,
 .rating > label:hover ~ input:checked ~ label, /* lighten current selection */
 .rating > input:checked ~ label:hover ~ label { color: #FFED85;  }
+
+
+@media (max-width:790px){
+
+  .rev-wrap{
+  top: 150px;
+  left: 20px;
+  padding: 30px;
+  }
+
+  .review-div{
+    height: 280px;
+  }
+
+}
+
+
+@media (max-width:600px){
+
+  .rev-wrap{
+  top: 150px;
+  left: 5px;
+  padding: 20px;
+  }
+
+  .review-div{
+    height: 280px;
+    width: 200px;
+  }
+
+}
