@@ -110,18 +110,8 @@ function openMenuAcc(){
 
 .ph-menu{
   display:none;
-}
-
-
-@media (max-width:730px){
-
-.other-sections{
-  display: none;
-}
-
-.ph-menu{
-  display: block;
   border-radius: 50%;
+  align-items: center;
   background-color: #FF1700;
   color: white;
   border: solid 1px white;
@@ -134,17 +124,36 @@ function openMenuAcc(){
   z-index: 99;
 }
 
-.ph-menu:hover{
-  background-color:#F05454;
-  color:white;
+
+@media (max-width:730px){
+
+  .other-sections{
+    display: none;
+  }
+
+  .ph-menu{
+    display: block;
+  }
+
+
+  .ph-menu:hover{
+    background-color:#F05454;
+    color:white;
+  }
+
+  .dlt-acc{
+    left: 20px;
+    padding:10px;
+    width:auto;
+    font-size:12px;
+  }
 }
 
-.dlt-acc{
-  left: 20px;
-  padding:10px;
-  width:auto;
-  font-size:12px;
-}
+@media (max-width:400px){
+
+  #nav-menu-ph{
+    padding-left: 6px;
+  }
 }
 
   </style>
