@@ -139,7 +139,7 @@ table{
 
 .update-btn:hover{
   background-color: #7db700;
-  color:white;
+  color: white;
 }
 
 /*Delete entry button*/
@@ -157,5 +157,52 @@ table{
 }
 
 
+/*Phone layout*/
 
+.ph-layout{
+  margin-top:150px;
+  display: none;
+}
+
+.quantity-input-ph{
+  width: 40px;
+  margin-right: 10px;
+}
+
+.btn-ph{
+  padding:5px;
+  line-height: 0;
+  border-radius:10px;
+  display:inline-block;
+  height:30px;
+  width:30px;
+  text-align:center;
+  font-size: 20px;
+}
+
+.c-name{
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+.itm-div{
+  display:inline-block;
+  margin-left:30px;
+}
+
+@media (max-width:780px){
+
+  .wrapper{
+    display:none;
+  }
+
+  .ph-layout{
+    display: block;
+  }
+
+  .tot{
+    text-align: center;
+  }
+
+}
 

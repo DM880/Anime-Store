@@ -31,6 +31,18 @@ function incrementValue(item_id)
     }
 }
 
+// Phone layout quantity
+
+function checkQuantity(item_id){
+  var quantity_input = document.getElementById('q-input'+item_id);
+  if(quantity_input.value < 0){
+    quantity_input.value = 1;
+  }
+  else if(quantity_input.value > 10){
+    quantity_input.value = 10;
+  }
+}
+
 
 // Delete entry cross
 
