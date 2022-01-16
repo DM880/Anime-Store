@@ -31,4 +31,3 @@ def pagination(page, obj_items, page_range):
         all_items = paginator.page(paginator.num_pages)
 
     return all_items
-

@@ -571,6 +571,8 @@ def create_checkout_session(request):
             else:
                 cart = Cart.objects.get(session_key=request.session.session_key)
                 email = None
+                user = None
+                user_detail = None
 
             payment_session_key = request.session.session_key
             subtotal = int(round(cart.tot_price, 2) * 100)
