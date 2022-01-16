@@ -33,7 +33,7 @@
 .success{
   color: green;
   font-size: 70px;
-  z-index: 99;
+  z-index:-1;
 }
 
 .success:hover{
@@ -58,6 +58,12 @@
 .t-up{
   height: 300px;
   width: 300px;
+}
+
+@media (max-width:600px){
+  .img-success{
+    display:none;
+  }
 }
 
 </style>
