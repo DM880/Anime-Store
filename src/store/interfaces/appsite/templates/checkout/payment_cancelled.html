@@ -10,7 +10,7 @@
   <h1>PAYMENT FAILED</h1>
 </div>
 <div style="width:100%;">
-  <img style="margin:auto;display:block;z-index:-1;" src="{% static 'img/checkout/payment_failed.gif' %}">
+  <img class="img-fail" style="margin:auto;display:block;z-index:-1;" src="{% static 'img/checkout/payment_failed.gif' %}">
 </div>
 
 <style>
@@ -31,6 +31,12 @@
   color: red;
   font-size: 70px;
   z-index: 99;
+}
+
+@media (max-width:550px){
+  .img-fail{
+    height:160px;
+  }
 }
 
 </style>

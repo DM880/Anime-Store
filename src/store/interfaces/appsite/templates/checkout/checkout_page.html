@@ -37,7 +37,7 @@
     <th>
       <h5 style="font-weight:bold;">Item Details</h5>
     </th>
-    <th>
+    <th class="img-tab">
     </th>
     <th>
       <h5 style="font-weight:bold;">Price</h5>
@@ -53,7 +53,7 @@
     {% for item in items %}
 
    <tr style="border-bottom: 1px solid #000;">
-    <td>
+    <td class="img-tab">
       <div class="itm-img"><img src="/media/{{ item.item.first_image.image }}"></div>
     </td>
     <td><div class="itm-name"><p>{{ item.item.name }}</p>
@@ -66,7 +66,7 @@
         <form method="POST" action="{% url 'checkout_update_quantity' entry=item.id %}">
           {% csrf_token %}
     <button type="button" id="minus" class="minus plus-minus" onclick="decrementValue({{item.id}})" title="Remove From Cart">-</button>
-    <input id="quantity{{item.id}}" class="quantity"  value="{{ item.quantity }}" name="quantity" readonly></input>
+    <input id="quantity{{item.id}}" class="quantity" value="{{ item.quantity }}" name="quantity" readonly></input>
     <button type="button" id="plus" class="plus plus-minus" onclick="incrementValue({{item.id}})" title="Add To Cart">+</button>
     </div>
     </td>
@@ -87,6 +87,44 @@
   <hr>
 
 </div>
+
+<!--Phone layout-->
+
+<div class="ph-layout">
+<div>
+   <div style="text-align:center;">
+     <h5>Item Details</h5>
+  </div>
+</div>
+{% for item in items %}
+
+<div style="width:90%;">
+  <div class="itm-div c-name">
+    <p>-{{ item.item.name|truncatechars:20 }}</p>
+  </div>
+<div class="itm-div">
+  <p>${{ item.total_price }}</p>
+  </div>
+  <div class="itm-div" style="text-align:center;">
+    <form method="POST" action="{% url 'checkout_update_quantity' entry=item.id %}">
+      {% csrf_token %}
+    <input name="quantity" style="display:inline-block;" onkeyup="checkQuantity({{item.id}})" type="number" min='1' max='10' id="q-input{{item.id}}" value="{{ item.quantity }}" class="quantity-input-ph"></input><button type="submit" class="btn btn-success btn-ph">⟳</button>
+    </form>
+  </div>
+<div style="display:inline-block;width:10px;">
+    <a class="delete-itm" id="delete-entry{{item.id}}" data-id="{{item.id}}" href="{% url 'checkout_remove_entry' entry=item.id %}" title="Delete Entry">X</a>
+</div>
+  </div>
+  <br>
+  <hr>
+<br>
+{% endfor %}
+
+</div>
+
+
+
+  <!--//////////////-->
 
 <!--Tot amount-->
 {% if items %}
