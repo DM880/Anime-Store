@@ -59,7 +59,7 @@ body{
   cursor: pointer;
 }
 
-.fas:hover{
+.nav .fas:hover,.navph .fas:hover{
   color: #D92332;
 }
 

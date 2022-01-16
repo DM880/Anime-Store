@@ -32,13 +32,3 @@ def pagination(page, obj_items, page_range):
 
     return all_items
 
-
-def get_session_key(request):
-
-    if not request.session.session_key:
-        request.session.create()
-        session_key = request.session.session_key
-    else:
-        session_key = request.session.session_key
-
-    return session_key

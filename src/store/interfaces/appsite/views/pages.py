@@ -36,7 +36,7 @@ from store.domain.cart import queries as cart_queries, checkout
 from store.domain.item import queries as item_queries
 
 
-from .utils import rating_avg, pagination, get_session_key
+from .utils import rating_avg, pagination
 
 
 class LandingPage(generic_views.TemplateView):
@@ -449,7 +449,11 @@ def add_item_cart(request, item_id):
     user = request.user
 
     # For guest users
-    session_key = get_session_key(request)
+    if not request.session.session_key:
+        request.session.create()
+        session_key = request.session.session_key
+    else:
+        session_key = request.session.session_key
 
     if quantity is None:
         quantity = 1
@@ -467,7 +471,11 @@ def remove_item_cart(request, item_id):
     quantity = request.POST.get("quantity")
     user = request.user
 
-    session_key = get_session_key(request)
+    if not request.session.session_key:
+        request.session.create()
+        session_key = request.session.session_key
+    else:
+        session_key = request.session.session_key
 
     if quantity is None:
         quantity = 1
@@ -489,7 +497,11 @@ def checkout_page(request):
         user = User.objects.get(email=request.user.email)
         cart = Cart.objects.get(user=user)
     else:
-        session_key = get_session_key(request)
+        if not request.session.session_key:
+            request.session.create()
+            session_key = request.session.session_key
+        else:
+            session_key = request.session.session_key
         cart = Cart.objects.get_or_create(session_key=session_key)[0]
 
     items = EntryCart.objects.filter(cart=cart)

@@ -16,21 +16,21 @@
       {% csrf_token %}
   <div class="username-div col">
     <i class="fas fa-user-circle"></i>
-    <h5>Username:</h5><input name="username" value="{{user.username}}"></input>
+    <h5>Username:</h5><input name="username" value="{{user.username}}" required></input>
   </div>
   <div class="email-div col">
     <i class="fas fa-at"></i>
-    <h5>Email:</h5><input name="email" value="{{user.email}}"></input>
+    <h5>Email:</h5><input name="email" value="{{user.email}}" required></input>
   </div>
     </div>
   <div class="f-name-div col">
     <i class="far fa-hand-point-right"></i>
-    <h5>First Name:</h5><input name="first-name" value="{{user.first_name}}"></input>
+    <h5>First Name:</h5><input name="first-name" value="{{user.first_name}}" required></input>
   </div>
   <br>
   <div class="l-name-div col">
     <i class="far fa-hand-peace"></i>
-    <h5>Last Name:</h5><input name="last-name" value="{{user.last_name}}"></input>
+    <h5>Last Name:</h5><input name="last-name" value="{{user.last_name}}" required></input>
   </div>
    </div>
   <div class="account-detail-div">
