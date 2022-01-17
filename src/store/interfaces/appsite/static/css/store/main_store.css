@@ -22,6 +22,9 @@ body{
   transition: opacity 0.5s;
 }
 
+.display-none-added{
+  display:none;
+}
 
 .img-cart{
   height: 75px;
@@ -160,3 +163,4 @@ body{
   width: 20px;
   height: 20px;
 }
+

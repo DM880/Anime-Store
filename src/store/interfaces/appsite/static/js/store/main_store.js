@@ -4,9 +4,11 @@ function addedCart(item_id) {
   if (document.getElementById("added"+item_id) != null) {
     setTimeout(function() {
       document.getElementById('added'+item_id).style.opacity = 1;
+      document.getElementById('added'+item_id).classList.remove("display-none-added");
     },);
     setTimeout(function(){
       document.getElementById('added'+item_id).style.opacity = 0;
+      document.getElementById('added'+item_id).classList.add("display-none-added");
     }, 2000);
   }
 }

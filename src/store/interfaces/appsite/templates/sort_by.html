@@ -1,9 +1,9 @@
 <form method="GET" action="{% url 'search_item' %}">
   {% if searched_item %}<input type="hidden" name="searched_item" value='{{ searched_item }}'>{% endif %}
   {% if items_category %}<input type="hidden" name="items_category" value='{{ items_category }}'>{% endif %}
-  <div style="margin-left:20px;margin-top:100px;">
+  <div style="margin-left:20px;margin-top:100px;z-index:98;">
     <p style="margin-bottom:-2px;">Sort by:</p>
-  <select id="sort" name="sorting_by">
+  <select id="sort" name="sorting_by" style="z-index:98;">
 <option value="price">Price(Lowest First)</option>
 <option value="-price">Price(Highest First)</option>
 <option value="name">Name</option>

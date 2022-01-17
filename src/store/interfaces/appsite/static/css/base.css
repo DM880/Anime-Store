@@ -257,18 +257,32 @@ footer{
     display:none;
   }
 
+
+/*User div if logged in*/
+
+.user-div{
+  width:100px;
+  height: 120px;
+  position:absolute;
+  top: 40px;
+  right:15px;
+  transition: all 0ms ease-in-out;
+}
+
 /*Search bar position*/
 
   .search-input-div{
-  top: 20px;
-  right: 128px;
-  position: fixed;
-  z-index:99;
+    top: 405px;
+    right: 108px;
+    position: fixed;
+    z-index:99;
+    width: 140px;
   }
 
   .search-input-div input[type="submit"]{
-    top: 20px;
-    right:78px;
+    top: 405px;
+    right:18px;
+    width:65px;
   }
 
 
