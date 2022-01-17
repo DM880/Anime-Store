@@ -19,8 +19,8 @@
 
 /* User Icons */
 
-.fas,.far{
-  font-size: 30px;
+.info-div .fas, .info-div .far{
+  font-size: 40px;
   margin-right: 15px;
 }
 
@@ -105,6 +105,7 @@
 
   .info-div{
     border: none;
+    margin-left: -40px;
   }
 
   .phone-n-div{
@@ -112,8 +113,12 @@
     text-align: left !important;
   }
 
-  #nav-menu-ph{
-    padding-left: 5px;
+  .info-div h5, .info-div h3, .info-div span{
+    font-size: 18px;
+  }
+
+  .info-div .fas, .info-div .far{
+    font-size: 25px;
   }
 
 }

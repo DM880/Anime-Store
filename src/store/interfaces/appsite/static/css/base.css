@@ -260,16 +260,16 @@ footer{
 
 /*User div if logged in*/
 
-.user-div{
-  width:100px;
-  height: 120px;
-  position:absolute;
-  top: 40px;
-  right:15px;
-  transition: all 0ms ease-in-out;
-}
+  .user-div{
+    width:100px;
+    height: 120px;
+    position:fixed;
+    top: 70px;
+    left: 140px;
+    transition: all 0ms ease-in-out;
+  }
 
-/*Search bar position*/
+  /*Search bar position*/
 
   .search-input-div{
     top: 405px;
@@ -343,7 +343,7 @@ footer{
     color: #D92332;
   }
 
-  .fas{
+  #phone-nav-ld .fas{
     font-size: 30px;
     padding: 10px;
     color: #F4FFFD;
@@ -353,8 +353,12 @@ footer{
     position: relative;
   }
 
-  .fas::after{
+  #phone-nav-ld .fas::after{
     content: none;
+  }
+
+  #phone-nav-ld .fas:hover{
+    color: #D92332;
   }
 
   /* Categories */

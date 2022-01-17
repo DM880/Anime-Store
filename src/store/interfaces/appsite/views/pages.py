@@ -649,9 +649,10 @@ def payment_successful(request, payment_session_key):
         if request.user.is_authenticated:
             user = User.objects.get(email=request.user.email)
             cart = Cart.objects.get(user=user)
-            cart.purchased = True
-            cart.save()
-            checkout.clean_cart(cart)
+            if cart.tot_price > 0:
+                cart.purchased = True
+                cart.save()
+                checkout.clean_cart(cart)
         else:
             cart = Cart.objects.get(session_key=request.session.session_key)
             cart.delete()
