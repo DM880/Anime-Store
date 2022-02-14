@@ -32,7 +32,7 @@ STRIPE_SECRET_KEY = config("STRIPE_SECRET_KEY")
 DOMAIN_URL = config("DOMAIN_URL")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ["*"]
 
